@@ -11,15 +11,21 @@ import Timetable from './Timetable';
 const Router = () => {
   const style = {
     app: {
-
+      height: '100%',
+      width: '100%'
+    },
+    pages: {
+      height: '100%',
+      width: '100%',
+      paddingTop: '56px'
     }
   };
 
   return (
     <BrowserRouter>
-      <div>
+      <div style={style.app}>
         <NavBar/>
-        <div style={style.app}>
+        <div style={style.pages}>
           <Switch>
             <Route exact path='/' component={FormatOne}/>
             <Route exact path='/f1' component={FormatOne}/>
