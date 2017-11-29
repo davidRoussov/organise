@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import FormatOneNote from './FormatOneNote';
+
+import { createNewTextarea } from '../actions/formatOne';
 
 class FormatOne extends Component {
   constructor() {
@@ -15,9 +20,11 @@ class FormatOne extends Component {
   }
 
   handleClick(e) {
-    if(this.node.contains(e.target)) {
-      console.log('click inside');
-      console.log(e);
+    if(this.node.contains(e.target) && !this.props.disableCreateNew) {
+      const x = e.x;
+      const y = e.y;
+      console.log(x, y);
+      this.props.createNewTextarea(x, y);
     }
   }
 
@@ -33,18 +40,31 @@ class FormatOne extends Component {
         width: '100%',
         height: '100%',
         padding: '20px',
-        borderRadius: '8px'
+        borderRadius: '8px',
+        cursor: 'text'
       }
     };
+
+    console.log(JSON.stringify(this.props.notes, null, 2));
+
+    const elements = this.props.notes.map((note, i) => <FormatOneNote key={i} note={note} />);
 
     return (
       <div style={style.container}>
         <div style={style.writeArea} ref={node => this.node = node}>
-          <p>hello</p>
+          {elements}
         </div>
       </div>
     );
   }
 };
 
-export default FormatOne;
+const mapStateToProps = state => {
+   return state.formatOne;
+}
+
+const mapDispatchToProps = {
+  createNewTextarea
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormatOne);
