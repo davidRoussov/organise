@@ -23,7 +23,6 @@ class FormatOne extends Component {
     if(this.node.contains(e.target) && !this.props.disableCreateNew) {
       const x = e.x;
       const y = e.y;
-      console.log(x, y);
       this.props.createNewTextarea(x, y);
     }
   }
@@ -45,9 +44,7 @@ class FormatOne extends Component {
       }
     };
 
-    console.log(JSON.stringify(this.props.notes, null, 2));
-
-    const elements = this.props.notes.map((note, i) => <FormatOneNote key={i} note={note} />);
+    const elements = this.props.notes.map((note, i) =>  <FormatOneNote key={i} note={note} requestFocus={note.isNew}/>);
 
     return (
       <div style={style.container}>
