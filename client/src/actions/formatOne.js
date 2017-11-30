@@ -11,3 +11,9 @@ export const createNewTextarea = (x, y) => dispatch => {
     }
   });
 };
+
+export const removeNewNote = () => dispatch => {
+  dispatch({
+    type: 'REMOVE_NEW_TEXTAREA'
+  });
+};
