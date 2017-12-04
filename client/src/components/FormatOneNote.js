@@ -47,6 +47,7 @@ class FormatOneNote extends Component {
     return (
       <div style={style}>
         <textarea
+          className="form-control"
           ref={(input) => { this.input = input; }}
           onBlur={this.handleBlur.bind(this)}
           value={this.state.text}
