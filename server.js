@@ -1,28 +1,25 @@
-const Koa = require('koa');
-const app = new Koa();
+import { uri } from './creds';
+import bodyParser from 'body-parser';
 
-// x-response-time
+const express = require('express');
+const app = express();
 
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  ctx.set('X-Response-Time', `${ms}ms`);
+app.use((request, response, next) => {
+  response.header('Access-Control-ALlow-Origin', 'http://localhost:3000');
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  response.header('Access-Control-Allow-Credentials', 'true');
+  next();
 });
 
-// logger
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}`);
+app.get('/', (request, response) => {
+  response.send('Hello, World!');
 });
 
-// response
-
-app.use(async ctx => {
-  ctx.body = 'Hello World';
+app.post('/signup', (request, response) => {
+  console.log(JSON.stringify(request.body, null, 2));
 });
 
-app.listen(3001);
+app.listen(3001, () => console.info('listening on port 3001'));
