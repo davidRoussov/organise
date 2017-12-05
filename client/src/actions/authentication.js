@@ -2,7 +2,7 @@ import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
 export const signup = user => dispatch => {
-  fetch(`${SERVER_URL}/auth/signup`, {
+  fetch(`${SERVER_URL}/api/auth/signup`, {
     method: 'POST',
     body: JSON.stringify({ user }),
     headers: {
