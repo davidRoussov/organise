@@ -2,10 +2,7 @@ import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
 export const signup = user => dispatch => {
-  console.log('signup action');
-  console.log(SERVER_URL);
-  console.log(JSON.stringify(user, null, 2));
-  fetch(`${SERVER_URL}/signup`, {
+  fetch(`${SERVER_URL}/auth/signup`, {
     method: 'POST',
     body: JSON.stringify({ user }),
     headers: {
@@ -21,7 +18,7 @@ export const signup = user => dispatch => {
   })
   .catch(error => {
     console.log('ERROR!');
-    console.log(JSON.stringify(error, null, 2));
+    console.log(error);
   });
 };
 
