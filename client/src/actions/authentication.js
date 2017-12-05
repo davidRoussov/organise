@@ -10,7 +10,8 @@ export const signup = user => dispatch => {
     body: JSON.stringify({ user }),
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    credentials: 'include'
   })
   .then(handleErrors)
   .then(response => response.json())

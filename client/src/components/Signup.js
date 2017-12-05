@@ -19,7 +19,12 @@ class Signup extends Component {
   submitSignup(e) {
     e.preventDefault();
     if(this.state.userInputsPassword1 === this.state.userInputsPassword2) {
-      this.props.signup({ ...this.state, password: this.state.userInputsPassword1 });
+      this.props.signup({ 
+        firstName: this.state.userInputsFirstName,
+        lastName: this.state.userInputsLastName,
+        emailAddress: this.state.userInputsEmailAddress,  
+        password: this.state.userInputsPassword1 
+      });
     } else {
       console.log('passwords don\'t match');
     }
