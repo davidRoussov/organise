@@ -31,5 +31,24 @@ module.exports = {
         response.status(400).send({ message: 'invalid user data sent to the server' }); 
       }
     }
+  },
+  login: (request, response) => {
+    console.log('***');
+    console.log(request);
+    if(request.body.credentials && request.body.credentials.username && request.body.credentials.password) {
+      const username = request.body.credentials.username;
+      const password = request.body.credentials.password;
+      User.authenticate(username, password, (error, user) => {
+        if(error || !user) {
+          response.status(401).send({ message: 'wrong email address or password' });
+        } else {
+          request.session.userId = user._id;
+          response.status(200).send({ success: true });
+        }
+      });
+    } else {
+      console.error('Unable to login: invalid credentials object');
+      response.status(400).send({ message: 'error sending credentials' });
+    }
   }
 }

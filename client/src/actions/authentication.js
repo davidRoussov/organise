@@ -25,8 +25,13 @@ export const signup = user => dispatch => {
 export const login = credentials => dispatch => {
   console.log('login action');
   console.log(JSON.stringify(credentials, null, 2));
-  fetch(``, {
-
+  fetch(`${SERVER_URL}/api/auth/login`, {
+    method: 'POST',
+    body: JSON.stringify({ credentials }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
   })
   .then(handleErrors)
   .then(response => response.json())
