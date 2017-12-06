@@ -37,5 +37,21 @@ UserSchema.statics.authenticate = (emailAddress, password, callback) => {
     });
 };
 
+UserSchema.statics.get = userID => new Promise((resolve, reject) => {
+  User.findOne({ _id: userID })
+    .exec((err, user) => {
+      if(err) {
+        console.error('Unable to execute Mongo query');
+        console.error(err);
+        reject('A database error occurred');
+      } else if(!user) {
+        console.error('Unable to find user by the provided id');
+        reject('Invalid session cookie sent');
+      } else {
+        resolve(user);
+      }
+    });
+});
+
 const User = mongoose.model('User', UserSchema);
 export default User;

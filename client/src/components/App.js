@@ -33,7 +33,7 @@ class App extends Component {
         <div style={style.app}>
           { this.props.spinnerVisible ? <LoadingApp/> :
             <div>
-              <NavBar/>
+              <NavBar user={this.props.user}/>
               <div style={style.pages}>
                 <Switch>
                   <Route exact path='/' component={FormatOne}/>

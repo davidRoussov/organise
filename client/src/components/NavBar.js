@@ -8,7 +8,7 @@ class NavBar extends Component {
         width: '100%'
       }
     };
-
+    
     const path = window.location.pathname;
     return (
       <div>
@@ -34,6 +34,13 @@ class NavBar extends Component {
               </li>
             </ul>
           </div>
+
+          <ul class='navbar-nav mr-auto'>
+            <li class="nav-item">
+              <a class="nav-link" href="#">{this.props.user ? this.props.user.emailAddress : '[no user]'}</a>
+            </li>
+          </ul>
+
         </nav>
       </div>
     );

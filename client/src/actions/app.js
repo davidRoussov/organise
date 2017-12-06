@@ -11,7 +11,7 @@ export const getUser = () => dispatch => {
   .then(response => {
     dispatch({
       type: 'GOT_USER',
-      data: response
+      data: response.user
     });
   })
   .catch(error => {
