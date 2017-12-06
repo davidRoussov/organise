@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import NavBar from './NavBar';
-
 import FormatOne from './FormatOne';
 import FormatTwo from './FormatTwo';
 import FormatThree from './FormatThree';
 import Timetable from './Timetable';
+import LoadingApp from './LoadingApp';
 
+import { getUser } from '../actions/app';
 class App extends Component {
+  componentDidMount() {
+    this.props.getUser();
+  }
+
   render() {
     const style = {
       app: {
@@ -25,20 +31,30 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div style={style.app}>
-        <NavBar/>
-          <div style={style.pages}>
-            <Switch>
-              <Route exact path='/' component={FormatOne}/>
-              <Route exact path='/f1' component={FormatOne}/>
-              <Route exact path='/f2' component={FormatTwo}/>
-              <Route exact path='/f3' component={FormatThree}/>
-              <Route exact path='/t' component={Timetable}/>
-            </Switch>
-          </div>
+          { this.props.spinnerVisible ? <LoadingApp/> :
+            <div>
+              <NavBar/>
+              <div style={style.pages}>
+                <Switch>
+                  <Route exact path='/' component={FormatOne}/>
+                  <Route exact path='/f1' component={FormatOne}/>
+                  <Route exact path='/f2' component={FormatTwo}/>
+                  <Route exact path='/f3' component={FormatThree}/>
+                  <Route exact path='/t' component={Timetable}/>
+                </Switch>
+              </div>
+            </div>
+          }
         </div>
       </BrowserRouter>
     );
   }
 };
 
-export default App;
+const mapStateToProps = state => state.app;
+
+const mapDispatchToProps = {
+  getUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

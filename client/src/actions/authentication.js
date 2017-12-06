@@ -1,7 +1,10 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
+export const hideAlerts = () => dispatch => dispatch({ type: 'HIDE_ALERTS' });
+
 export const signup = user => dispatch => {
+  dispatch({ type: 'SHOW_SPINNER' });
   fetch(`${SERVER_URL}/api/auth/signup`, {
     method: 'POST',
     body: JSON.stringify({ user }),
@@ -13,18 +16,19 @@ export const signup = user => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    console.log('SUCCESS!');
-    console.log(JSON.stringify(response, null, 2));
+    window.location.href = '/';
   })
   .catch(error => {
-    console.log('ERROR!');
-    console.log(error);
-  });
+    dispatch({
+      type: 'SIGNUP_FAILED',
+      message: error
+    });
+    dispatch({ type: 'HIDE_SPINNER' });
+  })
 };
 
 export const login = credentials => dispatch => {
-  console.log('login action');
-  console.log(JSON.stringify(credentials, null, 2));
+  dispatch({ type: 'SHOW_SPINNER' });
   fetch(`${SERVER_URL}/api/auth/login`, {
     method: 'POST',
     body: JSON.stringify({ credentials }),
@@ -36,11 +40,13 @@ export const login = credentials => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    console.log('SUCCESS!');
-    console.log(JSON.stringify(response, null, 2));
+    window.location.href = '/';
   })
   .catch(error => {
-    console.log('ERROR!');
-    console.log(JSON.stringify(error, null, 2));
-  });
+    dispatch({
+      type: 'LOGIN_FAILED',
+      message: error
+    });
+    dispatch({ type: 'HIDE_SPINNER' });
+  })
 };

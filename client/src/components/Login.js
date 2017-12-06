@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormControl, FormGroup, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { login } from '../actions/authentication';
+import { login, hideAlerts } from '../actions/authentication';
 
 class Login extends Component {
   constructor() {
@@ -66,8 +66,7 @@ class Login extends Component {
         width: '100%'
       },
       spinner: {
-        fontSize: '28px',
-        color: 'black'
+        fontSize: '28px'
       }
     };
 
@@ -78,7 +77,7 @@ class Login extends Component {
             <div style={style.panelBody} className='panel-body'>
               <h3 style={style.formHeading}>Log in to your account</h3>
 
-              {this.props.showLoginSpinner ? <i className="fa fa-spinner fa-spin" aria-hidden="true" style={style.spinner}></i> :
+              {this.props.spinnerVisible ? <i className="fa fa-spinner fa-spin" aria-hidden="true" style={style.spinner}></i> :
 
                 <form onSubmit={this.handleLogin.bind(this)}>
                   <FormGroup>
@@ -122,7 +121,8 @@ class Login extends Component {
 const mapStateToProps = state => state.authentication;
 
 const mapDispatchToProps = {
-  login
+  login,
+  hideAlerts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

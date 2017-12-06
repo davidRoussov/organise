@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormControl, FormGroup, Button, ControlLabel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { signup } from '../actions/authentication';
+import { signup, hideAlerts } from '../actions/authentication';
 
 class Signup extends Component {
   constructor() {
@@ -72,6 +72,9 @@ class Signup extends Component {
       },
       loginButton: {
         width: '100%'
+      },
+      spinner: {
+        fontSize: '32px'
       }
     };
 
@@ -81,63 +84,67 @@ class Signup extends Component {
           <div style={style.middle}>
             <div style={style.form} className='panel panel-default'>
               <div style={style.panelBody} className='panel-body'>
-                <form onSubmit={this.submitSignup.bind(this)}>
-                  <FormGroup>
-                    <ControlLabel style={style.label}>First name</ControlLabel>
-                    <FormControl
-                      type='text'
-                      placeholder='First name'
-                      style={style.inputField}
-                      value={this.state.userInputsFirstName}
-                      onChange={this.handleChangeUserInputsFirstName.bind(this)}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <ControlLabel style={style.label}>Last name</ControlLabel>
-                    <FormControl
-                      type='text'
-                      placeholder='Last name'
-                      style={style.inputField}
-                      value={this.state.userInputsLastName}
-                      onChange={this.handleChangeUserInputsLastName.bind(this)}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <ControlLabel style={style.label}>Email address</ControlLabel>
-                    <FormControl
-                      type='email'
-                      placeholder='Email address'
-                      style={style.inputField}
-                      value={this.state.userInputsEmailAddress}
-                      onChange={this.handleChangeUserInputsEmailAddress.bind(this)}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <ControlLabel style={style.label}>Password</ControlLabel>
-                    <FormControl
-                      type='password'
-                      placeholder='Password'
-                      style={style.inputField}
-                      value={this.state.userInputsPassword1}
-                      onChange={this.handleChangeUserInputsPassword1.bind(this)}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <ControlLabel style={style.label}>Re-type password</ControlLabel>
-                    <FormControl
-                      type='password'
-                      placeholder='Re-type password'
-                      style={style.inputField}
-                      value={this.state.userInputsPassword2}
-                      onChange={this.handleChangeUserInputsPassword2.bind(this)}
-                    />
-                  </FormGroup>
-                  <Button
-                    type='submit'
-                    className='btn-primary'
-                    style={style.loginButton}>
-                  CREATE ACCOUNT</Button>
-                </form>
+
+                { this.props.spinnerVisible ? <i className="fa fa-spinner fa-spin" aria-hidden="true" style={style.spinner}></i> :
+                  <form onSubmit={this.submitSignup.bind(this)}>
+                    <FormGroup>
+                      <ControlLabel style={style.label}>First name</ControlLabel>
+                      <FormControl
+                        type='text'
+                        placeholder='First name'
+                        style={style.inputField}
+                        value={this.state.userInputsFirstName}
+                        onChange={this.handleChangeUserInputsFirstName.bind(this)}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <ControlLabel style={style.label}>Last name</ControlLabel>
+                      <FormControl
+                        type='text'
+                        placeholder='Last name'
+                        style={style.inputField}
+                        value={this.state.userInputsLastName}
+                        onChange={this.handleChangeUserInputsLastName.bind(this)}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <ControlLabel style={style.label}>Email address</ControlLabel>
+                      <FormControl
+                        type='email'
+                        placeholder='Email address'
+                        style={style.inputField}
+                        value={this.state.userInputsEmailAddress}
+                        onChange={this.handleChangeUserInputsEmailAddress.bind(this)}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <ControlLabel style={style.label}>Password</ControlLabel>
+                      <FormControl
+                        type='password'
+                        placeholder='Password'
+                        style={style.inputField}
+                        value={this.state.userInputsPassword1}
+                        onChange={this.handleChangeUserInputsPassword1.bind(this)}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <ControlLabel style={style.label}>Re-type password</ControlLabel>
+                      <FormControl
+                        type='password'
+                        placeholder='Re-type password'
+                        style={style.inputField}
+                        value={this.state.userInputsPassword2}
+                        onChange={this.handleChangeUserInputsPassword2.bind(this)}
+                      />
+                    </FormGroup>
+                    <Button
+                      type='submit'
+                      className='btn-primary'
+                      style={style.loginButton}>
+                    CREATE ACCOUNT</Button>
+                  </form>
+                }
+
               </div>
             </div>
           </div>
@@ -150,7 +157,8 @@ class Signup extends Component {
 const mapStateToProps = state => state.authentication;
 
 const mapDispatchToProps = {
-  signup
+  signup,
+  hideAlerts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
