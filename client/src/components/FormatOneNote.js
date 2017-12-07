@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TextareaAutosize from 'react-autosize-textarea';
 
-import { removeNewNote } from '../actions/formatOne';
+import { removeNewNote, saveNote } from '../actions/formatOne';
 
 class FormatOneNote extends Component {
   constructor() {
@@ -29,6 +30,9 @@ class FormatOneNote extends Component {
   handleBlur(e) {
     if(this.props.note.isNew && this.state.initialText === this.state.text) {
       this.props.removeNewNote();
+    } else if (this.state.initialText !== this.state.text) {
+      const saveNoteData = { ...this.props.note, text: this.state.text };
+      this.props.saveNote(saveNoteData);
     }
   }
 
@@ -36,24 +40,34 @@ class FormatOneNote extends Component {
 
   render() {
     const style = {
-      position: 'absolute',
-      left: this.props.note.x - 8,
-      top: this.props.note.y - 12,
-      
-      width: '200px',
-      height: '100px'
+      note: {
+        position: 'absolute',
+        left: this.props.note.x - 8,
+        top: this.props.note.y - 12,
+        
+        width: '200px',
+        height: '100px'
+      },
+      textarea: {
+        border: 'none',
+        overflow: 'auto',
+        outline: 'none',
+        boxShadow: 'none',
+        resize: 'none',
+      }
     };
 
     return (
-      <div style={style}>
-        <textarea
+      <div style={style.note}>
+        <TextareaAutosize
           className="form-control"
-          ref={(input) => { this.input = input; }}
+          innerRef={(input) => { this.input = input; }}
           onBlur={this.handleBlur.bind(this)}
           value={this.state.text}
           onChange={this.handleChangeTextarea.bind(this)}
+          style={style.textarea}
         >
-        </textarea>
+        </TextareaAutosize>
       </div>
     );
   }
@@ -62,7 +76,8 @@ class FormatOneNote extends Component {
 const mapStateToProps = state => state.formatOne;
 
 const mapDispatchToProps = {
-  removeNewNote
+  removeNewNote,
+  saveNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormatOneNote);

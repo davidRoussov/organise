@@ -20,7 +20,7 @@ class FormatOne extends Component {
   }
 
   handleClick(e) {
-    if(this.node.contains(e.target)) {
+    if(this.node.contains(e.target) && e.button === 0) {
       const x = e.x;
       const y = e.y;
       this.props.createNewTextarea(x, y);

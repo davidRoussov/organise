@@ -32,7 +32,7 @@ class App extends Component {
       <BrowserRouter>
         <div style={style.app}>
           { this.props.spinnerVisible ? <LoadingApp/> :
-            <div>
+            <div style={{ height: '100%' }}>
               <NavBar user={this.props.user}/>
               <div style={style.pages}>
                 <Switch>
