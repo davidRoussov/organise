@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormControl, FormGroup, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { login, hideAlerts } from '../actions/authentication';
+import { login } from '../actions/authentication';
 
 class Login extends Component {
   constructor() {
@@ -121,8 +121,7 @@ class Login extends Component {
 const mapStateToProps = state => state.authentication;
 
 const mapDispatchToProps = {
-  login,
-  hideAlerts
+  login
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

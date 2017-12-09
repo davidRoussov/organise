@@ -19,6 +19,24 @@ const F1Schema = new mongoose.Schema({
   }
 });
 
+F1Schema.statics.getAllNotes = userID => new Promise((resolve, reject) => {
+  F1.find({ userID }, (err, notes) => {
+      if(err) {
+        console.error('Unable to execute Mongo query');
+        console.error(err);
+        reject('A database error occurred getting F1 notes');
+      } else {
+        const pertinentData = notes.map(note => ({
+          id: note._id,
+          x: note.x,
+          y: note.y,
+          text: note.text
+        }));
+        resolve(pertinentData);
+      }
+  });
+});
+
 F1Schema.statics.save = (userID, note) => new Promise((resolve, reject) => {
   if(note.isNew || !note._id) {
     const f1 = new F1({

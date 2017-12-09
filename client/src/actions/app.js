@@ -1,6 +1,8 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
+export const hideAlerts = () => dispatch => dispatch({ type: 'HIDE_ALERTS' });
+
 export const getUser = () => dispatch => {
   dispatch({ type: 'SHOW_SPINNER' });
   fetch(SERVER_URL + '/api/user', {
@@ -17,8 +19,9 @@ export const getUser = () => dispatch => {
   .catch(error => {
     dispatch({
       type: 'GET_USER_FAILED',
-      message: error
+      data: error.message
     });
+    window.location.href = '/login';
   })
   .then(() => dispatch({ type: 'HIDE_SPINNER' }));
 };

@@ -1,5 +1,6 @@
 const initialState = {
-  notes: []
+  notes: [],
+  writeAreaDisabled: true
 };
 
 const formatOne = (state = initialState, action) => {
@@ -11,6 +12,9 @@ const formatOne = (state = initialState, action) => {
     case 'REMOVE_NEW_TEXTAREA':
       const newNotes = state.notes.filter(note => !note.isNew);
       return { ...state, notes: newNotes };
+    case 'GOT_ALL_F1_NOTES':
+      const mergedNotes = state.notes.concat(action.data);
+      return { ...state, notes: mergedNotes, writeAreaDisabled: false };
     default:
       return state;
   }

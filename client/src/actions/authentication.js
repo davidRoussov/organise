@@ -1,8 +1,6 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
-export const hideAlerts = () => dispatch => dispatch({ type: 'HIDE_ALERTS' });
-
 export const signup = user => dispatch => {
   dispatch({ type: 'SHOW_SPINNER' });
   fetch(`${SERVER_URL}/api/auth/signup`, {

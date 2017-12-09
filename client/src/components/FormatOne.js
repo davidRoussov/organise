@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import FormatOneNote from './FormatOneNote';
 
-import { createNewTextarea } from '../actions/formatOne';
+import { createNewTextarea, getAllNotes } from '../actions/formatOne';
 
 class FormatOne extends Component {
   constructor() {
@@ -14,13 +14,17 @@ class FormatOne extends Component {
 
   componentDidMount() {
     document.addEventListener('click', this.handleClick);
+    this.props.getAllNotes();
   }
   componentWillUnmount() {
     document.removeEventListener('click', this.handleClick);
   }
 
   handleClick(e) {
-    if(this.node.contains(e.target) && e.button === 0) {
+    if(
+      !this.props.writeAreaDisabled &&
+      this.node.contains(e.target) && 
+      e.button === 0) {
       const x = e.x;
       const y = e.y;
       this.props.createNewTextarea(x, y);
@@ -28,29 +32,41 @@ class FormatOne extends Component {
   }
 
   render() {
+    const writeAreaStyle = {
+      backgroundColor: 'white',
+      width: '100%',
+      height: '100%',
+      padding: '20px',
+      borderRadius: '8px',
+      cursor: 'text'
+    };
+    const writeAreaDisabled = {
+      ...writeAreaStyle,
+      backgroundColor: '#DCDCDC',
+      cursor: 'not-allowed'
+    };
+
     const style = {
       container: {
         width: '100%',
         height: '100%',
         padding: '20px'
       },
-      writeArea: {
-        backgroundColor: 'white',
-        width: '100%',
-        height: '100%',
-        padding: '20px',
-        borderRadius: '8px',
-        cursor: 'text'
-      }
+      writeArea: { ...writeAreaStyle },
+      writeAreaDisabled: { ...writeAreaDisabled }
     };
 
     const elements = this.props.notes.map((note, i) =>  <FormatOneNote key={i} note={note} requestFocus={note.isNew}/>);
 
     return (
       <div style={style.container}>
-        <div style={style.writeArea} ref={node => this.node = node}>
-          {elements}
-        </div>
+        { this.props.writeAreaDisabled ?
+          <div style={style.writeAreaDisabled}></div>
+          :
+          <div style={style.writeArea} ref={node => this.node = node}>
+            {elements}
+          </div>
+        }
       </div>
     );
   }
@@ -61,7 +77,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  createNewTextarea
+  createNewTextarea,
+  getAllNotes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormatOne);

@@ -5,11 +5,15 @@ const app = (state={}, action) => {
     case 'HIDE_SPINNER':
       return { ...state, spinnerVisible: false };
     case 'GET_USER_FAILED':
-      return { ...state, displayErrorAlert: true, message: action.message };
+      return { ...state, displayAlert: true, alertMEssage: action.data };
     case 'GOT_USER':
       return { ...state, user: action.data };
     case 'HIDE_ALERTS':
-      return { ...state, displayErrorAlert: false };
+      return { ...state, displayAlert: false };
+    case 'ERROR_SAVING_F1_NOTE':
+      return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
+    case 'ERROR_GETTING_ALL_F1_NOTES':
+      return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     default:
       return state;
   };

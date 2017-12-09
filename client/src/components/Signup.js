@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormControl, FormGroup, Button, ControlLabel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { signup, hideAlerts } from '../actions/authentication';
+import { signup } from '../actions/authentication';
 
 class Signup extends Component {
   constructor() {
@@ -157,8 +157,7 @@ class Signup extends Component {
 const mapStateToProps = state => state.authentication;
 
 const mapDispatchToProps = {
-  signup,
-  hideAlerts
+  signup
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
