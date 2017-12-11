@@ -38,8 +38,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', routes);
 
-app.get('/', (request, response) => {
-  response.send('Hello, World!');
-});
-
 app.listen(3001, () => console.info('listening on port 3001'));
+
