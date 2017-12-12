@@ -5,8 +5,18 @@ const F2Schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  category: {
+  categoryID: {
     type: String,
     required: true
+  },
+  heading: {
+    type: String,
+    required: true
+  },
+  items: {
+    type: [String]
   }
 });
+
+const F2 = mongoose.model('F2', F2Schema);
+export default F2;

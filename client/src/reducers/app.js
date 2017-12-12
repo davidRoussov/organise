@@ -18,6 +18,8 @@ const app = (state={}, action) => {
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     case 'ERROR_GETTING_F2_NOTES':
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
+    case 'ERROR_GETTING_F2_CATEGORIES':
+      return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     default:
       return state;
   };

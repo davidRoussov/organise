@@ -42,7 +42,7 @@ class App extends Component {
       pages: {
         height: '100%',
         width: '100%',
-        paddingTop: '56px'
+        paddingTop: '75.3px'
       }
     };
 

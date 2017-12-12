@@ -1,7 +1,7 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
-export const getCategoriesAndNotes = () => dispatch => {
+export const getNotes = () => dispatch => {
   dispatch({ type: 'LOADING' });
 
   fetch(`${SERVER_URL}/api/f2`, {
@@ -18,14 +18,37 @@ export const getCategoriesAndNotes = () => dispatch => {
     console.log(JSON.stringify(error, null, 2));
     dispatch({
       type: 'ERROR_GETTING_F2_NOTES',
-      data: error.message || error
+      data: error.message || error.toString()
     });
   })
   .then(() => dispatch({ type: 'DONE_LOADING' }));
 };
 
+export const getCategories = () => dispatch => {
+  dispatch({ type: 'LOADING_CATEGORY' });
+
+  fetch(`${SERVER_URL}/api/f2/category`, {
+    credentials: 'include'
+  })
+  .then(handleErrors)
+  .then(response => response.json())
+  .then(response => {
+    dispatch({
+      type: 'GET_F2_CATEGORIES',
+      data: response.categories
+    });
+  })
+  .catch(error => {
+    dispatch({
+      type: 'ERROR_GETTING_F2_CATEGORIES',
+      data: error.message || error.toString()
+    });
+  })
+  .then(() => dispatch({ type: 'DONE_LOADING_CATEGORY' }));
+};
+
 export const createNewCategory = newCategory => dispatch => {
-  dispatch({ type: 'LOADING_NEW_CATEGORY' });
+  dispatch({ type: 'LOADING_CATEGORY' });
 
   fetch(`${SERVER_URL}/api/f2/category`, {
     method: 'POST',
@@ -38,16 +61,13 @@ export const createNewCategory = newCategory => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    console.log('SUCCESS');
-    console.log(JSON.stringify(response, null, 2));
+    dispatch(getCategories());
   })
   .catch(error => {
-    console.log('ERROR!');
-    console.log(JSON.stringify(error, null, 2));
     dispatch({
       type: 'ERROR_CREATING_NEW_F2_NOTE',
       data: error.message || error
     });
-  })
-  .then(() => dispatch({ type: 'DONE_LOADING_NEW_CATEGORY' }));
+    dispatch({ type: 'DONE_LOADING_CATEGORY' });
+  });
 }

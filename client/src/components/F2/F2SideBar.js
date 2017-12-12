@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { FormControl, Button, FormGroup } from 'react-bootstrap';
+import { FormControl, Button, FormGroup, SplitButton, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Spinner from '../Spinner';
-import { getCategoriesAndNotes, createNewCategory } from '../../actions/formatTwo';
+import { getCategories, createNewCategory } from '../../actions/formatTwo';
 
 class F2SideBar extends Component {
   constructor() {
@@ -14,10 +14,12 @@ class F2SideBar extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.getCategories();
+  }
+
   handleSubmitAddCategoy(e) {
     e.preventDefault();
-    console.log('submitting new category');
-    console.log(this.state.newCategoryName);
     this.props.createNewCategory(this.state.newCategoryName);
   }
 
@@ -37,11 +39,31 @@ class F2SideBar extends Component {
       },
       addCategoryDiv: {
         padding: '10px'
+      },
+      category: {
+        width: '80%'
       }
     }
 
+    const categories = this.props.categories.map((category, i) => {
+      return (
+        <div key={i} style={style.category} className="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <button style={style.category} type="button" className="btn btn-primary">{category.categoryName}</button>
+          <div className="btn-group" role="group">
+            <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div className="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <a className="dropdown-item" href="#">Edit</a>
+              <a className="dropdown-item" href="#">Delete</a>
+            </div>
+          </div>
+        </div>
+      );
+    });
+
     return (
       <div style={containerStyle}>
+
+        {categories}
 
         <div style={style.addCategory}>
           <button
@@ -87,7 +109,7 @@ const mapStateToProps = state => state.formatTwo;
 
 const mapDispatchToProps = {
   createNewCategory,
-  getCategoriesAndNotes
+  getCategories
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(F2SideBar);
