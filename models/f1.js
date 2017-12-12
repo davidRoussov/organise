@@ -43,14 +43,21 @@ F1Schema.statics.getAllNotes = userID => new Promise((resolve, reject) => {
         console.error(err);
         reject('A database error occurred getting F1 notes');
       } else {
-        const currentTime = Date.now();
+
+        const date = new Date();
+        date.setDate(date.getDate() - 1);
         const freshNotes = notes.filter(note => {
           const updatedAt = new Date(note.updatedAt);
-          console.log('---------------');
-
-          console.log('---------------');
-          const expired = 
-          
+          if(updatedAt > date) return true;
+          else {
+            F1Schema.statics.deleteNote(note._id)
+            .then(() => console.info('delete one expired note'))
+            .catch(err => {
+              console.error(`Unable to delete note with id ${note._id}`);
+              consoel.error(err);
+            });
+            return false;
+          }          
         });
 
         const pertinentData = freshNotes.map(note => ({
