@@ -26,6 +26,7 @@ class F2MainContentArea extends Component {
         <div className="card-columns">
           { notes }
         </div>
+        
       </div>
     );
   }

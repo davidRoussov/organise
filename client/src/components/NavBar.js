@@ -37,7 +37,7 @@ class NavBar extends Component {
 
           <ul className='navbar-nav mr-auto'>
             <li className="nav-item">
-              <a className="nav-link" href="#">{this.props.user ? this.props.user.emailAddress : '[no user]'}</a>
+              <a className="nav-link">{this.props.user ? this.props.user.emailAddress : '[no user]'}</a>
             </li>
           </ul>
 
