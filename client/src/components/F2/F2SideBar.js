@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { FormControl, Button, FormGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
+import Spinner from '../Spinner';
+import { getCategoriesAndNotes, createNewCategory } from '../../actions/formatTwo';
 
 class F2SideBar extends Component {
   constructor() {
@@ -14,6 +18,7 @@ class F2SideBar extends Component {
     e.preventDefault();
     console.log('submitting new category');
     console.log(this.state.newCategoryName);
+    this.props.createNewCategory(this.state.newCategoryName);
   }
 
   handleChangeAddCategory = e => this.setState({ newCategoryName: e.target.value });
@@ -46,28 +51,30 @@ class F2SideBar extends Component {
           >Add category</button>
           { this.state.displayAddCategory ? 
             <div style={style.addCategoryDiv}>
-              <form onSubmit={this.handleSubmitAddCategoy.bind(this)}>
-                <FormGroup>
-                  <div style={{margin: '10px'}}>
-                    <FormControl
-                      type="text"
-                      placeholder="new category"
-                      value={this.state.newCategoryName}
-                      onChange={this.handleChangeAddCategory.bind(this)}
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    className="btn-sm btn-primary"
-                    style={{marginRight: '2px'}}
-                  >Submit</Button>
-                  <Button
-                    type="button"
-                    className="btn-sm btn-default"
-                    onClick={this.handleCancelAddCategory.bind(this)}
-                  >Cancel</Button>
-                </FormGroup>
-              </form>
+              { this.props.addCategorySpinnerVisible ? <Spinner/> :
+                <form onSubmit={this.handleSubmitAddCategoy.bind(this)}>
+                  <FormGroup>
+                    <div style={{margin: '10px'}}>
+                      <FormControl
+                        type="text"
+                        placeholder="new category"
+                        value={this.state.newCategoryName}
+                        onChange={this.handleChangeAddCategory.bind(this)}
+                      />
+                    </div>
+                    <Button
+                      type="submit"
+                      className="btn-sm btn-primary"
+                      style={{marginRight: '2px'}}
+                    >Submit</Button>
+                    <Button
+                      type="button"
+                      className="btn-sm btn-default"
+                      onClick={this.handleCancelAddCategory.bind(this)}
+                    >Cancel</Button>
+                  </FormGroup>
+                </form>
+              }
             </div> : null
           }
         </div>
@@ -76,4 +83,11 @@ class F2SideBar extends Component {
   }
 }
 
-export default F2SideBar;
+const mapStateToProps = state => state.formatTwo;
+
+const mapDispatchToProps = {
+  createNewCategory,
+  getCategoriesAndNotes
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(F2SideBar);

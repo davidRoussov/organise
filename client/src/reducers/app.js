@@ -14,6 +14,10 @@ const app = (state={}, action) => {
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     case 'ERROR_GETTING_ALL_F1_NOTES':
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
+    case 'ERROR_CREATING_NEW_F2_NOTE':
+      return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
+    case 'ERROR_GETTING_F2_NOTES':
+      return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     default:
       return state;
   };

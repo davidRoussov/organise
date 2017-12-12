@@ -16,6 +16,10 @@ export const getCategoriesAndNotes = () => dispatch => {
   .catch(error => {
     console.log("ERROR!");
     console.log(JSON.stringify(error, null, 2));
+    dispatch({
+      type: 'ERROR_GETTING_F2_NOTES',
+      data: error.message || error
+    });
   })
   .then(() => dispatch({ type: 'DONE_LOADING' }));
 };
@@ -33,13 +37,17 @@ export const createNewCategory = newCategory => dispatch => {
   })
   .then(handleErrors)
   .then(response => response.json())
-  .then(repsonse => {
+  .then(response => {
     console.log('SUCCESS');
     console.log(JSON.stringify(response, null, 2));
   })
   .catch(error => {
     console.log('ERROR!');
     console.log(JSON.stringify(error, null, 2));
+    dispatch({
+      type: 'ERROR_CREATING_NEW_F2_NOTE',
+      data: error.message || error
+    });
   })
   .then(() => dispatch({ type: 'DONE_LOADING_NEW_CATEGORY' }));
 }
