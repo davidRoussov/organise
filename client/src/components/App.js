@@ -5,7 +5,7 @@ import AlertContainer from 'react-alert';
 
 import NavBar from './NavBar';
 import FormatOne from './FormatOne';
-import FormatTwo from './FormatTwo';
+import FormatTwo from './F2/FormatTwo';
 import FormatThree from './FormatThree';
 import Timetable from './Timetable';
 import LoadingApp from './LoadingApp';
