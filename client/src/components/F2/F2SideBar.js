@@ -3,7 +3,7 @@ import { FormControl, Button, FormGroup, SplitButton, MenuItem } from 'react-boo
 import { connect } from 'react-redux';
 
 import Spinner from '../Spinner';
-import { getCategories, createNewCategory } from '../../actions/formatTwo';
+import { getCategories, createNewCategory, setCurrentCategory } from '../../actions/formatTwo';
 
 class F2SideBar extends Component {
   constructor() {
@@ -23,6 +23,10 @@ class F2SideBar extends Component {
     this.props.createNewCategory(this.state.newCategoryName);
   }
 
+  handleSelectCategory(categoryID) {
+    this.props.setCurrentCategory(categoryID);
+  }
+
   handleChangeAddCategory = e => this.setState({ newCategoryName: e.target.value });
   handleCancelAddCategory = () => this.setState({ newCategoryName: '', displayAddCategory: false });  
   showAddCategory = () => this.setState({ displayAddCategory: true});
@@ -30,7 +34,8 @@ class F2SideBar extends Component {
   render() {
     const containerStyle = {
       ...this.props.style,
-      textAlign: 'center'
+      textAlign: 'center',
+      marginTop: '20px'
     };
 
     const style = {
@@ -41,19 +46,29 @@ class F2SideBar extends Component {
         padding: '10px'
       },
       category: {
-        width: '80%'
+        width: '80%',
+        borderRadius: '0px'
       }
     }
 
     const categories = this.props.categories.map((category, i) => {
       return (
-        <div key={i} style={style.category} className="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <button style={style.category} type="button" className="btn btn-primary">{category.categoryName}</button>
+        <div key={i} style={style.category} className="btn-group">
+          <button 
+            style={style.category} 
+            type="button" 
+            className={category.id === this.props.currentCategory ? "btn btn-success" : "btn btn-primary"}
+            onClick={this.handleSelectCategory.bind(this, category.id)}
+          >{category.categoryName}</button>
           <div className="btn-group" role="group">
-            <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-            <div className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a className="dropdown-item" href="#">Edit</a>
-              <a className="dropdown-item" href="#">Delete</a>
+            <button 
+              style={{borderRadius: '0px'}} 
+              type="button" 
+              className={category.id === this.props.currentCategory ? "btn btn-success dropdown-toggle" : "btn btn-primary dropdown-toggle"}
+              data-toggle="dropdown"></button>
+            <div className="dropdown-menu">
+              <a className="dropdown-item">Edit</a>
+              <a className="dropdown-item">Delete</a>
             </div>
           </div>
         </div>
@@ -109,7 +124,8 @@ const mapStateToProps = state => state.formatTwo;
 
 const mapDispatchToProps = {
   createNewCategory,
-  getCategories
+  getCategories,
+  setCurrentCategory
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(F2SideBar);

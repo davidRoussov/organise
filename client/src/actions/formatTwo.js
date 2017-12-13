@@ -1,6 +1,9 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
+export const setCurrentCategory = categoryID => dispatch => 
+  dispatch({ type: 'SETTING_CURRENT_F2_CATEGORY', categoryID });
+
 export const getNotes = () => dispatch => {
   dispatch({ type: 'LOADING' });
 
