@@ -10,12 +10,29 @@ const F2Schema = new mongoose.Schema({
     required: true
   },
   heading: {
-    type: String,
-    required: true
+    type: String
   },
   items: {
     type: [String]
   }
+});
+
+F2Schema.statics.createNote = (userID, categoryID) => new Promise((resolve, reject) => {
+  const f2 = new F2({
+    userID,
+    categoryID,
+    heading: '',
+    items: []
+  });
+  f2.save((err, results) => {
+    if(err) {
+      console.error('Unable to execute mongo query');
+      console.error(err);
+      reject('A database error occurred creating the new category');
+    } else {
+      resolve();
+    }
+  });
 });
 
 const F2 = mongoose.model('F2', F2Schema);

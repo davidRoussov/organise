@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { FormControl, Button, FormGroup, SplitButton, MenuItem } from 'react-bootstrap';
+import { FormControl, Button, FormGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Spinner from '../Spinner';
-import { getCategories, createNewCategory, setCurrentCategory } from '../../actions/formatTwo';
+import { getCategories, createNewCategory, setCurrentCategory, createNote } from '../../actions/formatTwo';
 
 class F2SideBar extends Component {
   constructor() {
@@ -35,7 +35,7 @@ class F2SideBar extends Component {
     const containerStyle = {
       ...this.props.style,
       textAlign: 'center',
-      marginTop: '20px'
+      minHeight: '100vh'
     };
 
     const style = {
@@ -43,11 +43,16 @@ class F2SideBar extends Component {
         marginTop: '20px'
       },
       addCategoryDiv: {
-        padding: '10px'
+        paddingTop: '10px',
+        paddingRight: '10px',
+        paddingLeft: '10px'
       },
       category: {
         width: '80%',
         borderRadius: '0px'
+      },
+      addNoteContainer: {
+        marginTop: '20px'
       }
     }
 
@@ -78,7 +83,9 @@ class F2SideBar extends Component {
     return (
       <div style={containerStyle}>
 
-        {categories}
+        <div style={{marginTop: '20px'}}>
+          {categories}
+        </div>
 
         <div style={style.addCategory}>
           <button
@@ -115,6 +122,16 @@ class F2SideBar extends Component {
             </div> : null
           }
         </div>
+
+        <div style={style.addNoteContainer}>
+          <button
+            type="button"
+            className="btn btn-outline-primary"
+            onClick={this.props.createNote.bind(null, this.props.currentCategory)}
+            disabled={!this.props.currentCategory}
+          >Add Note</button>
+        </div>
+
       </div>
     );
   }
@@ -125,7 +142,8 @@ const mapStateToProps = state => state.formatTwo;
 const mapDispatchToProps = {
   createNewCategory,
   getCategories,
-  setCurrentCategory
+  setCurrentCategory,
+  createNote
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(F2SideBar);

@@ -1,11 +1,34 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
+export const createNote = categoryID => dispatch => {
+  dispatch({ type: 'LOADING_NOTES' });
+
+  fetch(`${SERVER_URL}/api/f2`, {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify({ categoryID }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(handleErrors)
+  .then(response => response.json())
+  .then(response => {
+    console.log('SUCCESS!');
+    console.log(JSON.stringify(response, null, 2));
+  })
+  .catch(error => {
+    console.log('ERROR!');
+    console.log(JSON.stringify(error, null, 2));
+  });
+};
+
 export const setCurrentCategory = categoryID => dispatch => 
   dispatch({ type: 'SETTING_CURRENT_F2_CATEGORY', categoryID });
 
 export const getNotes = () => dispatch => {
-  dispatch({ type: 'LOADING' });
+  dispatch({ type: 'LOADING_NOTES' });
 
   fetch(`${SERVER_URL}/api/f2`, {
     credentials: 'include'
@@ -24,7 +47,7 @@ export const getNotes = () => dispatch => {
       data: error.message || error.toString()
     });
   })
-  .then(() => dispatch({ type: 'DONE_LOADING' }));
+  .then(() => dispatch({ type: 'DONE_LOADING_NOTES' }));
 };
 
 export const getCategories = () => dispatch => {

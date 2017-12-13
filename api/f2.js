@@ -3,6 +3,27 @@ import F2 from '../models/f2';
 import F2Category from '../models/f2Category';
 
 module.exports = {
+  createNote: async (request, response) => {
+    if(request.session && request.session.userId) {
+      const userID = request.session.userId;
+      if(request.body && request.body.categoryID) {
+        const categoryID = request.body.categoryID;
+        try {
+          await F2.createNote(userID, categoryID);
+          response.status(201).send({ success: true });
+        } catch(err) {
+          response.status(500).send({ message: err });
+        }
+      } else {
+        console.info('Unable to create new F2 note: missing request body data');
+        response.status(400).send({ message: 'Missing data from request body' });
+      }
+    } else {
+      console.log('Missing user ID from session when trying to create F2 category');
+      response.status(400).send({ message: 'Invalid session' });
+    }
+  },
+
   createNewCategory: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;
