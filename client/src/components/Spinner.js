@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Spinner = () => {
+const Spinner = props => {
   const style = {
     spinner: {
-      
+      fontSize: props.size || '20px'
     }
   };
 

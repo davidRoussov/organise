@@ -12,6 +12,10 @@ const formatTwo = (state=defaultState, action) => {
       return { ...state, categories: action.data };
     case 'SETTING_CURRENT_F2_CATEGORY':
       return { ...state, currentCategory: action.categoryID };
+    case 'LOADING_NOTES':
+      return { ...state, mainContentSpinnerVisible: true };
+    case 'DONE_LOADING_NOTES':
+      return { ...state, mainContentSpinnerVisible: false };
     default:
       return state;
   }

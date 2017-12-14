@@ -15,5 +15,6 @@ router.route('/f1').get(f1.get);
 router.route('/f2/category').post(f2.createNewCategory);
 router.route('/f2/category').get(f2.getCategories);
 router.route('/f2').post(f2.createNote);
+router.route('/f2').get(f2.getNotes);
 
 module.exports = router;

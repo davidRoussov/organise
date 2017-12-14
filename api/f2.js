@@ -3,6 +3,23 @@ import F2 from '../models/f2';
 import F2Category from '../models/f2Category';
 
 module.exports = {
+  getNotes: async (request, response) => {
+    if(request.session && request.session.userId) {
+      const userID = request.session.userId;
+      try {
+        const notes = await F2.getNotes(userID);
+        response.status(200).send({ notes });
+      } catch(error) {
+        console.error('Unable to get F2 notes');
+        console.error(error);
+        response.status(500).send({ message: 'Unable to get F2 notes' });
+      }
+    } else {
+      console.log('Missing user ID from session when trying to create F2 category');
+      response.status(400).send({ message: 'Invalid session' });
+    }
+  },
+
   createNote: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;

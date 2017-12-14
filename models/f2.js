@@ -17,6 +17,23 @@ const F2Schema = new mongoose.Schema({
   }
 });
 
+F2Schema.statics.getNotes = userID => new Promise((resolve, reject) => {
+  F2.find({ userID }, (error, results) => {
+    if(error) {
+      console.error('Unable to execute Mongo query');
+      reject(error);
+    } else {
+      const pertinentData = results.map(note => ({
+        id: note._id,
+        categoryID: note.categoryID,
+        heading: note.heading,
+        items: note.items
+      }));
+      resolve(pertinentData);
+    }
+  });
+});
+
 F2Schema.statics.createNote = (userID, categoryID) => new Promise((resolve, reject) => {
   const f2 = new F2({
     userID,

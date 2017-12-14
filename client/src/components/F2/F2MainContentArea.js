@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // import F2Note from './F2Note';
+import Spinner from '../Spinner';
 
 import { getNotes } from '../../actions/formatTwo';
 
 class F2MainContentArea extends Component {
+  constructor() {
+    super();
+  }
+
+  componentDidMount() {
+    this.props.getNotes();
+  }
+
   render() {
     const containerStyle = {
       ...this.props.style,
       padding: '20px',
-      minHeight: '100vh'
+      minHeight: '100vh',
+      textAlign: 'center'
     };
 
     // const notes = tempData.map((note, i) => {
@@ -24,8 +34,10 @@ class F2MainContentArea extends Component {
 
     return (
       <div style={containerStyle}>
-        <div className="card-columns">
-        </div>
+        { this.props.mainContentSpinnerVisible ? <Spinner size='48px'/> :
+          <div className="card-columns">
+          </div>
+        }
       </div>
     );
   }
