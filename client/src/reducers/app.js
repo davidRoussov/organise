@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 const app = (state={}, action) => {
   switch(action.type) {
     case 'SHOW_SPINNER':
@@ -20,7 +22,9 @@ const app = (state={}, action) => {
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     case 'ERROR_GETTING_F2_CATEGORIES':
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
-    default:
+    case 'ERROR_CREATING_F2_NOTE':
+      return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
+    default: 
       return state;
   };
 }

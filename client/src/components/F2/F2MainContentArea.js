@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import F2Note from './F2Note';
+import F2Note from './F2Note';
 import Spinner from '../Spinner';
 
 import { getNotes } from '../../actions/formatTwo';
 
 class F2MainContentArea extends Component {
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     this.props.getNotes();
   }
@@ -22,20 +18,22 @@ class F2MainContentArea extends Component {
       minHeight: '100vh',
       textAlign: 'center'
     };
+    
+    const notesInCurrentCategory = (this.props.notes && this.props.currentCategory) ? 
+      this.props.notes.filter(note => note.categoryID === this.props.currentCategory) : [];
 
-    // const notes = tempData.map((note, i) => {
-    //   return (
-    //     <F2Note
-    //       key={i}
-    //       data={note}
-    //     />
-    //   );
-    // });
+    const renderedNotes = notesInCurrentCategory && notesInCurrentCategory.map((note, i) =>
+      <F2Note
+        key={i}
+        data={note}
+      />
+    );
 
     return (
       <div style={containerStyle}>
         { this.props.mainContentSpinnerVisible ? <Spinner size='48px'/> :
           <div className="card-columns">
+            {renderedNotes}
           </div>
         }
       </div>

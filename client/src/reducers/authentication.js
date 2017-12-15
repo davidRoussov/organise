@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 const authentication = (state={}, action) => {
   switch(action.type) {
     case 'SHOW_SPINNER':
@@ -10,7 +12,8 @@ const authentication = (state={}, action) => {
       return { ...state, displayErrorAlert: true, alertMessage: action.message };
     case 'HIDE_ALERTS':
       return { ...state, displayErrorAlert: false };
-    default: return state;
+    default:
+      return state;
   };
 };
 

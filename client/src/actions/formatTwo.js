@@ -15,12 +15,13 @@ export const createNote = categoryID => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    console.log('SUCCESS!');
-    console.log(JSON.stringify(response, null, 2));
+    dispatch(getNotes());
   })
   .catch(error => {
-    console.log('ERROR!');
-    console.log(JSON.stringify(error, null, 2));
+    dispatch({
+      type: 'ERROR_CREATING_F2_NOTE',
+      data: error.message
+    });
   });
 };
 
@@ -36,12 +37,12 @@ export const getNotes = () => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    console.log('SUCCESS!!');
-    console.log(JSON.stringify(response, null, 2));
+    dispatch({
+      type: 'GET_F2_NOTES',
+      data: response.notes
+    });
   })
   .catch(error => {
-    console.log("ERROR!");
-    console.log(JSON.stringify(error, null, 2));
     dispatch({
       type: 'ERROR_GETTING_F2_NOTES',
       data: error.message || error.toString()

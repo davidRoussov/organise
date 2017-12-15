@@ -16,6 +16,8 @@ const formatTwo = (state=defaultState, action) => {
       return { ...state, mainContentSpinnerVisible: true };
     case 'DONE_LOADING_NOTES':
       return { ...state, mainContentSpinnerVisible: false };
+    case 'GET_F2_NOTES':
+      return { ...state, notes: action.data };
     default:
       return state;
   }

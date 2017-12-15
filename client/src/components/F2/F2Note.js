@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 
 class F2Note extends Component {
   render() {
+
+    const list = this.props.data.items && this.props.data.items.map(item => 
+      <p>item</p>
+    );
+
+
     return (
       <div className="card bg-light mb-3" style={{maxWidth: "20rem"}}>
-        <div className="card-header">{ this.props.data }</div>
+        <div className="card-header">{ this.props.data.heading }</div>
         <div className="card-body">
-          <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          {list}
         </div>
       </div>
     );

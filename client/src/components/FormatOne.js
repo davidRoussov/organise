@@ -38,7 +38,8 @@ class FormatOne extends Component {
       height: '100%',
       padding: '20px',
       borderRadius: '8px',
-      cursor: 'text'
+      cursor: 'text',
+      border: '1px solid #80808030'
     };
     const writeAreaDisabled = {
       ...writeAreaStyle,
