@@ -17,6 +17,19 @@ const F2Schema = new mongoose.Schema({
   }
 });
 
+F2Schema.statics.saveNote = note => new Promise((resolve, reject) => {
+  F2.findOneAndUpdate({ _id: note.id }, note, (error) => {
+    if(error) {
+      console.error('Unable to execute Mongo query');
+      console.error(error);
+      reject();
+    } else {
+      console.log('hi');
+      resolve();
+    }
+  });
+});
+
 F2Schema.statics.getNotes = userID => new Promise((resolve, reject) => {
   F2.find({ userID }, (error, results) => {
     if(error) {
