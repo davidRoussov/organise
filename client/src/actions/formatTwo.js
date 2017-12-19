@@ -1,6 +1,37 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
+export const saveNote = note => dispatch => {
+  dispatch({ type: 'SAVING_F2_NOTE' });
+  console.log(note);
+  fetch(`${SERVER_URL}/api/f2`, {
+    method: 'PUT',
+    credentials: 'include',
+    body: JSON.stringify({ note }),
+    headers: {
+      'Content-Type': 'application/json' 
+    }
+  })
+  .then(handleErrors)
+  .then(response => response.json())
+  .then(response => {
+    console.log('success');
+    console.log(response);
+    dispatch({
+      type: 'SUCCESS_SAVING_F2_NOTE',
+      data: note.id
+    });
+  })
+  .catch(error => {
+    console.log('error');
+    console.log(JSON.stringify(error, null, 2));
+    dispatch({
+      type: 'ERROR_SAVING_F2_NOTE',
+      data: error.message
+    });
+  });
+}
+
 export const createNote = categoryID => dispatch => {
   dispatch({ type: 'LOADING_NOTES' });
 

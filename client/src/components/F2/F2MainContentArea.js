@@ -25,7 +25,7 @@ class F2MainContentArea extends Component {
     const renderedNotes = notesInCurrentCategory && notesInCurrentCategory.map((note, i) =>
       <F2Note
         key={i}
-        data={note}
+        note={note}
       />
     );
 

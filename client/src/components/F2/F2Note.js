@@ -1,38 +1,64 @@
 import React, { Component } from 'react';
+import TextareaAutosize from 'react-autosize-textarea';
+import { connect } from 'react-redux';
+
+import { saveNote } from '../../actions/formatTwo';
 
 class F2Note extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    const init = (key, alt='') => ((props.note && props.note[key]) ? props.note[key] : alt);
 
     this.state = {
-      noteHeading: ''
+      initialNoteHeading: init('heading'),
+      noteHeading: init('heading'),
+      intitialNoteItems: init('items', []),
+      noteItems: init('items', [])
     };
   }
 
-  componentWillReceiveProps(props) {
-    if(props.heading) {
-      this.setState({ noteHeading: props.heading });
+  handleChangeNoteHeading = e => { 
+    this.setState({ noteHeading: e.target.value });
+  }
+
+  handleBlurNoteHeading() {
+    if(this.state.initialNoteHeading !== this.state.noteHeading) {
+      this.props.saveNote({
+        ...this.props.note,
+        heading: this.state.noteHeading
+      });
     }
   }
 
-  handleChangeNoteHeading = e => this.setState({ noteHeading: e.target.value });
-
   render() {
+    const style = {
+      noteHeading: {
+        background: 'transparent',
+        border: 'none',
+        outline: 'none',
+        overflow: 'hidden',
+        resize: 'none',
+        padding: '0px',
+        boxShadow: 'none'
+      }
+    };
 
-    const list = this.props.data.items && this.props.data.items.map(item => 
+    const list = this.props.note && this.props.note.items && this.props.note.items.map(item => 
       <p>item</p>
     );
-
 
     return (
       <div className="card bg-light mb-3" style={{maxWidth: "20rem"}}>
         <div className="card-header">
-          <input
-            type="text"
+          <TextareaAutosize
             className="form-control"
             value={this.state.noteHeading}
             onChange={this.handleChangeNoteHeading.bind(this)}
-          />   
+            style={style.noteHeading}
+            placeholder='Enter heading'
+            onBlur={this.handleBlurNoteHeading.bind(this)}
+          ></TextareaAutosize>   
         </div>
         <div className="card-body">
           {list}
@@ -42,4 +68,8 @@ class F2Note extends Component {
   }
 }
 
-export default F2Note;
+const mapDispatchToProps = {
+  saveNote
+};
+
+export default connect(null, mapDispatchToProps)(F2Note);
