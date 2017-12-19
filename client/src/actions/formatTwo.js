@@ -3,7 +3,7 @@ import handleErrors from './utilities';
 
 export const saveNote = note => dispatch => {
   dispatch({ type: 'SAVING_F2_NOTE' });
-  console.log(note);
+
   fetch(`${SERVER_URL}/api/f2`, {
     method: 'PUT',
     credentials: 'include',
@@ -15,16 +15,13 @@ export const saveNote = note => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    console.log('success');
-    console.log(response);
     dispatch({
       type: 'SUCCESS_SAVING_F2_NOTE',
       data: note.id
     });
+    setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
   })
   .catch(error => {
-    console.log('error');
-    console.log(JSON.stringify(error, null, 2));
     dispatch({
       type: 'ERROR_SAVING_F2_NOTE',
       data: error.message

@@ -9,6 +9,7 @@ import FormatTwo from './F2/FormatTwo';
 import FormatThree from './FormatThree';
 import Timetable from './Timetable';
 import LoadingApp from './LoadingApp';
+import MiniLoadingIndicator from './MiniLoadingIndicator';
 
 import { getUser, hideAlerts } from '../actions/app';
 class App extends Component {
@@ -67,6 +68,7 @@ class App extends Component {
           </div>
         </BrowserRouter>
         <AlertContainer ref={a => this.msg = a} { ...this.alertConfig } />
+        <MiniLoadingIndicator loading={this.props.miniLoading} visible={this.props.miniVisible}/>
       </div>
     );
   }

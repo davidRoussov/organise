@@ -24,8 +24,7 @@ F2Schema.statics.saveNote = note => new Promise((resolve, reject) => {
       console.error(error);
       reject();
     } else {
-      console.log('hi');
-      resolve();
+      resolve();  
     }
   });
 });
