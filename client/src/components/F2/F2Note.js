@@ -31,11 +31,25 @@ class F2Note extends Component {
     }
   }
 
+  handleBlurNoteTask() {
+
+  }
+
   handleClickAddTask() {
     const newNote = { ...this.props.note, 
       items: this.props.note.items.concat("")
     };
     this.props.saveNote(newNote);
+  }
+
+  handleChangeNoteItem = itemIndex => e => {
+    const newItems = this.state.noteItems.map((item, i) => {
+      if(i !== itemIndex) return item;
+      
+      return e.target.value;
+    });
+
+    this.setState({ noteItems: newItems });
   }
 
   render() {
@@ -53,11 +67,29 @@ class F2Note extends Component {
         cursor: 'pointer',
         float: 'left',
         marginBottom: '10px'
+      },
+      noteTask: {
+        background: 'transparent',
+        border: 'none',
+        outline: 'none',
+        overflow: 'hidden',
+        resize: 'none',
+        boxShadow: 'none',
+        borderBottom: '1px solid #DFD7CA'
       }
     };
 
-    const list = this.props.note && this.props.note.items && this.props.note.items.map(item => 
-      <p>item</p>
+    const list = this.state.noteItems.map((item, i) => 
+      <div key={i}>
+        <TextareaAutosize
+          className="form-control"
+          value={item}
+          onChange={this.handleChangeNoteItem(i).bind(this)}
+          style={style.noteTask}
+          placeholder='Enter task'
+          onBlur={this.handleBlurNoteTask.bind(this)}
+        ></TextareaAutosize>
+      </div>
     );
 
     return (

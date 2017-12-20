@@ -19,7 +19,7 @@ export const saveNote = note => dispatch => {
       type: 'SMALL_NETWORK_REQUEST_DONE',
       data: note.id
     });
-    setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
+    dispatch(getNotes());
   })
   .catch(error => {
     dispatch({
