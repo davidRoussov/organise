@@ -31,6 +31,13 @@ class F2Note extends Component {
     }
   }
 
+  handleClickAddTask() {
+    const newNote = { ...this.props.note, 
+      items: this.props.note.items.concat("")
+    };
+    this.props.saveNote(newNote);
+  }
+
   render() {
     const style = {
       noteHeading: {
@@ -41,6 +48,11 @@ class F2Note extends Component {
         resize: 'none',
         padding: '0px',
         boxShadow: 'none'
+      },
+      addTaskButton: {
+        cursor: 'pointer',
+        float: 'left',
+        marginBottom: '10px'
       }
     };
 
@@ -62,6 +74,14 @@ class F2Note extends Component {
         </div>
         <div className="card-body">
           {list}
+
+
+          <i 
+            style={style.addTaskButton} 
+            className="fa fa-plus"
+            onClick={this.handleClickAddTask.bind(this)}>
+          </i>
+
         </div>
       </div>
     );

@@ -24,9 +24,9 @@ const app = (state={}, action) => {
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     case 'ERROR_CREATING_F2_NOTE':
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
-    case 'SAVING_F2_NOTE':
+    case 'SMALL_NETWORK_REQUEST':
       return { ...state, miniLoading: true, miniVisible: true };
-    case 'SUCCESS_SAVING_F2_NOTE':
+    case 'SMALL_NETWORK_REQUEST_DONE':
       return { ...state, miniLoading: false, miniVisible: true };
     case 'HIDE_MINI_INDICATOR':
       return { ...state, miniLoading: false, miniVisible: false };

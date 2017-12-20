@@ -2,7 +2,7 @@ import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
 export const saveNote = note => dispatch => {
-  dispatch({ type: 'SAVING_F2_NOTE' });
+  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
   fetch(`${SERVER_URL}/api/f2`, {
     method: 'PUT',
@@ -16,7 +16,7 @@ export const saveNote = note => dispatch => {
   .then(response => response.json())
   .then(response => {
     dispatch({
-      type: 'SUCCESS_SAVING_F2_NOTE',
+      type: 'SMALL_NETWORK_REQUEST_DONE',
       data: note.id
     });
     setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
@@ -56,8 +56,9 @@ export const createNote = categoryID => dispatch => {
 export const setCurrentCategory = categoryID => dispatch => 
   dispatch({ type: 'SETTING_CURRENT_F2_CATEGORY', categoryID });
 
+
 export const getNotes = () => dispatch => {
-  dispatch({ type: 'LOADING_NOTES' });
+  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
   fetch(`${SERVER_URL}/api/f2`, {
     credentials: 'include'
@@ -69,14 +70,15 @@ export const getNotes = () => dispatch => {
       type: 'GET_F2_NOTES',
       data: response.notes
     });
+    dispatch({ type: 'SMALL_NETWORK_REQUEST_DONE' })
+    setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
   })
   .catch(error => {
     dispatch({
       type: 'ERROR_GETTING_F2_NOTES',
       data: error.message || error.toString()
     });
-  })
-  .then(() => dispatch({ type: 'DONE_LOADING_NOTES' }));
+  });
 };
 
 export const getCategories = () => dispatch => {
