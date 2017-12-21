@@ -32,7 +32,11 @@ class F2Note extends Component {
   }
 
   handleBlurNoteTask() {
-
+    const newNote = {
+      ...this.props.note,
+      items: this.state.noteItems
+    };
+    this.props.saveNote(newNote);
   }
 
   handleClickAddTask() {
