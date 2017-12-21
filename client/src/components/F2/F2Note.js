@@ -66,7 +66,8 @@ class F2Note extends Component {
       addTaskButton: {
         cursor: 'pointer',
         float: 'left',
-        marginBottom: '10px'
+        marginBottom: '10px',
+        marginTop: '10px' 
       },
       noteTask: {
         background: 'transparent',
@@ -75,7 +76,8 @@ class F2Note extends Component {
         overflow: 'hidden',
         resize: 'none',
         boxShadow: 'none',
-        borderBottom: '1px solid #DFD7CA'
+        borderBottom: '1px solid #DFD7CA',
+        borderRadius: '0px'
       }
     };
 
@@ -111,7 +113,8 @@ class F2Note extends Component {
           <i 
             style={style.addTaskButton} 
             className="fa fa-plus"
-            onClick={this.handleClickAddTask.bind(this)}>
+            onClick={this.handleClickAddTask.bind(this)}
+          >
           </i>
 
         </div>
