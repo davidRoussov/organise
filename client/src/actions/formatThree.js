@@ -25,34 +25,7 @@ export const deleteCategory = categoryID => dispatch => {
   })
 };
 
-export const deleteNote = noteID => dispatch => {
-  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
-
-  fetch(`${SERVER_URL}/api/f3`, {
-    method: 'DELETE',
-    credentials: 'include',
-    body: JSON.stringify({ noteID }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(handleErrors)
-  .then(response => response.json())
-  .then(response => {
-    dispatch({
-      type: 'SMALL_NETWORK_REQUEST_DONE',
-    });
-    dispatch(getNotes());
-  })
-  .catch(error => {
-    dispatch({
-      type: 'ERROR_DELETING_F3_NOTE',
-      data: error.message
-    });
-  });
-}
-
-export const saveNote = note => dispatch => {
+export const saveCategory = note => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
   fetch(`${SERVER_URL}/api/f3`, {
@@ -70,7 +43,7 @@ export const saveNote = note => dispatch => {
       type: 'SMALL_NETWORK_REQUEST_DONE',
       data: note.id
     });
-    dispatch(getNotes());
+    dispatch(getCategories());
   })
   .catch(error => {
     dispatch({
@@ -80,57 +53,9 @@ export const saveNote = note => dispatch => {
   });
 }
 
-export const createNote = categoryID => dispatch => {
-  dispatch({ type: 'LOADING_NOTES' });
-
-  fetch(`${SERVER_URL}/api/f3`, {
-    method: 'POST',
-    credentials: 'include',
-    body: JSON.stringify({ categoryID }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(handleErrors)
-  .then(response => response.json())
-  .then(response => {
-    dispatch(getNotes());
-  })
-  .catch(error => {
-    dispatch({
-      type: 'ERROR_CREATING_F3_NOTE',
-      data: error.message
-    });
-  });
-};
-
 export const setCurrentCategory = categoryID => dispatch => 
   dispatch({ type: 'SETTING_CURRENT_F3_CATEGORY', categoryID });
 
-
-export const getNotes = () => dispatch => {
-  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
-
-  fetch(`${SERVER_URL}/api/f3`, {
-    credentials: 'include'
-  })
-  .then(handleErrors)
-  .then(response => response.json())
-  .then(response => {
-    dispatch({
-      type: 'GET_F3_NOTES',
-      data: response.notes
-    });
-    dispatch({ type: 'SMALL_NETWORK_REQUEST_DONE' })
-    setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
-  })
-  .catch(error => {
-    dispatch({
-      type: 'ERROR_GETTING_F3_NOTES',
-      data: error.message || error.toString()
-    });
-  });
-};
 
 export const getCategories = () => dispatch => {
   dispatch({ type: 'LOADING_CATEGORY' });

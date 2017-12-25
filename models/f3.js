@@ -23,7 +23,12 @@ F3Schema.statics.getCategories = userID => new Promise((resolve, reject) => {
       console.error('Unable to execute Mongo query');
       reject(error);
     } else {
-      resolve(results);
+      const pruned = results.map(category => ({
+        id: category._id,
+        categoryName: category.categoryName,
+        items: category.items
+      }));
+      resolve(pruned);
     }
   });
 });

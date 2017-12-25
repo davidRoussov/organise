@@ -3,7 +3,7 @@ import { FormControl, Button, FormGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Spinner from '../Spinner';
-import { getCategories, createNewCategory, setCurrentCategory, createNote } from '../../actions/formatThree';
+import { getCategories, createNewCategory, setCurrentCategory } from '../../actions/formatThree';
 import F3DeleteCategory from './F3DeleteCategory';
 
 class F3SideBar extends Component {
@@ -20,7 +20,7 @@ class F3SideBar extends Component {
     this.props.getCategories();
   }
 
-  handleSubmitAddCategoy(e) {
+  handleSubmitAddCategory(e) {
     e.preventDefault();
     this.props.createNewCategory(this.state.newCategoryName);
   }
@@ -55,9 +55,6 @@ class F3SideBar extends Component {
       category: {
         width: '80%',
         borderRadius: '0px'
-      },
-      addNoteContainer: {
-        marginTop: '20px'
       }
     }
 
@@ -101,7 +98,7 @@ class F3SideBar extends Component {
           { this.state.displayAddCategory ? 
             <div style={style.addCategoryDiv}>
               { this.props.addCategorySpinnerVisible ? <Spinner/> :
-                <form onSubmit={this.handleSubmitAddCategoy.bind(this)}>
+                <form onSubmit={this.handleSubmitAddCategory.bind(this)}>
                   <FormGroup>
                     <div style={{margin: '10px'}}>
                       <FormControl
@@ -128,15 +125,6 @@ class F3SideBar extends Component {
           }
         </div>
 
-        <div style={style.addNoteContainer}>
-          <button
-            type="button"
-            className="btn btn-outline-primary"
-            onClick={this.props.createNote.bind(null, this.props.currentCategory)}
-            disabled={!this.props.currentCategory}
-          >Add Note</button>
-        </div>
-
         <F3DeleteCategory
           show={this.state.deleteCategoryModalVisible}
           close={this.closeDeleteCategoryModal.bind(this)}
@@ -153,8 +141,7 @@ const mapStateToProps = state => state.formatThree;
 const mapDispatchToProps = {
   createNewCategory,
   getCategories,
-  setCurrentCategory,
-  createNote
+  setCurrentCategory
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(F3SideBar);
