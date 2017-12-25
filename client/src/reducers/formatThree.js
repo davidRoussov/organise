@@ -9,7 +9,13 @@ const formatThree = (state=defaultState, action) => {
     case 'DONE_LOADING_CATEGORY':
       return { ...state, addCategorySpinnerVisible: false };
     case 'GET_F3_CATEGORIES':
-      return { ...state, categories: action.data };
+      if(state.currentCategory && state.currentCategory.id) {
+        const id = state.currentCategory.id;
+        const updatedCurrentCategory = action.data.filter(category => category.id === id)[0];
+        return { ...state, categories: action.data, currentCategory: updatedCurrentCategory  };
+      } else {
+        return { ...state, categories: action.data };
+      }
     case 'SETTING_CURRENT_F3_CATEGORY':
       return { ...state, currentCategory: action.category };
     case 'LOADING_NOTES':

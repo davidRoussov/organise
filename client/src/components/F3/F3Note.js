@@ -70,7 +70,7 @@ class F3Note extends Component {
   render() {
     const style = {
       item: {
-        marginBottom: '20px',
+        marginBottom: '10px',
         position: 'relative'
       },
       itemTitle: {
