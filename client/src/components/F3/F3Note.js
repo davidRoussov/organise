@@ -67,6 +67,32 @@ class F3Note extends Component {
     this.setState({ items: newItems });
   }
 
+  handleChangeItemTitle = itemIndex => e => {
+    const newItems = this.state.items.map((item, i) => {
+      if(i !== itemIndex) return item;
+      else {
+        return {
+          ...item,
+          itemTitle: e.target.value
+        }
+      }
+    });
+    this.setState({ items: newItems });
+  }
+
+  handleChangeItemDetails = itemIndex => e => {
+    const newItems = this.state.items.map((item, i) => {
+      if(i !== itemIndex) return item;
+      else {
+        return {
+          ...item,
+          itemDetails: e.target.value
+        }
+      }
+    });
+    this.setState({ items: newItems });
+  }
+
   render() {
     const style = {
       item: {
@@ -98,6 +124,9 @@ class F3Note extends Component {
       },
       col2: {
         width: '95%'
+      },
+      addItemButton: {
+        marginTop: '10px'
       }
     };
 
@@ -118,6 +147,7 @@ class F3Note extends Component {
               <TextareaAutosize
                 className="form-control"
                 value={item.itemTitle}
+                onChange={this.handleChangeItemTitle(i).bind(this)}
                 style={style.itemTitle}
                 placeholder='Enter item title'
                 onBlur={this.handleBlurItemTitle(i).bind(this)}
@@ -126,6 +156,7 @@ class F3Note extends Component {
                 <TextareaAutosize
                   className="form-control"
                   value={item.itemDetails}
+                  onChange={this.handleChangeItemDetails(i).bind(this)}
                   style={style.itemDetails}
                   placeholder='Enter item details'
                   onBlur={this.handleBlurItemDetails(i).bind(this)}
@@ -143,7 +174,7 @@ class F3Note extends Component {
         <h3 className="card-header">{this.props.currentCategory.categoryName}</h3>
         <div className="card-block">
           { renderedItems }
-          <button className="btn btn-primary" onClick={this.handleAddItem.bind(this)}>Add item</button>
+          <button className="btn btn-primary" onClick={this.handleAddItem.bind(this)} style={style.addItemButton}>Add item</button>
         </div>
       </div>
     );
