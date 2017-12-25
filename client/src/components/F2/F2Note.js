@@ -57,6 +57,12 @@ class F2Note extends Component {
     this.setState({ noteItems: newItems });
   }
 
+  handleDeleteTask = itemIndex => () => {
+    const newItems = this.state.noteItems.filter((item, i) => i !== itemIndex);
+    const newNote = { ...this.props.note, items: newItems };
+    this.props.saveNote(newNote);
+  }
+
   render() {
     const style = {
       noteHeading: {
@@ -66,7 +72,8 @@ class F2Note extends Component {
         overflow: 'hidden',
         resize: 'none',
         padding: '0px',
-        boxShadow: 'none'
+        boxShadow: 'none',
+        fontWeight: 'bold'
       },
       addTaskButton: {
         cursor: 'pointer',
@@ -92,6 +99,11 @@ class F2Note extends Component {
         top: '0px',
         right: '0px'
       },
+      noteOptionsHeading: {
+        position: 'absolute',
+        top: '5px',
+        right: '0px'
+      },
       noteOptionsButton: {
         backgroundColor: 'transparent',
         boxShadow: 'none'
@@ -109,15 +121,6 @@ class F2Note extends Component {
           onBlur={this.handleBlurNoteTask.bind(this)}
         ></TextareaAutosize>
 
-
-        {/* <div className="dropdown">
-          <i key={i} style={style.noteOptions} className="fa fa-ellipsis-h dropdown-toggle" data-toggle="dropdown" aria-hidden="true"></i>
-          <div className="dropdown-menu">
-            <a className="dropdown-item">Edit</a>
-            <a className="dropdown-item">Delete</a>
-          </div>
-        </div> */}
-
         <div style={style.noteOptions} key={i}>
             <button 
               type="button" 
@@ -127,12 +130,9 @@ class F2Note extends Component {
               >
             </button>
             <ul className="dropdown-menu" role="menu" >
-              <a className="dropdown-item">Edit</a>
-              <a className="dropdown-item">Delete</a>
+              <a className="dropdown-item" onClick={this.handleDeleteTask(i).bind(this)}>Delete</a>
             </ul>
-        </div>
-
-        
+        </div>        
       </div>
     );
 
@@ -147,6 +147,19 @@ class F2Note extends Component {
             placeholder='Enter heading'
             onBlur={this.handleBlurNoteHeading.bind(this)}
           ></TextareaAutosize>   
+          <div style={style.noteOptionsHeading}>
+            <button 
+              type="button" 
+              className="btn btn-default dropdown-toggle" 
+              data-toggle="dropdown"
+              style={style.noteOptionsButton}
+              >
+            </button>
+            <ul className="dropdown-menu" role="menu" >
+              <a className="dropdown-item">Edit</a>
+              <a className="dropdown-item">Delete</a>
+            </ul>
+          </div>    
         </div>
         <div className="card-body">
           {list}
