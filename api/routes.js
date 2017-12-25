@@ -4,6 +4,7 @@ const auth = require('./auth');
 const user = require('./user');
 const f1 = require('./f1');
 const f2 = require('./f2');
+const f3 = require('./f3');
 
 const router = express.Router();
 
@@ -19,5 +20,7 @@ router.route('/f2').post(f2.createNote);
 router.route('/f2').get(f2.getNotes);
 router.route('/f2').put(f2.saveNote);
 router.route('/f2').delete(f2.deleteNote);
+router.route('/f3/category').post(f3.createNewCategory);
+router.route('/f3/category').get(f3.getCategories);
 
 module.exports = router;

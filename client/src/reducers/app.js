@@ -24,6 +24,8 @@ const app = (state={}, action) => {
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     case 'ERROR_CREATING_F2_NOTE':
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
+    case 'SUCCESS_DELETING_CATEGORY':
+      return { ...state, displayAlert: true, alertMessage: 'Successfully deleted category', alertType: 'success' };
     case 'SMALL_NETWORK_REQUEST':
       return { ...state, miniLoading: true, miniVisible: true };
     case 'SMALL_NETWORK_REQUEST_DONE':

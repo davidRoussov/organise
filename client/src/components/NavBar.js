@@ -21,13 +21,13 @@ class NavBar extends Component {
           <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav mr-auto">
               <li className={ (path === '/f1' || path === '/') ? "nav-item active" : "nav-item"}>
-                <a className="nav-link" href="/f1">Format 1</a>
+                <a className="nav-link" href="/f1">Short</a>
               </li>
               <li className={ path === '/f2' ? "nav-item active" : "nav-item"}>
-                <a className="nav-link" href="/f2">Format 2</a>
+                <a className="nav-link" href="/f2">Medium</a>
               </li>
               <li className={ path === '/f3' ? "nav-item active" : "nav-item"}>
-                <a className="nav-link" href="/f3">Format 3</a>
+                <a className="nav-link" href="/f3">Long</a>
               </li>
               <li className={ path === '/f4' ? "nav-item active" : "nav-item"}>
                 <a className="nav-link" href="/f4">Timetable</a>
