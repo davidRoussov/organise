@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
 import { connect } from 'react-redux';
+import Radium from 'radium';
 
 import { saveNote } from '../../actions/formatTwo';
 
@@ -71,7 +72,8 @@ class F2Note extends Component {
         cursor: 'pointer',
         float: 'left',
         marginBottom: '10px',
-        marginTop: '10px' 
+        marginTop: '10px',
+        marginLeft: '10px'
       },
       noteTask: {
         background: 'transparent',
@@ -81,12 +83,23 @@ class F2Note extends Component {
         resize: 'none',
         boxShadow: 'none',
         borderBottom: '1px solid #DFD7CA',
-        borderRadius: '0px'
+        borderRadius: '0px',
+        width: '100%',
+        paddingRight: '24px'
+      },
+      noteOptions: {
+        position: 'absolute',
+        top: '0px',
+        right: '0px'
+      },
+      noteOptionsButton: {
+        backgroundColor: 'transparent',
+        boxShadow: 'none'
       }
     };
 
     const list = this.state.noteItems.map((item, i) => 
-      <div key={i}>
+      <div key={i} style={{ position: 'relative' }}>
         <TextareaAutosize
           className="form-control"
           value={item}
@@ -95,6 +108,31 @@ class F2Note extends Component {
           placeholder='Enter task'
           onBlur={this.handleBlurNoteTask.bind(this)}
         ></TextareaAutosize>
+
+
+        {/* <div className="dropdown">
+          <i key={i} style={style.noteOptions} className="fa fa-ellipsis-h dropdown-toggle" data-toggle="dropdown" aria-hidden="true"></i>
+          <div className="dropdown-menu">
+            <a className="dropdown-item">Edit</a>
+            <a className="dropdown-item">Delete</a>
+          </div>
+        </div> */}
+
+        <div style={style.noteOptions} key={i}>
+            <button 
+              type="button" 
+              className="btn btn-default dropdown-toggle" 
+              data-toggle="dropdown"
+              style={style.noteOptionsButton}
+              >
+            </button>
+            <ul className="dropdown-menu" role="menu" >
+              <a className="dropdown-item">Edit</a>
+              <a className="dropdown-item">Delete</a>
+            </ul>
+        </div>
+
+        
       </div>
     );
 
@@ -131,4 +169,4 @@ const mapDispatchToProps = {
   saveNote
 };
 
-export default connect(null, mapDispatchToProps)(F2Note);
+export default connect(null, mapDispatchToProps)(Radium(F2Note));
