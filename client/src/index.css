@@ -11,3 +11,7 @@ html, body, #root {
 .card-body {
   padding: 0px !important;
 }
+
+a {
+  cursor: pointer !important;
+}

@@ -3,7 +3,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import { connect } from 'react-redux';
 import Radium from 'radium';
 
-import { saveNote } from '../../actions/formatTwo';
+import { saveNote, deleteNote } from '../../actions/formatTwo';
 
 class F2Note extends Component {
   constructor(props) {
@@ -61,6 +61,10 @@ class F2Note extends Component {
     const newItems = this.state.noteItems.filter((item, i) => i !== itemIndex);
     const newNote = { ...this.props.note, items: newItems };
     this.props.saveNote(newNote);
+  }
+
+  handleDeleteNote() {
+    this.props.deleteNote(this.props.note.id);
   }
 
   render() {
@@ -129,7 +133,7 @@ class F2Note extends Component {
               style={style.noteOptionsButton}
               >
             </button>
-            <ul className="dropdown-menu" role="menu" >
+            <ul className="dropdown-menu" role="menu" style={{position: 'relative', zIndex: '1000'}}>
               <a className="dropdown-item" onClick={this.handleDeleteTask(i).bind(this)}>Delete</a>
             </ul>
         </div>        
@@ -147,7 +151,7 @@ class F2Note extends Component {
             placeholder='Enter heading'
             onBlur={this.handleBlurNoteHeading.bind(this)}
           ></TextareaAutosize>   
-          <div style={style.noteOptionsHeading}>
+          <div style={style.noteOptionsHeading} className="btn-group" role="group">
             <button 
               type="button" 
               className="btn btn-default dropdown-toggle" 
@@ -155,9 +159,8 @@ class F2Note extends Component {
               style={style.noteOptionsButton}
               >
             </button>
-            <ul className="dropdown-menu" role="menu" >
-              <a className="dropdown-item">Edit</a>
-              <a className="dropdown-item">Delete</a>
+            <ul className="dropdown-menu" role="menu" style={{position: 'relative', zIndex: '1000'}}>
+              <a className="dropdown-item" onClick={this.handleDeleteNote.bind(this)}>Delete</a>
             </ul>
           </div>    
         </div>
@@ -179,7 +182,8 @@ class F2Note extends Component {
 }
 
 const mapDispatchToProps = {
-  saveNote
+  saveNote,
+  deleteNote
 };
 
 export default connect(null, mapDispatchToProps)(Radium(F2Note));

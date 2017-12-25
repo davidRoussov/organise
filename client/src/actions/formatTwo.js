@@ -1,6 +1,33 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
+export const deleteNote = noteID => dispatch => {
+  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
+
+  fetch(`${SERVER_URL}/api/f2`, {
+    method: 'DELETE',
+    credentials: 'include',
+    body: JSON.stringify({ noteID }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(handleErrors)
+  .then(response => response.json())
+  .then(response => {
+    dispatch({
+      type: 'SMALL_NETWORK_REQUEST_DONE',
+    });
+    dispatch(getNotes());
+  })
+  .catch(error => {
+    dispatch({
+      type: 'ERROR_DELETING_F2_NOTE',
+      data: error.message
+    });
+  });
+}
+
 export const saveNote = note => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
