@@ -1,0 +1,1 @@
+export const triggerTimetableModal = () => dispatch => dispatch({ type: 'TRIGGER_TIMETABLE_MODAL' });

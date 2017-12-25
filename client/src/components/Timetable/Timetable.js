@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import SettingsModal from './SettingsModal';
 
 class Timetable extends Component {
   render() {
@@ -11,6 +14,8 @@ class Timetable extends Component {
         display: 'table'
       }
     };
+
+    console.log(this.props);
 
     return (
       <div style={style.container}>
@@ -86,9 +91,20 @@ class Timetable extends Component {
             </tr>
           </tbody>
         </table> 
+
+
+        <SettingsModal
+          show={this.props.timetableSettingsModalVisible}
+        />
       </div>
     );
   }
 };
 
-export default Timetable;
+const mapStateToProps = state => state.timetable;
+
+const mapDisaptchToProps = {
+
+};
+
+export default connect(mapStateToProps, mapDisaptchToProps)(Timetable);
