@@ -29,9 +29,15 @@ class NavBar extends Component {
               <li className={ path === '/f3' ? "nav-item active" : "nav-item"}>
                 <a className="nav-link" href="/f3">Long</a>
               </li>
-              <li className={ path === '/f4' ? "nav-item active" : "nav-item"}>
-                <a className="nav-link" href="/f4">Timetable</a>
+              <li className={ path === '/t' ? "nav-item active" : "nav-item"}>
+                <a className="nav-link" href="/t">Timetable</a>
               </li>
+              { path === '/t' ?
+                <li className="nav-item">
+                  <button class="btn btn-secondary btn-sm" style={{marginTop: '3px'}}>Settings</button>
+                </li>
+                : null
+              }
             </ul>
           </div>
 

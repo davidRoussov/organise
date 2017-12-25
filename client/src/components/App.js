@@ -7,7 +7,7 @@ import NavBar from './NavBar';
 import FormatOne from './FormatOne';
 import FormatTwo from './F2/FormatTwo';
 import FormatThree from './F3/FormatThree';
-import Timetable from './Timetable';
+import Timetable from './Timetable/Timetable';
 import LoadingApp from './LoadingApp';
 import MiniLoadingIndicator from './MiniLoadingIndicator';
 
