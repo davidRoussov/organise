@@ -17,6 +17,17 @@ const F2Schema = new mongoose.Schema({
   }
 });
 
+F2Schema.statics.deleteCategoryNotes = categoryID => new Promise((resolve, reject) => {
+  F2.find({ categoryID: categoryID }).remove(error => {
+    if(error) {
+      console.error('Unable to execute Mongo query');
+      reject(error);
+    } else {
+      resolve();
+    }
+  });
+});
+
 F2Schema.statics.deleteNote = noteID => new Promise((resolve, reject) => {
   F2.findOneAndRemove({ _id: noteID }, error => {
     if(error) {

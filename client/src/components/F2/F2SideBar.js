@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 
 import Spinner from '../Spinner';
 import { getCategories, createNewCategory, setCurrentCategory, createNote } from '../../actions/formatTwo';
+import F2DeleteCategory from './F2DeleteCategory';
 
 class F2SideBar extends Component {
   constructor() {
     super();
     this.state = {
       displayAddCategory: false,
-      newCategoryName: ''
+      newCategoryName: '',
+      deleteCategoryModalVisible: false
     };
   }
 
@@ -30,6 +32,9 @@ class F2SideBar extends Component {
   handleChangeAddCategory = e => this.setState({ newCategoryName: e.target.value });
   handleCancelAddCategory = () => this.setState({ newCategoryName: '', displayAddCategory: false });  
   showAddCategory = () => this.setState({ displayAddCategory: true});
+
+  showDeleteCategoryModal = category => () => this.setState({ categoryForModal: category, deleteCategoryModalVisible: true });
+  closeDeleteCategoryModal = () => this.setState({ deleteCategoryModalVisible: false });
 
   render() {
     const containerStyle = {
@@ -73,7 +78,7 @@ class F2SideBar extends Component {
               data-toggle="dropdown"></button>
             <div className="dropdown-menu">
               <a className="dropdown-item">Edit</a>
-              <a className="dropdown-item">Delete</a>
+              <a className="dropdown-item" onClick={this.showDeleteCategoryModal(category).bind(this)}>Delete</a>
             </div>
           </div>
         </div>
@@ -131,6 +136,12 @@ class F2SideBar extends Component {
             disabled={!this.props.currentCategory}
           >Add Note</button>
         </div>
+
+        <F2DeleteCategory
+          show={this.state.deleteCategoryModalVisible}
+          close={this.closeDeleteCategoryModal.bind(this)}
+          category={this.state.categoryForModal}
+        />
 
       </div>
     );

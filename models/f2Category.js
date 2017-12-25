@@ -11,6 +11,17 @@ const F2CategorySchema = new mongoose.Schema({
   }
 });
 
+F2CategorySchema.statics.delete = categoryID => new Promise((resolve, reject) => {
+  F2Category.find({ _id: categoryID }).remove(error => {
+    if(error) {
+      console.error('Unable to execute Mongo query');
+      reject(error);
+    } else {
+      resolve();
+    }
+  });
+});
+
 F2CategorySchema.statics.get = userID => new Promise((resolve, reject) => {
   F2Category.find({ userID }, (err, categories) => {
     if(err) {

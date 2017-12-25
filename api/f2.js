@@ -3,6 +3,36 @@ import F2 from '../models/f2';
 import F2Category from '../models/f2Category';
 
 module.exports = {
+  deleteCategory: async (request, response) => {
+    if(request.session && request.session.userId) {
+      const userID = request.session.userId;
+      if(request.body && request.body.categoryID) {
+        const categoryID = request.body.categoryID;
+        try {
+          await F2.deleteCategoryNotes(categoryID);
+          try {
+            await F2Category.delete(categoryID);
+            response.status(200).send({ success: true });
+          } catch(error) {
+            console.error('Unable to delete F2 category');
+            console.error(error);
+            response.status(500).send({ message: "Deleted F2 category notes but unable to delete F2 category" });
+          }
+        } catch(error) {
+          console.error('Unable to delete F2 category notes');
+          console.error(error);
+          response.status(500).send({ message: 'Unable to delete F2 category notes before deleting the category' });
+        }
+      } else {
+        console.log('Missing category ID from request body');
+        response.status(400).send({ message: 'Missing categoryID from request body' });
+      }
+    } else {
+      console.log('Missing user ID from session when trying to delete F2 category');
+      response.status(400).send({ message: 'Invalid session' });
+    }
+  },
+
   deleteNote: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;
@@ -21,7 +51,7 @@ module.exports = {
         response.status(400).send({ message: 'Missing note ID from request body' });
       }
     } else {
-      console.log('Missing user ID from session when trying to create F2 category');
+      console.log('Missing user ID from session when trying to delete F2 note');
       response.status(400).send({ message: 'Invalid session' });
     }
   },

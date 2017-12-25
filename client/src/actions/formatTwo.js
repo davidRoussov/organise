@@ -1,6 +1,27 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
+export const deleteCategory = categoryID => dispatch => {
+  dispatch({ type: 'LOADING_CATEGORY' });
+  
+  fetch(`${SERVER_URL}/api/f2/category`, {
+    method: 'DELETE',
+    credentials: 'include',
+    body: JSON.stringify({ categoryID }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(handleErrors)
+  .then(response => response.json())
+  .then(response => {
+    console.log('success', response);
+  })
+  .then(error => {
+    console.log('error', error);
+  });
+};
+
 export const deleteNote = noteID => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
