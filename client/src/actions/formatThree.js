@@ -4,7 +4,7 @@ import handleErrors from './utilities';
 export const deleteCategory = categoryID => dispatch => {
   dispatch({ type: 'LOADING_CATEGORY' });
   
-  fetch(`${SERVER_URL}/api/f3/category`, {
+  fetch(`${SERVER_URL}/api/f3`, {
     method: 'DELETE',
     credentials: 'include',
     body: JSON.stringify({ categoryID }),
@@ -25,13 +25,13 @@ export const deleteCategory = categoryID => dispatch => {
   })
 };
 
-export const saveCategory = note => dispatch => {
+export const saveCategory = newCategory => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
   fetch(`${SERVER_URL}/api/f3`, {
     method: 'PUT',
     credentials: 'include',
-    body: JSON.stringify({ note }),
+    body: JSON.stringify({ newCategory }),
     headers: {
       'Content-Type': 'application/json' 
     }
@@ -41,7 +41,7 @@ export const saveCategory = note => dispatch => {
   .then(response => {
     dispatch({
       type: 'SMALL_NETWORK_REQUEST_DONE',
-      data: note.id
+      data: newCategory.id
     });
     dispatch(getCategories());
   })
@@ -53,14 +53,14 @@ export const saveCategory = note => dispatch => {
   });
 }
 
-export const setCurrentCategory = categoryID => dispatch => 
-  dispatch({ type: 'SETTING_CURRENT_F3_CATEGORY', categoryID });
+export const setCurrentCategory = category => dispatch => 
+  dispatch({ type: 'SETTING_CURRENT_F3_CATEGORY', category });
 
 
 export const getCategories = () => dispatch => {
   dispatch({ type: 'LOADING_CATEGORY' });
 
-  fetch(`${SERVER_URL}/api/f3/category`, {
+  fetch(`${SERVER_URL}/api/f3`, {
     credentials: 'include'
   })
   .then(handleErrors)
@@ -83,7 +83,7 @@ export const getCategories = () => dispatch => {
 export const createNewCategory = newCategory => dispatch => {
   dispatch({ type: 'LOADING_CATEGORY' });
 
-  fetch(`${SERVER_URL}/api/f3/category`, {
+  fetch(`${SERVER_URL}/api/f3`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify({ newCategory }),

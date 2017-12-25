@@ -17,6 +17,17 @@ const F3Schema = new mongoose.Schema({
   ]
 });
 
+F3Schema.statics.update = (userID, newCategory) => new Promise((resolve, reject) => {
+  F3.findOneAndUpdate({ userID }, newCategory, error => {
+    if(error) {
+      console.error('Unable to execute Mongo query');
+      reject(error);
+    } else {
+      resolve();
+    }
+  });
+});
+
 F3Schema.statics.getCategories = userID => new Promise((resolve, reject) => {
   F3.find({ userID }, (error, results) => {
     if(error) {

@@ -2,6 +2,29 @@ import express from 'express';
 import F3 from '../models/F3';
 
 module.exports = {
+  saveCategory: async (request, response) => {
+    if(request.session && request.session.userId) {
+      const userID = request.session.userId;
+      if(request.body && request.body.newCategory) {
+        const newCategory = request.body.newCategory;
+        try {
+          await F3.update(userID, newCategory);
+          response.status(200).send({ success: true });
+        } catch(error) {
+          console.error("Unable to update F3 category");
+          console.error(error);
+          response.status(500).send({ message: "server error, unable to update F3 category" });
+        }
+      } else {
+        console.error('Missing newCategory property from request body');
+        reponse.status(400).send({ message: 'Missing newCategory property from request body' });
+      }
+    } else {
+      console.log('Missing user ID from session when trying to update f3 category');
+      response.status(400).send({ message: 'Invalid session' });
+    }
+  },
+
   getCategories: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;
@@ -32,6 +55,9 @@ module.exports = {
           console.error(error);
           response.status(500).send({ message: 'Unable to create F3 category' });
         }
+      } else {
+        console.error('Missing newCategory property from request body');
+        reponse.status(400).send({ message: 'Missing newCategory property from request body' });
       }
     } else {
       console.log('Missing user ID from session when trying to create F3 category');

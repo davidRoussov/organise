@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import F3Note from './F3Note';
+
 class F3MainContentArea extends Component {
   render() {
+    const containerStyle = {
+      ...this.props.style,
+      padding: '20px',
+      minHeight: '100vh'
+    };
+
     return (
-      <p>maincontent area</p>
+      <div style={containerStyle}>
+        { this.props.currentCategory ? <F3Note/> : null }
+      </div>
     );
   }
 }

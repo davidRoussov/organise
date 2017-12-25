@@ -20,7 +20,8 @@ router.route('/f2').post(f2.createNote);
 router.route('/f2').get(f2.getNotes);
 router.route('/f2').put(f2.saveNote);
 router.route('/f2').delete(f2.deleteNote);
-router.route('/f3/category').post(f3.createNewCategory);
-router.route('/f3/category').get(f3.getCategories);
+router.route('/f3').post(f3.createNewCategory);
+router.route('/f3').get(f3.getCategories);
+router.route('/f3').put(f3.saveCategory);
 
 module.exports = router;

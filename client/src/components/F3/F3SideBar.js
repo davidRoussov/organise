@@ -25,8 +25,8 @@ class F3SideBar extends Component {
     this.props.createNewCategory(this.state.newCategoryName);
   }
 
-  handleSelectCategory(categoryID) {
-    this.props.setCurrentCategory(categoryID);
+  handleSelectCategory(category) {
+    this.props.setCurrentCategory(category);
   }
 
   handleChangeAddCategory = e => this.setState({ newCategoryName: e.target.value });
@@ -64,14 +64,14 @@ class F3SideBar extends Component {
           <button 
             style={style.category} 
             type="button" 
-            className={category.id === this.props.currentCategory ? "btn btn-success" : "btn btn-primary"}
-            onClick={this.handleSelectCategory.bind(this, category.id)}
+            className={category.id === (this.props.currentCategory && this.props.currentCategory.id) ? "btn btn-success" : "btn btn-primary"}
+            onClick={this.handleSelectCategory.bind(this, category)}
           >{category.categoryName}</button>
           <div className="btn-group" role="group">
             <button 
               style={{borderRadius: '0px'}} 
               type="button" 
-              className={category.id === this.props.currentCategory ? "btn btn-success dropdown-toggle" : "btn btn-primary dropdown-toggle"}
+              className={category.id === (this.props.currentCategory && this.props.currentCategory.id) ? "btn btn-success dropdown-toggle" : "btn btn-primary dropdown-toggle"}
               data-toggle="dropdown"></button>
             <div className="dropdown-menu">
               <a className="dropdown-item">Edit</a>

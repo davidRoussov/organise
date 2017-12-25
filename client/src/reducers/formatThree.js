@@ -11,13 +11,11 @@ const formatThree = (state=defaultState, action) => {
     case 'GET_F3_CATEGORIES':
       return { ...state, categories: action.data };
     case 'SETTING_CURRENT_F3_CATEGORY':
-      return { ...state, currentCategory: action.categoryID };
+      return { ...state, currentCategory: action.category };
     case 'LOADING_NOTES':
       return { ...state, mainContentSpinnerVisible: true };
     case 'DONE_LOADING_NOTES':
       return { ...state, mainContentSpinnerVisible: false };
-    case 'GET_F3_NOTES':
-      return { ...state, notes: action.data };
     default:
       return state;
   }
