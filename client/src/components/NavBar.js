@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerTimetableModal } from '../actions/navbar';
+import { triggerTimetableModal } from '../actions/timetable';
 
 class NavBar extends Component {
   render() {
