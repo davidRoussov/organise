@@ -30,13 +30,13 @@ class Timetable extends Component {
       tbody.push(
         <tr key={i}>
           <td>{hours[i] + " - " + hours[i + 1]}</td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
+          <td contentEditable="true"></td>
+          <td contentEditable="true"></td>
+          <td contentEditable="true"></td>
+          <td contentEditable="true"></td>
+          <td contentEditable="true"></td>
+          <td contentEditable="true"></td>
+          <td contentEditable="true"></td>
         </tr>
       );
     }
