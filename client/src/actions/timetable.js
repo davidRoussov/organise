@@ -40,6 +40,7 @@ export const updateTimetableVisibleTimes = newTimes => dispatch => {
   .then(response => response.json())
   .then(response => {
     dispatch({ type: 'SMALL_NETWORK_REQUEST_SUCCESS' });
+    dispatch(getTableData());
   })
   .catch(error => {
     dispatch({ type: 'SMALL_NETWORK_REQUEST_FAIL' });

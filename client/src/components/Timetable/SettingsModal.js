@@ -2,22 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
-import { updateTimetableVisibleTimes } from '../../actions/timetable';
+import { updateTimetableVisibleTimes, getTableData } from '../../actions/timetable';
 
 class SettingsModal extends Component {
   constructor() {
     super();
+
+    const hours = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00", "00:00"];
+    const times = {};
+    for(let i = 0; i < hours.length - 1; i++) {
+      const time = hours[i] + ' - ' + hours[i + 1];
+      times[time] = false
+    }
+
     this.state = {
-      times: {}
+      times
     };
   }
 
-  componentWillMount() {
-    const hours = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00", "00:00"];
-    hours.reduce((acc, time) => 
-      acc.then(() => this.setState({ times: { ...this.state.times, [time]: false }}, () => Promise.resolve())), 
-        Promise.resolve());
-  }    
+  componentDidMount() {
+    this.props.getTableData();
+  }
+  
+  componentWillReceiveProps(props) {
+    if(props.timetableData && props.timetableData.visibleTimes) {
+      this.setState({ times: props.timetableData.visibleTimes });
+    }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -37,7 +48,7 @@ class SettingsModal extends Component {
       }
     };
 
-    const tbody = this.state.times && Object.keys(this.state.times).map((time, i) => 
+    const tbody = this.state.times && Object.keys(this.state.times).sort().map((time, i) => 
       <tr key={i}>
         <td style={style.visibleTimeTD}>{time}</td>
         <td style={style.visibleTimeTD}><Input type="radio" name={time} checked={this.state.times[time]} onChange={this.handleChange.bind(this)}/></td>
@@ -81,7 +92,8 @@ class SettingsModal extends Component {
 const mapStateToProps = state => state.timetable;
 
 const mapDisaptchToProps = {
-  updateTimetableVisibleTimes
+  updateTimetableVisibleTimes,
+  getTableData
 };
 
 export default connect(mapStateToProps, mapDisaptchToProps)(SettingsModal);
