@@ -35,6 +35,20 @@ const TimetableSchema = new mongoose.Schema({
   }
 });
 
+TimetableSchema.statics.get =  userID => new Promise((resolve, reject) => {
+  Timetable.find({ userID }, (error, results) => {
+    if(error) {
+      console.log('Unable to execute Mongo query');
+      reject(error);
+    } else {
+      const pruned = results.map(result => ({
+        visibleTimes: result.visibleTimes
+      }));
+      resolve(pruned);
+    }
+  });
+});
+
 TimetableSchema.statics.saveVisibleTimes = (userID, newTimes) => new Promise((resolve, reject) => {
   Timetable.findOneAndUpdate({ userID }, { visibleTimes: newTimes }, { upsert: true },  error => {
     if(error) {

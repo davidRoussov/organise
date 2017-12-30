@@ -2,6 +2,23 @@ import express from 'express';
 import Timetable from '../models/timetable';
 
 module.exports = {
+  get: async (request, response) => {
+    if(request.session && request.session.userId) {
+        const userID = request.session.userId;
+        try {
+          const timetable = await Timetable.get(userID);
+          response.status(200).send({ timetable });
+        } catch(error) {
+          console.error('Unable to get timetable data');
+          console.error(error);
+          response.status(500).send({ message: 'a database error occurred getting timtable data' });
+        }
+    } else {
+      console.log('Missing user ID from session when trying to get timetable data');
+      response.status(400).send({ message: 'Invalid session' });
+    }
+  },
+
   saveVisibleTimes: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;
