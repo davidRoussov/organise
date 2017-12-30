@@ -5,6 +5,7 @@ const user = require('./user');
 const f1 = require('./f1');
 const f2 = require('./f2');
 const f3 = require('./f3');
+const timetable = require('./timetable');
 
 const router = express.Router();
 
@@ -23,5 +24,6 @@ router.route('/f2').delete(f2.deleteNote);
 router.route('/f3').post(f3.createNewCategory);
 router.route('/f3').get(f3.getCategories);
 router.route('/f3').put(f3.saveCategory);
+router.route('/t/settings').put(timetable.saveVisibleTimes);
 
 module.exports = router;

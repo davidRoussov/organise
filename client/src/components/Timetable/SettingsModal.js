@@ -57,8 +57,8 @@ class SettingsModal extends Component {
                 <thead>
                   <tr>
                     <th>Time</th>
-                    <th>Not Visible</th>
                     <th>Visible</th>
+                    <th>Not Visible</th>
                   </tr>
                 </thead>
                 <tbody>
