@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 
 import SettingsModal from './SettingsModal';
 
-import { closeTimetableModal } from '../../actions/timetable';
+import { closeTimetableModal, getTableData } from '../../actions/timetable';
 
 class Timetable extends Component {
+  componentDidMount() {
+    this.props.getTableData();
+  }
+
   render() {
     const style = {
       container: {
@@ -41,6 +45,9 @@ class Timetable extends Component {
       );
     }
 
+    console.log("hiiiiijorgikerhguijlbsgrtlgerthjbsgh");
+    console.log(this.props);
+
     return (
       <div style={style.container}>
         <table className="table table-bordered" style={style.table}>
@@ -74,7 +81,8 @@ class Timetable extends Component {
 const mapStateToProps = state => state.timetable;
 
 const mapDisaptchToProps = {
-  closeTimetableModal
+  closeTimetableModal,
+  getTableData
 };
 
 export default connect(mapStateToProps, mapDisaptchToProps)(Timetable);

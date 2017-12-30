@@ -8,6 +8,8 @@ const timetable = (state=initialState, action) => {
       return { ...state, timetableSettingsModalVisible: true };
     case 'CLOSE_TIMETABLE_MODAL':
       return { ...state, timetableSettingsModalVisible: false };
+    case 'GET_TIMETABLE_DATA':
+      return { ...state, timetableData: action.data };
     default:
       return state;
   }

@@ -37,7 +37,7 @@ class NavBar extends Component {
               { path === '/t' ?
                 <li className="nav-item">
                   <button 
-                    className="btn btn-secondary btn-sm" 
+                    className="btn btn-danger btn-sm" 
                     style={{marginTop: '3px'}}
                     onClick={this.props.triggerTimetableModal}
                   >Settings</button>
