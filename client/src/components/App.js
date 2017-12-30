@@ -68,7 +68,7 @@ class App extends Component {
           </div>
         </BrowserRouter>
         <AlertContainer ref={a => this.msg = a} { ...this.alertConfig } />
-        <MiniLoadingIndicator loading={this.props.miniLoading} visible={this.props.miniVisible}/>
+        <MiniLoadingIndicator loading={this.props.miniLoading} visible={this.props.miniVisible} error={this.props.miniFail}/>
       </div>
     );
   }

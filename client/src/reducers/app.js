@@ -28,8 +28,10 @@ const app = (state={}, action) => {
       return { ...state, displayAlert: true, alertMessage: 'Successfully deleted category', alertType: 'success' };
     case 'SMALL_NETWORK_REQUEST':
       return { ...state, miniLoading: true, miniVisible: true };
-    case 'SMALL_NETWORK_REQUEST_DONE':
+    case 'SMALL_NETWORK_REQUEST_SUCCESS':
       return { ...state, miniLoading: false, miniVisible: true };
+    case 'SMALL_NETWORK_REQUEST_FAIL':
+      return { ...state, miniLoading: false, miniVisible: true, miniFail: true };
     case 'HIDE_MINI_INDICATOR':
       return { ...state, miniLoading: false, miniVisible: false };
     default: 

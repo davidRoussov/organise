@@ -40,7 +40,7 @@ export const saveCategory = newCategory => dispatch => {
   .then(response => response.json())
   .then(response => {
     dispatch({
-      type: 'SMALL_NETWORK_REQUEST_DONE',
+      type: 'SMALL_NETWORK_REQUEST_SUCCESS',
       data: newCategory.id
     });
     dispatch(getCategories());

@@ -15,6 +15,10 @@ const MiniLoadingIndicator = props => {
 
   };
 
+  const cross = {
+    color: '#d9534f'
+  };
+
   return (
     <div style={container}>
       { props.visible ?
@@ -22,7 +26,13 @@ const MiniLoadingIndicator = props => {
           { props.loading ? 
             <i className="fa fa-spinner" style={spinner}></i>
             :
-            <i className="fa fa-check" style={tick}></i>
+            <div>
+              { props.error ?
+                <i className="fa fa-times" style={cross}></i>
+                :
+                <i className="fa fa-check" style={tick}></i>
+              }
+            </div>
           }
         </div>
       : null }

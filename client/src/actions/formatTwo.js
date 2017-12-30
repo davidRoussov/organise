@@ -40,7 +40,7 @@ export const deleteNote = noteID => dispatch => {
   .then(response => response.json())
   .then(response => {
     dispatch({
-      type: 'SMALL_NETWORK_REQUEST_DONE',
+      type: 'SMALL_NETWORK_REQUEST_SUCCESS',
     });
     dispatch(getNotes());
   })
@@ -67,7 +67,7 @@ export const saveNote = note => dispatch => {
   .then(response => response.json())
   .then(response => {
     dispatch({
-      type: 'SMALL_NETWORK_REQUEST_DONE',
+      type: 'SMALL_NETWORK_REQUEST_SUCCESS',
       data: note.id
     });
     dispatch(getNotes());
@@ -121,7 +121,7 @@ export const getNotes = () => dispatch => {
       type: 'GET_F2_NOTES',
       data: response.notes
     });
-    dispatch({ type: 'SMALL_NETWORK_REQUEST_DONE' })
+    dispatch({ type: 'SMALL_NETWORK_REQUEST_SUCCESS' })
     setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
   })
   .catch(error => {
