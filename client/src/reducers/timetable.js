@@ -12,6 +12,10 @@ const timetable = (state=initialState, action) => {
       return { ...state, timetableData: action.data };
     case 'SUCCESS_UPDATING_TIMETABLE_CELL':
       return { ...state, redToBlack: true };
+    case 'SHOW_TIMETABLE_COLOR_BUTTONS':
+      return { ...state, colorButtonsVisible: true };
+    case 'HIDE_TIMETABLE_COLOR_BUTTONS':
+      return { ...state, colorButtonsVisible: false };
     default:
       return state;
   }

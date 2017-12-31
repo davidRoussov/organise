@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerTimetableModal } from '../actions/timetable';
+
+import TimetableNavbarOptions from './Timetable/TimetableNavbarOptions';
 
 class NavBar extends Component {
   render() {
@@ -35,13 +36,7 @@ class NavBar extends Component {
                 <a className="nav-link" href="/t">Timetable</a>
               </li>
               { path === '/t' ?
-                <li className="nav-item">
-                  <button 
-                    className="btn btn-info btn-sm" 
-                    style={{marginTop: '3px'}}
-                    onClick={this.props.triggerTimetableModal}
-                  >Settings</button>
-                </li>
+                <TimetableNavbarOptions/>
                 : null
               }
             </ul>
@@ -62,7 +57,7 @@ class NavBar extends Component {
 const mapStateToProps = state => state.navbar;
 
 const mapDispatchToProps ={
-  triggerTimetableModal
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

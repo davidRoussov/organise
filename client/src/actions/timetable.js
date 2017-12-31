@@ -4,6 +4,9 @@ import handleErrors from './utilities';
 export const triggerTimetableModal = () => dispatch => dispatch({ type: 'TRIGGER_TIMETABLE_MODAL' });
 export const closeTimetableModal = () => dispatch => dispatch({ type: 'CLOSE_TIMETABLE_MODAL' });
 
+export const showColorButtons = () => dispatch => dispatch({ type: 'SHOW_TIMETABLE_COLOR_BUTTONS' });
+export const hideColorButtons = () => dispatch => dispatch({ type: 'HIDE_TIMETABLE_COLOR_BUTTONS' });
+
 export const updateTableCell = (time, day, text) => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 

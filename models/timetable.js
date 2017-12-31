@@ -255,6 +255,226 @@ const TimetableSchema = new mongoose.Schema({
   },
   twelveHours: {
     type: Boolean
+  },
+  colors: {
+    type: {
+      "00:00 - 01:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "01:00 - 02:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "02:00 - 03:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "03:00 - 04:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "04:00 - 05:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "05:00 - 06:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "06:00 - 07:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "07:00 - 08:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "08:00 - 09:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "09:00 - 10:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "10:00 - 11:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "11:00 - 12:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "12:00 - 13:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "13:00 - 14:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "14:00 - 15:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "15:00 - 16:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "16:00 - 17:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "17:00 - 18:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "18:00 - 19:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "19:00 - 20:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "20:00 - 21:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "21:00 - 22:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "22:00 - 23:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      },
+      "23:00 - 00:00": {
+         "monday": String,
+         "tuesday": String,
+         "wednesday": String,
+         "thursday": String,
+         "friday": String,
+         "saturday": String,
+         "sunday": String 
+      }
+    }
   }
 });
 

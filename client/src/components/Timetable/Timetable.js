@@ -4,7 +4,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 
 import SettingsModal from './SettingsModal';
 
-import { closeTimetableModal, getTableData, updateTableCell } from '../../actions/timetable';
+import { closeTimetableModal, getTableData, updateTableCell, showColorButtons, hideColorButtons } from '../../actions/timetable';
 
 class Timetable extends Component {
   constructor() {
@@ -257,6 +257,8 @@ class Timetable extends Component {
     else if(val !== this.state[time][day]) {
       this.props.updateTableCell(time, day, val);
     }
+
+    this.props.hideColorButtons();
   }
 
   formatTime(time) {
@@ -322,6 +324,7 @@ class Timetable extends Component {
               defaultValue={this.state[time].monday}
               ref={input => this[time + 'monday'] = input}
               onChange={() => this[time + 'monday'].textarea.style.color = 'red'}
+              onFocus={() => this.props.showColorButtons()}
               onBlur={this.handleChange(time, 'monday').bind(this)}
             ></TextareaAutosize>
           </td>
@@ -332,6 +335,7 @@ class Timetable extends Component {
               defaultValue={this.state[time].tuesday}
               ref={input => this[time + 'tuesday'] = input}
               onChange={() => this[time + 'tuesday'].textarea.style.color = 'red'}
+              onFocus={() => this.props.showColorButtons()}
               onBlur={this.handleChange(time, 'tuesday').bind(this)}
             ></TextareaAutosize>
           </td>
@@ -342,6 +346,7 @@ class Timetable extends Component {
               defaultValue={this.state[time].wednesday}
               ref={input => this[time + 'wednesday'] = input}
               onChange={() => this[time + 'wednesday'].textarea.style.color = 'red'}
+              onFocus={() => this.props.showColorButtons()}
               onBlur={this.handleChange(time, 'wednesday').bind(this)}
             ></TextareaAutosize>
           </td>
@@ -352,6 +357,7 @@ class Timetable extends Component {
               defaultValue={this.state[time].thursday}
               ref={input => this[time + 'thursday'] = input}
               onChange={() => this[time + 'thursday'].textarea.style.color = 'red'}
+              onFocus={() => this.props.showColorButtons()}
               onBlur={this.handleChange(time, 'thursday').bind(this)}
             ></TextareaAutosize>
           </td>
@@ -362,6 +368,7 @@ class Timetable extends Component {
               defaultValue={this.state[time].friday}
               ref={input => this[time + 'friday'] = input}
               onChange={() => this[time + 'friday'].textarea.style.color = 'red'}
+              onFocus={() => this.props.showColorButtons()}
               onBlur={this.handleChange(time, 'friday').bind(this)}
             ></TextareaAutosize>
           </td>
@@ -372,6 +379,7 @@ class Timetable extends Component {
               defaultValue={this.state[time].saturday}
               ref={input => this[time + 'saturday'] = input}
               onChange={() => this[time + 'saturday'].textarea.style.color = 'red'}
+              onFocus={() => this.props.showColorButtons()}
               onBlur={this.handleChange(time, 'saturday').bind(this)}
             ></TextareaAutosize>
           </td>
@@ -382,6 +390,7 @@ class Timetable extends Component {
               defaultValue={this.state[time].sunday}
               ref={input => this[time + 'sunday'] = input}
               onChange={() => this[time + 'sunday'].textarea.style.color = 'red'}
+              onFocus={() => this.props.showColorButtons()}
               onBlur={this.handleChange(time, 'sunday').bind(this)}
             ></TextareaAutosize>
           </td>
@@ -424,7 +433,9 @@ const mapStateToProps = state => state.timetable;
 const mapDisaptchToProps = {
   closeTimetableModal,
   getTableData,
-  updateTableCell
+  updateTableCell,
+  showColorButtons,
+  hideColorButtons
 };
 
 export default connect(mapStateToProps, mapDisaptchToProps)(Timetable);
