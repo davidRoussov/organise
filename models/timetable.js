@@ -259,220 +259,220 @@ const TimetableSchema = new mongoose.Schema({
   colors: {
     type: {
       "00:00 - 01:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "01:00 - 02:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "02:00 - 03:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "03:00 - 04:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "04:00 - 05:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "05:00 - 06:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "06:00 - 07:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "07:00 - 08:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "08:00 - 09:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "09:00 - 10:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "10:00 - 11:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "11:00 - 12:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "12:00 - 13:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "13:00 - 14:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "14:00 - 15:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "15:00 - 16:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "16:00 - 17:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "17:00 - 18:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "18:00 - 19:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "19:00 - 20:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "20:00 - 21:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "21:00 - 22:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "22:00 - 23:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       },
       "23:00 - 00:00": {
-         "monday": String,
-         "tuesday": String,
-         "wednesday": String,
-         "thursday": String,
-         "friday": String,
-         "saturday": String,
-         "sunday": String 
+         "monday": mongoose.Schema.Types.Mixed,
+         "tuesday": mongoose.Schema.Types.Mixed,
+         "wednesday": mongoose.Schema.Types.Mixed,
+         "thursday": mongoose.Schema.Types.Mixed,
+         "friday": mongoose.Schema.Types.Mixed,
+         "saturday": mongoose.Schema.Types.Mixed,
+         "sunday": mongoose.Schema.Types.Mixed 
       }
     }
   }

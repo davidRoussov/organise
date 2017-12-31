@@ -5,13 +5,14 @@ module.exports = {
   updateCellColor: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;    
-      if(request.body && request.body.cell && request.body.color) {
+      if(request.body && request.body.cell && request.body.hasOwnProperty('color')) {
         const cell = request.body.cell;
         const color = request.body.color;
         await Timetable.updateCellColor(userID, cell, color);
         response.status(200).send({ success: true });
       } else {
         const errorMessage = 'request body or cell or color properties missing from request';
+        console.log(errorMessage);
         response.status(400).send({ message: errorMessage });
       }
     } else {

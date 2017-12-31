@@ -35,14 +35,18 @@ class TimetableNavbarOptions extends Component {
     function rgb2hex(rgb) {
       rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
       return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-     }
+    }
 
-     function hex(x) {
-       return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
-     }
+    function hex(x) {
+      return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+    }
 
     const currentlyFocusedCell = this.props.currentlyFocusedCell;
-    const cellColor = rgb2hex(e.target.style.color);
+    let cellColor = null;
+    if(e.target.style.color !== 'white') {
+      cellColor = rgb2hex(e.target.style.color);
+    }
+
     this.props.updateCellColor(currentlyFocusedCell, cellColor );
   }
 
@@ -98,6 +102,12 @@ class TimetableNavbarOptions extends Component {
       left: '100px'
     };
 
+    const colorSix = {
+      ...this.state.colorButton,
+      color: 'white',
+      left: '120px'
+    };
+
     return [
         <li className="nav-item" key={1}>
           <button 
@@ -140,6 +150,13 @@ class TimetableNavbarOptions extends Component {
             className="fa fa-circle timetableColorIcon" 
             aria-hidden="true" 
             style={colorFive}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
+
+          <i
+            className="fa fa-circle-thin timetableColorIcon" 
+            aria-hidden="true" 
+            style={colorSix}
             onClick={this.handleClickColorButton.bind(this)}
           ></i>
 
