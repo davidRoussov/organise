@@ -1,8 +1,16 @@
-import { MONGO_URI, SESSION_SECRET } from './secret';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import cors from 'cors';
+
+const SESSION_SECRET = process.env.NODE_ENV === 'production' ? process.env.SESSION_SECRET : 'monkey banana';
+const MONGO_URI = process.env.NODE_ENV === 'production' ? process.env.MONGO_URI : 'mongodb://localhost/organise';
+
+console.log('*****************************');
+console.log(SESSION_SECRET);
+console.log(MONGO_URI);
+console.log('*****************************');
+
 
 const MongoStore = require('connect-mongo')(session);
 mongoose.connect(MONGO_URI, { useMongoClient: true });
