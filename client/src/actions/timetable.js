@@ -6,6 +6,30 @@ export const closeTimetableModal = () => dispatch => dispatch({ type: 'CLOSE_TIM
 
 export const showColorButtons = () => dispatch => dispatch({ type: 'SHOW_TIMETABLE_COLOR_BUTTONS' });
 export const hideColorButtons = () => dispatch => dispatch({ type: 'HIDE_TIMETABLE_COLOR_BUTTONS' });
+export const setCurrentlyFocusedCell = (time, day) => dispatch => dispatch({ type: 'FOCUSED_TIMETABLE_CELL', time, day });
+
+export const updateCellColor = (cell, color) => dispatch => {
+  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
+
+  fetch(`${SERVER_URL}/api/t/cell-color`, {
+    method: 'PUT',
+    credentials: 'include',
+    body: JSON.stringify({ cell, color }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(handleErrors)
+  .then(response => response.json())
+  .then(response => {
+    dispatch({ type: 'SMALL_NETWORK_REQUEST_SUCCESS' });
+    dispatch({ type: 'SUCCESS_UPDATING_TIMETABLE_CELL' });
+  })
+  .catch(error => {
+    dispatch({ type: 'SMALL_NETWORK_REQUEST_FAIL' });
+  })
+  .then(() => setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000)); 
+};
 
 export const updateTableCell = (time, day, text) => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });

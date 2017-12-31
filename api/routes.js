@@ -27,5 +27,6 @@ router.route('/f3').put(f3.saveCategory);
 router.route('/t/settings').put(timetable.saveSettings);
 router.route('/t').get(timetable.get);
 router.route('/t').put(timetable.updateCell);
+router.route('/t/cell-color').put(timetable.updateCellColor);
 
 module.exports = router;

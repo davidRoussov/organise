@@ -478,6 +478,19 @@ const TimetableSchema = new mongoose.Schema({
   }
 });
 
+TimetableSchema.statics.updateCellColor = (userID, cell, color) => new Promise((resolve, reject) => {
+  const location = `colors.${cell.time}.${cell.day}`;
+
+  Timetable.findOneAndUpdate({ userID }, { $set: { [location]: color } }, { upsert: true }, error => {
+    if(error) {
+      console.log('Unable to execute Mongo query');
+      reject(error);
+    } else {
+      resolve();
+    }
+  });
+});
+
 TimetableSchema.statics.updateCell = (userID, time, day, text='') => new Promise((resolve, reject) => {
   const location = `data.${time}.${day}`
 

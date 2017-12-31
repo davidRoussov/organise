@@ -10,7 +10,8 @@ const LoadingApp = () => {
       fontSize: '64px',
       position: 'absolute',
       left: '50%',
-      top: '50%'
+      top: '50%',
+      margin: '-32px 0 0 -32px'
     }
   };
 

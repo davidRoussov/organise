@@ -16,6 +16,11 @@ const timetable = (state=initialState, action) => {
       return { ...state, colorButtonsVisible: true };
     case 'HIDE_TIMETABLE_COLOR_BUTTONS':
       return { ...state, colorButtonsVisible: false };
+    case 'FOCUSED_TIMETABLE_CELL':
+      return { ...state, currentlyFocusedCell: {
+        time: action.time,
+        day: action.day
+      }};
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { triggerTimetableModal } from '../../actions/timetable';
+import { triggerTimetableModal, updateCellColor } from '../../actions/timetable';
 
 class TimetableNavbarOptions extends Component {
   constructor() {
@@ -27,6 +27,23 @@ class TimetableNavbarOptions extends Component {
         visible: 'hidden'
       }
     }
+  }
+
+  handleClickColorButton(e) {
+    var hexDigits = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"]; 
+
+    function rgb2hex(rgb) {
+      rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+      return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+     }
+
+     function hex(x) {
+       return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+     }
+
+    const currentlyFocusedCell = this.props.currentlyFocusedCell;
+    const cellColor = rgb2hex(e.target.style.color);
+    this.props.updateCellColor(currentlyFocusedCell, cellColor );
   }
 
   componentWillReceiveProps(props) {
@@ -91,15 +108,40 @@ class TimetableNavbarOptions extends Component {
         </li>,
         <li className="nav-item" style={{position: 'relative'}} key={2}>
 
-          <i className="fa fa-circle" aria-hidden="true" style={colorOne}></i>
+          <i 
+            className="fa fa-circle" 
+            aria-hidden="true" 
+            style={colorOne}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
 
-          <i className="fa fa-circle" aria-hidden="true" style={colorTwo}></i>
+          <i 
+            className="fa fa-circle" 
+            aria-hidden="true" 
+            style={colorTwo}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
 
-          <i className="fa fa-circle" aria-hidden="true" style={colorThree}></i>
+          <i 
+            className="fa fa-circle" 
+            aria-hidden="true" 
+            style={colorThree}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
 
-          <i className="fa fa-circle" aria-hidden="true" style={colorFour}></i>
+          <i 
+            className="fa fa-circle" 
+            aria-hidden="true" 
+            style={colorFour}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
 
-          <i className="fa fa-circle" aria-hidden="true" style={colorFive}></i>
+          <i 
+            className="fa fa-circle" 
+            aria-hidden="true" 
+            style={colorFive}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
 
         </li>
     ]
@@ -109,7 +151,8 @@ class TimetableNavbarOptions extends Component {
 const mapStateToProps = state => state.timetable;
 
 const mapDispatchToProps = {
-  triggerTimetableModal
+  triggerTimetableModal,
+  updateCellColor
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimetableNavbarOptions);
