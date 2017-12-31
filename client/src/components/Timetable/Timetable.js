@@ -291,7 +291,13 @@ class Timetable extends Component {
       minHeight: '46px',
       background: color || 'transparent',
       border: '0',
-      borderRadius: '0px'
+      borderRadius: '0px',
+      position: 'absolute',
+      top: '0px',
+      left: '0px',
+      right: '0px',
+      bottom: '1px',
+      color: 'black'  
     }
   }
 
@@ -311,15 +317,9 @@ class Timetable extends Component {
       dayCol: {
         width: '13%'
       },
-      cellInput: {
-        width: '100%',
-        minHeight: '46px',
-        background: 'transparent',
-        border: '0',
-        borderRadius: '0px'
-      },
       editableTD: {
-        padding: '0px'
+        padding: '0px',
+        position: 'relative'
       },
       timeCell: {
         fontSize: '11px'
@@ -341,7 +341,7 @@ class Timetable extends Component {
               style={this.calculateCellStyle(time, 'monday')}
               defaultValue={this.state[time].monday}
               ref={input => this[time + 'monday'] = input}
-              onChange={() => this[time + 'monday'].textarea.style.color = 'red'}
+              onChange={() => this[time + 'monday'].textarea.style.color = '#d9534f '}
               onFocus={this.handleTableCellFocus(time, 'monday').bind(this)}
               onBlur={this.handleChange(time, 'monday').bind(this)}
             ></TextareaAutosize>
@@ -352,7 +352,7 @@ class Timetable extends Component {
               style={this.calculateCellStyle(time, 'tuesday')}
               defaultValue={this.state[time].tuesday}
               ref={input => this[time + 'tuesday'] = input}
-              onChange={() => this[time + 'tuesday'].textarea.style.color = 'red'}
+              onChange={() => this[time + 'tuesday'].textarea.style.color = '#d9534f  '}
               onFocus={this.handleTableCellFocus(time, 'tuesday').bind(this)}
               onBlur={this.handleChange(time, 'tuesday').bind(this)}
             ></TextareaAutosize>
@@ -363,7 +363,7 @@ class Timetable extends Component {
               style={this.calculateCellStyle(time, 'wednesday')}
               defaultValue={this.state[time].wednesday}
               ref={input => this[time + 'wednesday'] = input}
-              onChange={() => this[time + 'wednesday'].textarea.style.color = 'red'}
+              onChange={() => this[time + 'wednesday'].textarea.style.color = '#d9534f  '}
               onFocus={this.handleTableCellFocus(time, 'wednesday').bind(this)}
               onBlur={this.handleChange(time, 'wednesday').bind(this)}
             ></TextareaAutosize>
@@ -374,7 +374,7 @@ class Timetable extends Component {
               style={this.calculateCellStyle(time, 'thursday')}
               defaultValue={this.state[time].thursday}
               ref={input => this[time + 'thursday'] = input}
-              onChange={() => this[time + 'thursday'].textarea.style.color = 'red'}
+              onChange={() => this[time + 'thursday'].textarea.style.color = '#d9534f '}
               onFocus={this.handleTableCellFocus(time, 'thursday').bind(this)}
               onBlur={this.handleChange(time, 'thursday').bind(this)}
             ></TextareaAutosize>
@@ -385,7 +385,7 @@ class Timetable extends Component {
               style={this.calculateCellStyle(time, 'friday')}
               defaultValue={this.state[time].friday}
               ref={input => this[time + 'friday'] = input}
-              onChange={() => this[time + 'friday'].textarea.style.color = 'red'}
+              onChange={() => this[time + 'friday'].textarea.style.color = '#d9534f '}
               onFocus={this.handleTableCellFocus(time, 'friday').bind(this)}
               onBlur={this.handleChange(time, 'friday').bind(this)}
             ></TextareaAutosize>
@@ -396,7 +396,7 @@ class Timetable extends Component {
               style={this.calculateCellStyle(time, 'saturday')}
               defaultValue={this.state[time].saturday}
               ref={input => this[time + 'saturday'] = input}
-              onChange={() => this[time + 'saturday'].textarea.style.color = 'red'}
+              onChange={() => this[time + 'saturday'].textarea.style.color = '#d9534f '}
               onFocus={this.handleTableCellFocus(time, 'saturday').bind(this)}
               onBlur={this.handleChange(time, 'saturday').bind(this)}
             ></TextareaAutosize>
@@ -407,7 +407,7 @@ class Timetable extends Component {
               style={this.calculateCellStyle(time, 'sunday')}
               defaultValue={this.state[time].sunday}
               ref={input => this[time + 'sunday'] = input}
-              onChange={() => this[time + 'sunday'].textarea.style.color = 'red'}
+              onChange={() => this[time + 'sunday'].textarea.style.color = '#d9534f '}
               onFocus={this.handleTableCellFocus(time, 'sunday').bind(this)}
               onBlur={this.handleChange(time, 'sunday').bind(this)}
             ></TextareaAutosize>
