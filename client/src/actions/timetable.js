@@ -22,7 +22,8 @@ export const getTableData = () => dispatch => {
   })
   .catch(error => {
     dispatch({ type: 'SMALL_NETWORK_REQUEST_FAIL' });
-  });
+  })
+  .then(() => setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000));
 };
 
 export const updateTimetableVisibleTimes = newTimes => dispatch => {
