@@ -109,35 +109,35 @@ class TimetableNavbarOptions extends Component {
         <li className="nav-item" style={{position: 'relative'}} key={2}>
 
           <i 
-            className="fa fa-circle" 
+            className="fa fa-circle timetableColorIcon" 
             aria-hidden="true" 
             style={colorOne}
             onClick={this.handleClickColorButton.bind(this)}
           ></i>
 
           <i 
-            className="fa fa-circle" 
+            className="fa fa-circle timetableColorIcon" 
             aria-hidden="true" 
             style={colorTwo}
             onClick={this.handleClickColorButton.bind(this)}
           ></i>
 
           <i 
-            className="fa fa-circle" 
+            className="fa fa-circle timetableColorIcon" 
             aria-hidden="true" 
             style={colorThree}
             onClick={this.handleClickColorButton.bind(this)}
           ></i>
 
           <i 
-            className="fa fa-circle" 
+            className="fa fa-circle timetableColorIcon" 
             aria-hidden="true" 
             style={colorFour}
             onClick={this.handleClickColorButton.bind(this)}
           ></i>
 
           <i 
-            className="fa fa-circle" 
+            className="fa fa-circle timetableColorIcon" 
             aria-hidden="true" 
             style={colorFive}
             onClick={this.handleClickColorButton.bind(this)}

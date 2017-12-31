@@ -24,6 +24,7 @@ export const updateCellColor = (cell, color) => dispatch => {
   .then(response => {
     dispatch({ type: 'SMALL_NETWORK_REQUEST_SUCCESS' });
     dispatch({ type: 'SUCCESS_UPDATING_TIMETABLE_CELL' });
+    dispatch(getTableData());
   })
   .catch(error => {
     dispatch({ type: 'SMALL_NETWORK_REQUEST_FAIL' });

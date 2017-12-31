@@ -19,3 +19,7 @@ a {
 table td, table th {
   border: 1px solid #eceeef !important;
 }
+
+.timetableColorIcon:hover {
+  transform: scale(1.1) !important;
+}
