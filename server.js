@@ -38,5 +38,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', routes);
 
+if(process.env.NODE_ENV === 'production') {
+  app.get('/static/*', (request, response) => {
+    const path = request.originalUrl;
+    response.sendFile(path, { root: __dirname + '/client/build/' });
+  });
+
+  app.get('*', (request, response) => {
+    response.sendFile('index.html', { root: __dirname + '/client/build/' });
+  });
+}
+
 app.listen(3001, () => console.info('listening on port 3001'));
 
