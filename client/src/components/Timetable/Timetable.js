@@ -282,6 +282,19 @@ class Timetable extends Component {
     this.props.showColorButtons();  
   }
 
+  calculateCellStyle(time, day) {
+    const timetableColors = this.props.timetableData.colors;
+    const color = timetableColors && timetableColors[time] && timetableColors[time][day];
+
+    return {
+      width: '100%',
+      minHeight: '46px',
+      background: color || 'transparent',
+      border: '0',
+      borderRadius: '0px'
+    }
+  }
+
   render() {
     const style = {
       container: {
@@ -325,7 +338,7 @@ class Timetable extends Component {
           <td style={style.editableTD}>
             <TextareaAutosize
               className="form-control"
-              style={style.cellInput}
+              style={this.calculateCellStyle(time, 'monday')}
               defaultValue={this.state[time].monday}
               ref={input => this[time + 'monday'] = input}
               onChange={() => this[time + 'monday'].textarea.style.color = 'red'}
@@ -336,7 +349,7 @@ class Timetable extends Component {
           <td style={style.editableTD}>
             <TextareaAutosize
               className="form-control"
-              style={style.cellInput}
+              style={this.calculateCellStyle(time, 'tuesday')}
               defaultValue={this.state[time].tuesday}
               ref={input => this[time + 'tuesday'] = input}
               onChange={() => this[time + 'tuesday'].textarea.style.color = 'red'}
@@ -347,7 +360,7 @@ class Timetable extends Component {
           <td style={style.editableTD}>
             <TextareaAutosize
               className="form-control"
-              style={style.cellInput}
+              style={this.calculateCellStyle(time, 'wednesday')}
               defaultValue={this.state[time].wednesday}
               ref={input => this[time + 'wednesday'] = input}
               onChange={() => this[time + 'wednesday'].textarea.style.color = 'red'}
@@ -358,7 +371,7 @@ class Timetable extends Component {
           <td style={style.editableTD}>
             <TextareaAutosize
               className="form-control"
-              style={style.cellInput}
+              style={this.calculateCellStyle(time, 'thursday')}
               defaultValue={this.state[time].thursday}
               ref={input => this[time + 'thursday'] = input}
               onChange={() => this[time + 'thursday'].textarea.style.color = 'red'}
@@ -369,7 +382,7 @@ class Timetable extends Component {
           <td style={style.editableTD}>
             <TextareaAutosize
               className="form-control"
-              style={style.cellInput}
+              style={this.calculateCellStyle(time, 'friday')}
               defaultValue={this.state[time].friday}
               ref={input => this[time + 'friday'] = input}
               onChange={() => this[time + 'friday'].textarea.style.color = 'red'}
@@ -380,7 +393,7 @@ class Timetable extends Component {
           <td style={style.editableTD}>
             <TextareaAutosize
               className="form-control"
-              style={style.cellInput}
+              style={this.calculateCellStyle(time, 'saturday')}
               defaultValue={this.state[time].saturday}
               ref={input => this[time + 'saturday'] = input}
               onChange={() => this[time + 'saturday'].textarea.style.color = 'red'}
@@ -391,7 +404,7 @@ class Timetable extends Component {
           <td style={style.editableTD}>
             <TextareaAutosize
               className="form-control"
-              style={style.cellInput}
+              style={this.calculateCellStyle(time, 'sunday')}
               defaultValue={this.state[time].sunday}
               ref={input => this[time + 'sunday'] = input}
               onChange={() => this[time + 'sunday'].textarea.style.color = 'red'}

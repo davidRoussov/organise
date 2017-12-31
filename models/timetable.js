@@ -513,7 +513,8 @@ TimetableSchema.statics.get = userID => new Promise((resolve, reject) => {
       const pruned = results.map(result => ({
         visibleTimes: result.visibleTimes,
         data: result.data,
-        twelveHours: result.twelveHours
+        twelveHours: result.twelveHours,
+        colors: result.colors
       }));
       resolve(pruned);
     }
