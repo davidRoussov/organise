@@ -104,36 +104,48 @@ class F3Note extends Component {
         backgroundColor: 'transparent',
         boxShadow: 'none',
         outline: 'none',
-        border: '0'
+        border: '0',
+        ':hover': {
+          backgroundColor: 'red'
+        }
       },
       itemDetails: {
-        minHeight: '60px'
+        minHeight: '60px',
+        marginBottom: '10px'
       },
       col1: {
-        width: '5%',
-        textAlign: 'center'
+        position: 'absolute',
+        top: '50%',
+        margin: '-9.5px 0 0 -6px'
       },
       detailsExpander: {
         fontSize: '19px',
-        cursor: 'pointer',
-        position: 'absolute',
-        top: '7px',
-        ':hover': {
-          color: '#0275d8'
-        }
+        cursor: 'pointer'
       },
       col2: {
-        width: '95%'
+        marginLeft: '15px',
+        width: '100%'
       },
       addItemButton: {
-        marginTop: '10px'
+        margin: '10px 0 20px 20px'
+      },
+      itemRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        width: '100%',
+        padding: '0px 20px 0px 20px',
+        margin: '0px',
+        ':hover': {
+          background: '#ECECEC'
+        }
       }
     };
 
     const renderedItems = this.state.items.map((item, i) => {
       return (
         <div key={i} style={style.item}>
-          <div className="row" style={{width: '100%'}}>
+          <div className="row" style={style.itemRow} key={i}>
             <div style={style.col1}>
               <i 
                 key={i} 
@@ -172,7 +184,7 @@ class F3Note extends Component {
     return (
       <div className="card">
         <h3 className="card-header">{this.props.currentCategory.categoryName}</h3>
-        <div className="card-block">
+        <div className="card-block" style={{padding: '0px'}}>
           { renderedItems }
           <button className="btn btn-primary" onClick={this.handleAddItem.bind(this)} style={style.addItemButton}>Add item</button>
         </div>

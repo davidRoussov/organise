@@ -53,7 +53,8 @@ export const saveCategory = newCategory => dispatch => {
       type: 'ERROR_SAVING_F3_NOTE',
       data: error.message
     });
-  });
+  })
+  .then(() => setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000));
 }
 
 export const setCurrentCategory = category => dispatch => 
