@@ -2,6 +2,30 @@ import express from 'express';
 import F3 from '../models/f3';
 
 module.exports = {
+  deleteCategory: async (request, response) => {
+    if(request.session && request.session.userId) {
+      const userID = request.session.userId;
+      if(request.body && request.body.categoryID) {
+        const categoryID = request.body.categoryID;
+        try {
+          await F3.deleteCategory(userID, categoryID);
+          response.status(200).send({ message: 'Successfully deleted F3 category' });
+        } catch(error) {
+          console.error('Unable to delete F3 category from database');
+          console.error(error);
+          response.status(500).send({ message: error });
+        }
+      } else {
+        const errorMessage = 'Missing request body or categoryID from request body';
+        console.error(errorMessage);
+        response.status(400).send({ message: errorMessage });
+      }
+    } else {
+      console.log('Missing user ID from session when trying to delete f3 category');
+      response.status(400).send({ message: 'Invalid session' });
+    }
+  },
+
   saveCategory: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;

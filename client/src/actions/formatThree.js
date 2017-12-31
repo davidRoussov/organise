@@ -1,8 +1,9 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
+import { handleResponse } from './utilities';
 
 export const deleteCategory = categoryID => dispatch => {
-  dispatch({ type: 'LOADING_CATEGORY' });
+  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
   
   fetch(`${SERVER_URL}/api/f3`, {
     method: 'DELETE',
@@ -12,17 +13,19 @@ export const deleteCategory = categoryID => dispatch => {
       'Content-Type': 'application/json'
     }
   })
-  .then(handleErrors)
-  .then(response => response.json())
+  .then(handleResponse)
   .then(response => {
+    dispatch({ type: 'SMALL_NETWORK_REQUEST_SUCCESS' });
     dispatch({
       type: 'SUCCESS_DELETING_CATEGORY'
     });
     dispatch(getCategories());
   })
-  .then(error => {
-    console.log('error', error);
+  .catch(errorMessage => {
+    dispatch({ type: 'SMALL_NETWORK_REQUEST_FAIL' });
+    dispatch({ type: 'ERROR_DELETING_CATEGORY', data: errorMessage });
   })
+  .then(() => setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000));
 };
 
 export const saveCategory = newCategory => dispatch => {

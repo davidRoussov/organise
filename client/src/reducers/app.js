@@ -26,10 +26,8 @@ const app = (state={}, action) => {
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
     case 'SUCCESS_DELETING_CATEGORY':
       return { ...state, displayAlert: true, alertMessage: 'Successfully deleted category', alertType: 'success' };
-    case 'ERROR_EDITING_F3_CATEGORY':
+    case 'ERROR_DELETING_CATEGORY':
       return { ...state, displayAlert: true, alertMessage: action.data, alertType: 'error' };
-    case 'SUCCESS_EDITING_F3_CATEGORY':
-      return { ...state, displayAlert: true, alertMessage: 'Successfully modified category', alertType: 'success' };
     case 'SMALL_NETWORK_REQUEST':
       return { ...state, miniLoading: true, miniVisible: true };
     case 'SMALL_NETWORK_REQUEST_SUCCESS':
