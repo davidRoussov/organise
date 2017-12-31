@@ -1,6 +1,26 @@
 import { SERVER_URL } from '../config';
 import handleErrors from './utilities';
 
+export const logout = () => dispatch => {
+  dispatch({ type: 'SHOW_SPINNER' });
+
+  fetch(`${SERVER_URL}/api/auth/logout`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(handleErrors)
+  .then(response => response.json())
+  .then(response => {
+    window.location.href = '/login';
+  })
+  .catch(error => {
+
+  });
+};
+
 export const signup = user => dispatch => {
   dispatch({ type: 'SHOW_SPINNER' });
   fetch(`${SERVER_URL}/api/auth/signup`, {

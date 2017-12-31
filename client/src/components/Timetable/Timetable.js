@@ -292,12 +292,8 @@ class Timetable extends Component {
       background: color || 'transparent',
       border: '0',
       borderRadius: '0px',
-      position: 'absolute',
-      top: '0px',
-      left: '0px',
-      right: '0px',
-      bottom: '1px',
-      color: 'black'  
+      color: 'black',
+      boxSizing: 'border-box'
     }
   }
 

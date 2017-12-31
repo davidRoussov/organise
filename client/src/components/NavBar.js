@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 
 import TimetableNavbarOptions from './Timetable/TimetableNavbarOptions';
+import { logout } from '../actions/authentication';
 
 class NavBar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userMenuOpen: false
+    };
+  }
+
+  handleLogout() {
+    this.props.logout();
+  }
+
   render() {
     const style = {
       navbar: {
@@ -44,7 +57,13 @@ class NavBar extends Component {
 
           <ul className='navbar-nav mr-auto'>
             <li className="nav-item">
-              <a className="nav-link">{this.props.user ? this.props.user.emailAddress : '[no user]'}</a>
+              <a id="userMenu" className="nav-link" onClick={() => this.setState({ userMenuOpen: !this.state.userMenuOpen })}>{this.props.user ? this.props.user.emailAddress : '[no user]'}</a>
+              <Popover placement="bottom" isOpen={this.state.userMenuOpen} target="userMenu" toggle={() => this.setState({ userMenuOpen: !this.state.userMenuOpen })}>
+                <PopoverHeader>{this.props.user ? this.props.user.emailAddress : '[no user]'}</PopoverHeader>
+                <PopoverBody style={{paddingLeft: '10px', paddingRight: '10px', textAlign: 'center'}}>
+                  <button type="button" className="btn btn-primary" style={{width: '100%'}} onClick={this.handleLogout.bind(this)}>Logout</button>
+                </PopoverBody>
+              </Popover>
             </li>
           </ul>
 
@@ -57,7 +76,7 @@ class NavBar extends Component {
 const mapStateToProps = state => state.navbar;
 
 const mapDispatchToProps ={
-
+  logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

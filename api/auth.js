@@ -3,6 +3,18 @@ import bcrypt from 'bcryptjs';
 import User from '../models/user';
 
 module.exports = {
+  logout: (request, response) => {
+    request.session.destroy(error => {
+      if(error) {
+        console.error('Unable to destroy session');
+        console.error(error);
+        response.status(500).send({ message: 'Unable to destroy session' });
+      } else {
+        response.status(200).send({ success: true });
+      }
+    });
+  },
+
   signup: (request, response) => {
     if(request.body.user) {
       const userData = request.body.user;
@@ -33,8 +45,6 @@ module.exports = {
     }
   },
   login: (request, response) => {
-    console.log('***');
-    console.log(request);
     if(request.body.credentials && request.body.credentials.username && request.body.credentials.password) {
       const username = request.body.credentials.username;
       const password = request.body.credentials.password;
