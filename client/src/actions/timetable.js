@@ -19,7 +19,7 @@ export const updateTableCell = (time, day, text) => dispatch => {
   .then(response => response.json())
   .then(response => {
     dispatch({ type: 'SMALL_NETWORK_REQUEST_SUCCESS' });
-    dispatch(getTableData());
+    dispatch({ type: 'SUCCESS_UPDATING_TIMETABLE_CELL' });
   })
   .catch(error => {
     dispatch({ type: 'SMALL_NETWORK_REQUEST_FAIL' });

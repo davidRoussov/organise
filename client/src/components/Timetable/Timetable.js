@@ -234,14 +234,35 @@ class Timetable extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log(props);
     if(props.timetableData && props.timetableData.data) {
       this.setState({ ...props.timetableData.data });
+    }
+
+    if(props.redToBlack) {
+      Object.keys(this.state).forEach(time => {
+        ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].forEach(day => {
+          if(this[time + day]) {
+            this[time + day].textarea.style.color = 'black';
+          }
+        });
+      });
     }
   }
 
   handleChange = (time, day) => e => {
-    this.props.updateTableCell(time, day, e.target.value);
+
+    console.log('***');
+    console.log(time, day, e.target.value);
+    console.log('^^' + e.target.value + '^^');
+    console.log(this.state[time][day]);
+
+    const val = e.target.value;
+    if(val === '' && !this.state[time][day]) {
+
+    }
+    else if(val !== this.state[time][day]) {
+      this.props.updateTableCell(time, day, val);
+    }
   }
 
   render() {
