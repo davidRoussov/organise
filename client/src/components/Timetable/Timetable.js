@@ -234,8 +234,9 @@ class Timetable extends Component {
   }
 
   componentWillReceiveProps(props) {
+    console.log(props);
     if(props.timetableData && props.timetableData.data) {
-      this.setState({ data: props.timetableData.data });
+      this.setState({ ...props.timetableData.data });
     }
   }
 

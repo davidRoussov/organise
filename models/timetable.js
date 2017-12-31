@@ -275,7 +275,8 @@ TimetableSchema.statics.get = userID => new Promise((resolve, reject) => {
       reject(error);
     } else {
       const pruned = results.map(result => ({
-        visibleTimes: result.visibleTimes
+        visibleTimes: result.visibleTimes,
+        data: result.data
       }));
       resolve(pruned);
     }
