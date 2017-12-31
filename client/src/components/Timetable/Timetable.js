@@ -250,18 +250,28 @@ class Timetable extends Component {
   }
 
   handleChange = (time, day) => e => {
-
-    console.log('***');
-    console.log(time, day, e.target.value);
-    console.log('^^' + e.target.value + '^^');
-    console.log(this.state[time][day]);
-
     const val = e.target.value;
     if(val === '' && !this.state[time][day]) {
 
     }
     else if(val !== this.state[time][day]) {
       this.props.updateTableCell(time, day, val);
+    }
+  }
+
+  formatTime(time) {
+    if(this.props.timetableData.twelveHours) {
+      return time
+        .split(' - ')
+        .map(t => {
+          const split = t.split(':')
+          const hour = Number(split[0])
+          const suffix = (hour >= 12) ? 'pm' : 'am'
+          return ((hour + 11) % 12 + 1) + ':' + split[1] + suffix;
+        })
+        .join(' - ')
+    } else {
+      return time;
     }
   }
 
@@ -290,6 +300,9 @@ class Timetable extends Component {
       },
       editableTD: {
         padding: '0px'
+      },
+      timeCell: {
+        fontSize: '11px'
       }
     };
 
@@ -297,81 +310,84 @@ class Timetable extends Component {
       (this.props.timetableData && this.props.timetableData.visibleTimes && Object.keys(this.props.timetableData.visibleTimes)
         .filter(time => this.props.timetableData.visibleTimes[time])) || []
 
-    const tbody = visibleTimes.sort().map((time, i) =>
-      <tr key={i}>
-        <td>{time}</td>
-        <td style={style.editableTD}>
-          <TextareaAutosize
-            className="form-control"
-            style={style.cellInput}
-            defaultValue={this.state[time].monday}
-            ref={input => this[time + 'monday'] = input}
-            onChange={() => this[time + 'monday'].textarea.style.color = 'red'}
-            onBlur={this.handleChange(time, 'monday').bind(this)}
-          ></TextareaAutosize>
-        </td>
-        <td style={style.editableTD}>
-          <TextareaAutosize
-            className="form-control"
-            style={style.cellInput}
-            defaultValue={this.state[time].tuesday}
-            ref={input => this[time + 'tuesday'] = input}
-            onChange={() => this[time + 'tuesday'].textarea.style.color = 'red'}
-            onBlur={this.handleChange(time, 'tuesday').bind(this)}
-          ></TextareaAutosize>
-        </td>
-        <td style={style.editableTD}>
-          <TextareaAutosize
-            className="form-control"
-            style={style.cellInput}
-            defaultValue={this.state[time].wednesday}
-            ref={input => this[time + 'wednesday'] = input}
-            onChange={() => this[time + 'wednesday'].textarea.style.color = 'red'}
-            onBlur={this.handleChange(time, 'wednesday').bind(this)}
-          ></TextareaAutosize>
-        </td>
-        <td style={style.editableTD}>
-          <TextareaAutosize
-            className="form-control"
-            style={style.cellInput}
-            defaultValue={this.state[time].thursday}
-            ref={input => this[time + 'thursday'] = input}
-            onChange={() => this[time + 'thursday'].textarea.style.color = 'red'}
-            onBlur={this.handleChange(time, 'thursday').bind(this)}
-          ></TextareaAutosize>
-        </td>
-        <td style={style.editableTD}>
-          <TextareaAutosize
-            className="form-control"
-            style={style.cellInput}
-            defaultValue={this.state[time].friday}
-            ref={input => this[time + 'friday'] = input}
-            onChange={() => this[time + 'friday'].textarea.style.color = 'red'}
-            onBlur={this.handleChange(time, 'friday').bind(this)}
-          ></TextareaAutosize>
-        </td>
-        <td style={style.editableTD}>
-          <TextareaAutosize
-            className="form-control"
-            style={style.cellInput}
-            defaultValue={this.state[time].saturday}
-            ref={input => this[time + 'saturday'] = input}
-            onChange={() => this[time + 'saturday'].textarea.style.color = 'red'}
-            onBlur={this.handleChange(time, 'saturday').bind(this)}
-          ></TextareaAutosize>
-        </td>
-        <td style={style.editableTD}>
-          <TextareaAutosize
-            className="form-control"
-            style={style.cellInput}
-            defaultValue={this.state[time].sunday}
-            ref={input => this[time + 'sunday'] = input}
-            onChange={() => this[time + 'sunday'].textarea.style.color = 'red'}
-            onBlur={this.handleChange(time, 'sunday').bind(this)}
-          ></TextareaAutosize>
-        </td>
-      </tr>
-    );
+    const tbody = visibleTimes.sort().map((time, i) => {
+      const formattedTime = this.formatTime(time);
+      return (
+        <tr key={i}>
+          <td style={style.timeCell}>{formattedTime}</td>
+          <td style={style.editableTD}>
+            <TextareaAutosize
+              className="form-control"
+              style={style.cellInput}
+              defaultValue={this.state[time].monday}
+              ref={input => this[time + 'monday'] = input}
+              onChange={() => this[time + 'monday'].textarea.style.color = 'red'}
+              onBlur={this.handleChange(time, 'monday').bind(this)}
+            ></TextareaAutosize>
+          </td>
+          <td style={style.editableTD}>
+            <TextareaAutosize
+              className="form-control"
+              style={style.cellInput}
+              defaultValue={this.state[time].tuesday}
+              ref={input => this[time + 'tuesday'] = input}
+              onChange={() => this[time + 'tuesday'].textarea.style.color = 'red'}
+              onBlur={this.handleChange(time, 'tuesday').bind(this)}
+            ></TextareaAutosize>
+          </td>
+          <td style={style.editableTD}>
+            <TextareaAutosize
+              className="form-control"
+              style={style.cellInput}
+              defaultValue={this.state[time].wednesday}
+              ref={input => this[time + 'wednesday'] = input}
+              onChange={() => this[time + 'wednesday'].textarea.style.color = 'red'}
+              onBlur={this.handleChange(time, 'wednesday').bind(this)}
+            ></TextareaAutosize>
+          </td>
+          <td style={style.editableTD}>
+            <TextareaAutosize
+              className="form-control"
+              style={style.cellInput}
+              defaultValue={this.state[time].thursday}
+              ref={input => this[time + 'thursday'] = input}
+              onChange={() => this[time + 'thursday'].textarea.style.color = 'red'}
+              onBlur={this.handleChange(time, 'thursday').bind(this)}
+            ></TextareaAutosize>
+          </td>
+          <td style={style.editableTD}>
+            <TextareaAutosize
+              className="form-control"
+              style={style.cellInput}
+              defaultValue={this.state[time].friday}
+              ref={input => this[time + 'friday'] = input}
+              onChange={() => this[time + 'friday'].textarea.style.color = 'red'}
+              onBlur={this.handleChange(time, 'friday').bind(this)}
+            ></TextareaAutosize>
+          </td>
+          <td style={style.editableTD}>
+            <TextareaAutosize
+              className="form-control"
+              style={style.cellInput}
+              defaultValue={this.state[time].saturday}
+              ref={input => this[time + 'saturday'] = input}
+              onChange={() => this[time + 'saturday'].textarea.style.color = 'red'}
+              onBlur={this.handleChange(time, 'saturday').bind(this)}
+            ></TextareaAutosize>
+          </td>
+          <td style={style.editableTD}>
+            <TextareaAutosize
+              className="form-control"
+              style={style.cellInput}
+              defaultValue={this.state[time].sunday}
+              ref={input => this[time + 'sunday'] = input}
+              onChange={() => this[time + 'sunday'].textarea.style.color = 'red'}
+              onBlur={this.handleChange(time, 'sunday').bind(this)}
+            ></TextareaAutosize>
+          </td>
+        </tr>
+      )
+    });
 
     return (
       <div style={style.container}>

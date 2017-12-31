@@ -252,6 +252,9 @@ const TimetableSchema = new mongoose.Schema({
          "sunday": String 
       }
     }
+  },
+  twelveHours: {
+    type: Boolean
   }
 });
 
@@ -276,15 +279,16 @@ TimetableSchema.statics.get = userID => new Promise((resolve, reject) => {
     } else {
       const pruned = results.map(result => ({
         visibleTimes: result.visibleTimes,
-        data: result.data
+        data: result.data,
+        twelveHours: result.twelveHours
       }));
       resolve(pruned);
     }
   });
 });
 
-TimetableSchema.statics.saveVisibleTimes = (userID, newTimes) => new Promise((resolve, reject) => {
-  Timetable.findOneAndUpdate({ userID }, { visibleTimes: newTimes }, { upsert: true },  error => {
+TimetableSchema.statics.saveSettings = (userID, newTimes, twelveHours) => new Promise((resolve, reject) => {
+  Timetable.findOneAndUpdate({ userID }, { visibleTimes: newTimes, twelveHours }, { upsert: true },  error => {
     if(error) {
       console.error('Unable to execute Mongo query');
       reject(error);

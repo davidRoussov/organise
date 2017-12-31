@@ -24,7 +24,7 @@ router.route('/f2').delete(f2.deleteNote);
 router.route('/f3').post(f3.createNewCategory);
 router.route('/f3').get(f3.getCategories);
 router.route('/f3').put(f3.saveCategory);
-router.route('/t/settings').put(timetable.saveVisibleTimes);
+router.route('/t/settings').put(timetable.saveSettings);
 router.route('/t').get(timetable.get);
 router.route('/t').put(timetable.updateCell);
 

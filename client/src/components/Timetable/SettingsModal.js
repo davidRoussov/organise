@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
-import { updateTimetableVisibleTimes, getTableData } from '../../actions/timetable';
+import { updateTimetableSettings, getTableData } from '../../actions/timetable';
 
 class SettingsModal extends Component {
   constructor() {
@@ -16,7 +16,8 @@ class SettingsModal extends Component {
     }
 
     this.state = {
-      times
+      times,
+      twelveHours: false
     };
   }
 
@@ -28,11 +29,15 @@ class SettingsModal extends Component {
     if(props.timetableData && props.timetableData.visibleTimes) {
       this.setState({ times: props.timetableData.visibleTimes });
     }
+
+    if(props.timetableData && props.timetableData.twelveHours) {
+      this.setState({ twelveHours: true });
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.updateTimetableVisibleTimes(this.state.times);
+    this.props.updateTimetableSettings(this.state.times, this.state.twelveHours);
     this.props.close();
   }
 
@@ -40,6 +45,8 @@ class SettingsModal extends Component {
     const time = e.target.name;
     this.setState({ times: { ...this.state.times, [time]: !this.state.times[time] }});
   }
+
+  handleChangeTimeFormat = () => this.setState({ twelveHours: !this.state.twelveHours })
 
   render() {
     const style = {
@@ -77,6 +84,20 @@ class SettingsModal extends Component {
                 </tbody>
               </table>
             </FormGroup>
+            <hr/>
+
+            <FormGroup>
+              <Label>Display 12 hour or 24 hour time format</Label><br/>
+              <Label check>
+                <Input type="radio" name="timeFormat" checked={this.state.twelveHours} onChange={this.handleChangeTimeFormat.bind(this)} inline="true"/>
+                12 hour
+              </Label>
+              <Label check>
+                <Input type="radio" name="timeFormat" checked={!this.state.twelveHours} onChange={this.handleChangeTimeFormat.bind(this)} inline="true"/>
+                24 hour
+              </Label>
+            </FormGroup>
+            <hr/>
 
           </ModalBody>
           <ModalFooter>
@@ -92,7 +113,7 @@ class SettingsModal extends Component {
 const mapStateToProps = state => state.timetable;
 
 const mapDisaptchToProps = {
-  updateTimetableVisibleTimes,
+  updateTimetableSettings,
   getTableData
 };
 

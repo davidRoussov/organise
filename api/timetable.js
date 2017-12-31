@@ -37,25 +37,27 @@ module.exports = {
     }
   },
 
-  saveVisibleTimes: async (request, response) => {
+  saveSettings: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;
-      if(request.body && request.body.times) {
+      if(request.body && request.body.times && request.body.hasOwnProperty('twelveHours')) {
         const times = request.body.times;
+        const twelveHours = request.body.twelveHours;
         try {
-          await Timetable.saveVisibleTimes(userID, times);
+          await Timetable.saveSettings(userID, times, twelveHours);
           response.status(200).send({ success: true });
         } catch(error) {
-          console.error('Unable to update timetable visible times');
+          console.error('Unable to update timetable settings');
           console.error(error);
           response.status(500).send({ message: 'a database error occurred' });
         }
       } else {
-        console.error('Missing times property from request body');
-        reponse.status(400).send({ message: 'Missing times property from request body' });
+        const errorMessage = 'Missing times or twelveHours property from request body';
+        console.error(errorMessage);
+        response.status(400).send({ message: errorMessage });
       }
     } else {
-      console.log('Missing user ID from session when trying to update timetable visible times');
+      console.log('Missing user ID from session when trying to update timetable settings');
       response.status(400).send({ message: 'Invalid session' });
     }
   }

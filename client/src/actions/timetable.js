@@ -49,13 +49,13 @@ export const getTableData = () => dispatch => {
   .then(() => setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000));
 };
 
-export const updateTimetableVisibleTimes = newTimes => dispatch => {
+export const updateTimetableSettings = (newTimes, twelveHours) => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
   fetch(`${SERVER_URL}/api/t/settings`, {
     method: 'PUT',
     credentials: 'include',
-    body: JSON.stringify({ times: newTimes }),
+    body: JSON.stringify({ times: newTimes, twelveHours }),
     headers: {
       'Content-Type': 'application/json'
     }
