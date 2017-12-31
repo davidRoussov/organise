@@ -29,7 +29,7 @@ class NavBar extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-primary" style={style.navbar}>
-          <a className="navbar-brand" href="/">Organise</a>
+          <a className="navbar-brand" href="/">myCRUD</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
