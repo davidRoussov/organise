@@ -1,1 +1,1 @@
-web: node server.js --exec babel-node --presets es2015,stage-2
+web: babel-node server.js --exec --presets es2015,stage-2
