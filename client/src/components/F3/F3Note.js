@@ -40,12 +40,12 @@ class F3Note extends Component {
     this.props.saveCategory(newCategory);
   }
 
-  handleBlurItemTitle = itemIndex => () => {
-
-  }
-
-  handleBlurItemDetails = itemIndex => () => {
-
+  handleBlurItem = () => {
+    const newCategory = {
+      ...this.props.currentCategory,
+      items: this.state.items
+    }
+    this.props.saveCategory(newCategory);
   }
 
   handleExpander = itemIndex => () => {
@@ -150,7 +150,7 @@ class F3Note extends Component {
                 onChange={this.handleChangeItemTitle(i).bind(this)}
                 style={style.itemTitle}
                 placeholder='Enter item title'
-                onBlur={this.handleBlurItemTitle(i).bind(this)}
+                onBlur={this.handleBlurItem.bind(this)}
               ></TextareaAutosize>
               { item.detailsVisible ? 
                 <TextareaAutosize
@@ -159,7 +159,7 @@ class F3Note extends Component {
                   onChange={this.handleChangeItemDetails(i).bind(this)}
                   style={style.itemDetails}
                   placeholder='Enter item details'
-                  onBlur={this.handleBlurItemDetails(i).bind(this)}
+                  onBlur={this.handleBlurItem.bind(this)}
                 ></TextareaAutosize>
                 : null
               }
