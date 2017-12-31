@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import cors from 'cors';
 
+const PORT = process.env.PORT || 3001;
+
 const SESSION_SECRET = process.env.NODE_ENV === 'production' ? process.env.SESSION_SECRET : 'monkey banana';
 const MONGO_URI = process.env.NODE_ENV === 'production' ? process.env.MONGO_URI : 'mongodb://localhost/organise';
 
@@ -51,5 +53,5 @@ if(process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(3001, () => console.info('listening on port 3001'));
+app.listen(PORT, () => console.info(`listening on port ${PORT}`));
 
