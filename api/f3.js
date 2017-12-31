@@ -1,5 +1,5 @@
 import express from 'express';
-import F3 from '../models/F3';
+import F3 from '../models/f3';
 
 module.exports = {
   saveCategory: async (request, response) => {
