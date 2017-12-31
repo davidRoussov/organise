@@ -26,5 +26,6 @@ router.route('/f3').get(f3.getCategories);
 router.route('/f3').put(f3.saveCategory);
 router.route('/t/settings').put(timetable.saveVisibleTimes);
 router.route('/t').get(timetable.get);
+router.route('/t').put(timetable.updateCell);
 
 module.exports = router;

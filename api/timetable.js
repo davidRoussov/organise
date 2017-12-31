@@ -2,6 +2,24 @@ import express from 'express';
 import Timetable from '../models/timetable';
 
 module.exports = {
+  updateCell: async (request, response) => {
+    if(request.session && request.session.userId) {
+      const userID = request.session.userId;   
+      if(request.body && request.body.time && request.body.day && request.body.text) {
+        const { time, day, text } = request.body;
+        await Timetable.updateCell(userID, time, day, text);
+        response.status(200).send({ success: true });
+      } else {
+        const errorMessage = 'Missing body, time, day or text from the request';
+        console.error(errorMessage);
+        response.status(400).send({ message: errorMessage });
+      }
+    } else {
+      console.log('Missing user ID from session when trying to update table cell');
+      response.status(400).send({ message: 'Invalid session' });
+    }
+  },
+
   get: async (request, response) => {
     if(request.session && request.session.userId) {
       const userID = request.session.userId;

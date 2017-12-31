@@ -255,7 +255,20 @@ const TimetableSchema = new mongoose.Schema({
   }
 });
 
-TimetableSchema.statics.get =  userID => new Promise((resolve, reject) => {
+TimetableSchema.statics.updateCell = (userID, time, day, text) => new Promise((resolve, reject) => {
+  const location = `data.${time}.${day}`
+
+  Timetable.findOneAndUpdate({ userID }, { $set: { [location]: text } }, { upsert: true }, error => {
+    if(error) {
+      console.log('Unable to execute Mongo query');
+      reject(error);
+    } else {
+      resolve();
+    }
+  });
+});
+
+TimetableSchema.statics.get = userID => new Promise((resolve, reject) => {
   Timetable.find({ userID }, (error, results) => {
     if(error) {
       console.log('Unable to execute Mongo query');

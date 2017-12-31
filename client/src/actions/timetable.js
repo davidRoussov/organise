@@ -4,6 +4,29 @@ import handleErrors from './utilities';
 export const triggerTimetableModal = () => dispatch => dispatch({ type: 'TRIGGER_TIMETABLE_MODAL' });
 export const closeTimetableModal = () => dispatch => dispatch({ type: 'CLOSE_TIMETABLE_MODAL' });
 
+export const updateTableCell = (time, day, text) => dispatch => {
+  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
+
+  fetch(`${SERVER_URL}/api/t`, {
+    method: 'PUT',
+    credentials: 'include',
+    body: JSON.stringify({ time, day, text }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(handleErrors)
+  .then(response => response.json())
+  .then(response => {
+    dispatch({ type: 'SMALL_NETWORK_REQUEST_SUCCESS' });
+    dispatch(getTableData());
+  })
+  .catch(error => {
+    dispatch({ type: 'SMALL_NETWORK_REQUEST_FAIL' });
+  })
+  .then(() => setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000));
+};
+
 export const getTableData = () => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 

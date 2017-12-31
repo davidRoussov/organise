@@ -4,7 +4,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 
 import SettingsModal from './SettingsModal';
 
-import { closeTimetableModal, getTableData } from '../../actions/timetable';
+import { closeTimetableModal, getTableData, updateTableCell } from '../../actions/timetable';
 
 class Timetable extends Component {
   constructor() {
@@ -240,13 +240,7 @@ class Timetable extends Component {
   }
 
   handleChange = (time, day) => e => {
-    // let data = { ...this.state[time] };
-    // data[day] = e.target.value;
-    // this.setState({ [time]: data });
-
-    console.log('***');
-    console.log(time, day);
-    console.log(e.target.value);
+    this.props.updateTableCell(time, day, e.target.value);
   }
 
   render() {
@@ -391,7 +385,8 @@ const mapStateToProps = state => state.timetable;
 
 const mapDisaptchToProps = {
   closeTimetableModal,
-  getTableData
+  getTableData,
+  updateTableCell
 };
 
 export default connect(mapStateToProps, mapDisaptchToProps)(Timetable);
