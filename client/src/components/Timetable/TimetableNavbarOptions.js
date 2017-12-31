@@ -102,10 +102,34 @@ class TimetableNavbarOptions extends Component {
       left: '100px'
     };
 
+    const colorSeven = {
+      ...this.state.colorButton,
+      color: '#f1c40f',
+      left: '120px'
+    };
+
+    const colorEight = {
+      ...this.state.colorButton,
+      color: '#1abc9c',
+      left: '140px'
+    };
+
+    const colorNine = {
+      ...this.state.colorButton,
+      color: '#95a5a6',
+      left: '160px'
+    };
+
+    const colorTen = {
+      ...this.state.colorButton,
+      color: '#F1A9A0',
+      left: '180px'
+    };
+
     const colorSix = {
       ...this.state.colorButton,
       color: 'white',
-      left: '120px'
+      left: '200px'
     };
 
     return [
@@ -157,6 +181,34 @@ class TimetableNavbarOptions extends Component {
             className="fa fa-circle-thin timetableColorIcon" 
             aria-hidden="true" 
             style={colorSix}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
+
+          <i
+            className="fa fa-circle timetableColorIcon" 
+            aria-hidden="true" 
+            style={colorTen}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
+
+          <i
+            className="fa fa-circle timetableColorIcon" 
+            aria-hidden="true" 
+            style={colorNine}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
+
+          <i
+            className="fa fa-circle timetableColorIcon" 
+            aria-hidden="true" 
+            style={colorEight}
+            onClick={this.handleClickColorButton.bind(this)}
+          ></i>
+
+          <i
+            className="fa fa-circle timetableColorIcon" 
+            aria-hidden="true" 
+            style={colorSeven}
             onClick={this.handleClickColorButton.bind(this)}
           ></i>
 
