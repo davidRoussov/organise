@@ -114,17 +114,23 @@ class F3Note extends Component {
         marginBottom: '10px'
       },
       col1: {
-        position: 'absolute',
-        top: '50%',
-        margin: '-9.5px 0 0 -6px'
+        flexGrow: '1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
       },
       detailsExpander: {
         fontSize: '19px',
         cursor: 'pointer'
       },
       col2: {
-        marginLeft: '15px',
-        width: '100%'
+        flexGrow: '20'
+      },
+      col3: {
+        flexGrow: '1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
       },
       addItemButton: {
         margin: '10px 0 20px 20px'
@@ -134,7 +140,6 @@ class F3Note extends Component {
         flexDirection: 'row',
         alignItems: 'stretch',
         width: '100%',
-        padding: '0px 20px 0px 20px',
         margin: '0px',
         ':hover': {
           background: '#ECECEC'
@@ -175,6 +180,9 @@ class F3Note extends Component {
                 ></TextareaAutosize>
                 : null
               }
+            </div>
+            <div style={style.col3}>
+              <i className="fa fa-caret-down" aria-hidden="true"></i>
             </div>
           </div>
         </div>
