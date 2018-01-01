@@ -93,6 +93,17 @@ class F3Note extends Component {
     this.setState({ items: newItems });
   }
 
+  handleDeleteItem = itemIndex => e => {
+    e.preventDefault();
+
+    const newItems = this.state.items.filter((item, i) => i !== itemIndex);
+    const newCategory = {
+      ...this.props.currentCategory,
+      items: newItems
+    };
+    this.props.saveCategory(newCategory);
+  }
+
   render() {
     const style = {
       item: {
@@ -144,6 +155,9 @@ class F3Note extends Component {
         ':hover': {
           background: '#ECECEC'
         }
+      },
+      itemMenuButton: {
+        background: 'transparent'
       }
     };
 
@@ -181,8 +195,16 @@ class F3Note extends Component {
                 : null
               }
             </div>
-            <div style={style.col3}>
-              <i className="fa fa-caret-down" aria-hidden="true"></i>
+            <div style={style.col3} className="btn-group" role="group">
+              <button 
+              className="btn btn-default dropdown-toggle" 
+              aria-hidden="true" 
+              style={style.itemMenuButton} 
+              data-toggle="dropdown"
+              ></button>
+              <ul className="dropdown-menu" role="menu">
+                <a className="dropdown-item" onClick={this.handleDeleteItem(i).bind(this)}>Delete</a>
+              </ul>
             </div>
           </div>
         </div>
@@ -191,7 +213,7 @@ class F3Note extends Component {
     
     return (
       <div className="card">
-        <h3 className="card-header">{this.props.currentCategory.categoryName}</h3>
+        <h3 className="card-header" style={{marginBottom: '10px'}}>{this.props.currentCategory.categoryName}</h3>
         <div className="card-block" style={{padding: '0px'}}>
           { renderedItems }
           <button className="btn btn-primary" onClick={this.handleAddItem.bind(this)} style={style.addItemButton}>Add item</button>
