@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import { deleteCategory } from '../../actions/formatTwo';
+import { deleteCategory } from '../../actions/formatThree';
 
-class F2DeleteCategory extends Component {
+class F3DeleteCategory extends Component {
   handleDeleteCategory() {
     this.props.deleteCategory(this.props.category.id);
     this.props.close();
@@ -16,7 +16,7 @@ class F2DeleteCategory extends Component {
       <Modal isOpen={this.props.show} toggle={this.props.close} className="danger">
         <ModalHeader toggle={this.toggle}>Delete: {categoryName}?</ModalHeader>
         <ModalBody>
-          Confirm the deletion of this category by clicking 'Delete'. Warning, this will delete the associated notes.
+          Confirm the deletion of this category by clicking 'Delete'. Warning: this will delete the associated notes.
         </ModalBody>
         <ModalFooter>
           <Button color="danger" onClick={this.handleDeleteCategory.bind(this)}>Delete</Button>
@@ -33,4 +33,4 @@ const mapDispatchToProps = {
   deleteCategory
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(F2DeleteCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(F3DeleteCategory);

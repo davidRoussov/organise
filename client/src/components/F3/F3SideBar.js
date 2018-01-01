@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Spinner from '../Spinner';
 import { getCategories, createNewCategory, setCurrentCategory } from '../../actions/formatThree';
 import F3DeleteCategory from './F3DeleteCategory';
+import F3EditCategory from './F3EditCategory';
 
 class F3SideBar extends Component {
   constructor() {
@@ -12,7 +13,8 @@ class F3SideBar extends Component {
     this.state = {
       displayAddCategory: false,
       newCategoryName: '',
-      deleteCategoryModalVisible: false
+      deleteCategoryModalVisible: false,
+      editCategoryModalVisible: false
     };
   }
 
@@ -35,6 +37,9 @@ class F3SideBar extends Component {
 
   showDeleteCategoryModal = category => () => this.setState({ categoryForModal: category, deleteCategoryModalVisible: true });
   closeDeleteCategoryModal = () => this.setState({ deleteCategoryModalVisible: false });
+
+  showEditCategoryModal = category => () => this.setState({ categoryForModal: category, editCategoryModalVisible: true });
+  closeEditCategoryModal = () => this.setState({ editCategoryModalVisible: false });
 
   render() {
     const containerStyle = {
@@ -74,7 +79,7 @@ class F3SideBar extends Component {
               className={category.id === (this.props.currentCategory && this.props.currentCategory.id) ? "btn btn-success dropdown-toggle" : "btn btn-primary dropdown-toggle"}
               data-toggle="dropdown"></button>
             <div className="dropdown-menu">
-              <a className="dropdown-item">Edit</a>
+              <a className="dropdown-item" onClick={this.showEditCategoryModal(category).bind(this)}>Edit</a>
               <a className="dropdown-item" onClick={this.showDeleteCategoryModal(category).bind(this)}>Delete</a>
             </div>
           </div>
@@ -128,6 +133,12 @@ class F3SideBar extends Component {
         <F3DeleteCategory
           show={this.state.deleteCategoryModalVisible}
           close={this.closeDeleteCategoryModal.bind(this)}
+          category={this.state.categoryForModal}
+        />
+
+        <F3EditCategory
+          show={this.state.editCategoryModalVisible}
+          close={this.closeEditCategoryModal.bind(this)}
           category={this.state.categoryForModal}
         />
 

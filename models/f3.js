@@ -17,6 +17,17 @@ const F3Schema = new mongoose.Schema({
   ]
 });
 
+F3Schema.statics.deleteCategory = (userID, categoryID) => new Promise((resolve, reject) => {
+  F3.findOneAndRemove({ _id: categoryID }, error => {
+    if(error) {
+      console.error('Unable to execute Mongo query');
+      reject(error);
+    } else {
+      resolve();
+    }
+  });
+});
+
 F3Schema.statics.update = (userID, newCategory) => new Promise((resolve, reject) => {
   F3.findOneAndUpdate({ userID, _id: newCategory.id }, newCategory, error => {
     if(error) {
