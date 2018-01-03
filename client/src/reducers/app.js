@@ -1,13 +1,15 @@
 /*eslint-disable */
 
-const app = (state={}, action) => {
+const app = (state={ loading: true }, action) => {
   switch(action.type) {
+    case 'DONE_LOADING_USER':
+      return { ...state, loading: false };
     case 'SHOW_SPINNER':
       return { ...state, spinnerVisible: true };
     case 'HIDE_SPINNER':
       return { ...state, spinnerVisible: false };
     case 'GET_USER_FAILED':
-      return { ...state, displayAlert: true, alertMEssage: action.data };
+      return { ...state, displayAlert: true, alertMessage: action.data };
     case 'GOT_USER':
       return { ...state, user: action.data };
     case 'HIDE_ALERTS':

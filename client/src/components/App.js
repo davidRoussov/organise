@@ -47,24 +47,27 @@ class App extends Component {
       }
     };
 
+    const { loading } = this.props;
+
     return (
       <div style={style.app}>
         <BrowserRouter>
           <div style={style.app}>
-            { this.props.spinnerVisible ? <LoadingApp/> :
+            { !loading &&
               <div style={{ height: '100%' }}>
                 <NavBar user={this.props.user}/>
-                <div style={style.pages}>
-                  <Switch>
-                    <Route exact path='/' component={FormatOne}/>
-                    <Route exact path='/f1' component={FormatOne}/>
-                    <Route exact path='/f2' component={FormatTwo}/>
-                    <Route exact path='/f3' component={FormatThree}/>
-                    <Route exact path='/t' component={Timetable}/>
-                  </Switch>
-                </div>
+                  <div style={style.pages}>
+                    <Switch>
+                      <Route exact path='/' component={FormatOne}/>
+                      <Route exact path='/f1' component={FormatOne}/>
+                      <Route exact path='/f2' component={FormatTwo}/>
+                      <Route exact path='/f3' component={FormatThree}/>
+                      <Route exact path='/t' component={Timetable}/>
+                    </Switch>
+                  </div>
               </div>
             }
+            { loading ? <LoadingApp/> : false }
           </div>
         </BrowserRouter>
         <AlertContainer ref={a => this.msg = a} { ...this.alertConfig } />
