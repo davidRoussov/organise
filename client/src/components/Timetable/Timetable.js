@@ -290,10 +290,11 @@ class Timetable extends Component {
       width: '100%',
       minHeight: '46px',
       background: color || 'transparent',
-      border: '0',
       borderRadius: '0px',
       color: 'black',
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
+      
+      border: '0'
     }
   }
 
@@ -333,7 +334,7 @@ class Timetable extends Component {
           <td style={style.timeCell}>{formattedTime}</td>
           <td style={style.editableTD}>
             <TextareaAutosize
-              className="form-control"
+              className="form-control editableTimetableCell"
               style={this.calculateCellStyle(time, 'monday')}
               defaultValue={this.state[time].monday}
               ref={input => this[time + 'monday'] = input}
@@ -344,7 +345,7 @@ class Timetable extends Component {
           </td>
           <td style={style.editableTD}>
             <TextareaAutosize
-              className="form-control"
+              className="form-control editableTimetableCell"
               style={this.calculateCellStyle(time, 'tuesday')}
               defaultValue={this.state[time].tuesday}
               ref={input => this[time + 'tuesday'] = input}
@@ -355,7 +356,7 @@ class Timetable extends Component {
           </td>
           <td style={style.editableTD}>
             <TextareaAutosize
-              className="form-control"
+              className="form-control editableTimetableCell"
               style={this.calculateCellStyle(time, 'wednesday')}
               defaultValue={this.state[time].wednesday}
               ref={input => this[time + 'wednesday'] = input}
@@ -366,7 +367,7 @@ class Timetable extends Component {
           </td>
           <td style={style.editableTD}>
             <TextareaAutosize
-              className="form-control"
+              className="form-control editableTimetableCell"
               style={this.calculateCellStyle(time, 'thursday')}
               defaultValue={this.state[time].thursday}
               ref={input => this[time + 'thursday'] = input}
@@ -377,7 +378,7 @@ class Timetable extends Component {
           </td>
           <td style={style.editableTD}>
             <TextareaAutosize
-              className="form-control"
+              className="form-control editableTimetableCell"
               style={this.calculateCellStyle(time, 'friday')}
               defaultValue={this.state[time].friday}
               ref={input => this[time + 'friday'] = input}
@@ -388,7 +389,7 @@ class Timetable extends Component {
           </td>
           <td style={style.editableTD}>
             <TextareaAutosize
-              className="form-control"
+              className="form-control editableTimetableCell"
               style={this.calculateCellStyle(time, 'saturday')}
               defaultValue={this.state[time].saturday}
               ref={input => this[time + 'saturday'] = input}
@@ -399,7 +400,7 @@ class Timetable extends Component {
           </td>
           <td style={style.editableTD}>
             <TextareaAutosize
-              className="form-control"
+              className="form-control editableTimetableCell"
               style={this.calculateCellStyle(time, 'sunday')}
               defaultValue={this.state[time].sunday}
               ref={input => this[time + 'sunday'] = input}
