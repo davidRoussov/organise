@@ -15,7 +15,7 @@ const F2Schema = new mongoose.Schema({
   items: {
     type: [String]
   }
-});
+}, { timestamps: true });
 
 F2Schema.statics.deleteCategoryNotes = categoryID => new Promise((resolve, reject) => {
   F2.find({ categoryID: categoryID }).remove(error => {
