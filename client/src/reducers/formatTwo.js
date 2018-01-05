@@ -1,5 +1,6 @@
 const defaultState = {
-  categories: []
+  categories: [],
+  currentCategory: null
 };
 
 const formatTwo = (state=defaultState, action) => {
