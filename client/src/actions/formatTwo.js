@@ -82,7 +82,7 @@ export const saveNote = note => dispatch => {
 
 export const createNote = categoryID => dispatch => {
   dispatch({ type: 'LOADING_NOTES' });
-
+  
   fetch(`${SERVER_URL}/api/f2`, {
     method: 'POST',
     credentials: 'include',

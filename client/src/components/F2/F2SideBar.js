@@ -133,7 +133,6 @@ class F2SideBar extends Component {
             type="button"
             className="btn btn-outline-primary"
             onClick={this.props.createNote.bind(null, this.props.currentCategory)}
-            disabled={!this.props.currentCategory}
           >Add Note</button>
         </div>
 

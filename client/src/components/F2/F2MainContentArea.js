@@ -17,9 +17,8 @@ class F2MainContentArea extends Component {
     this.props.getNotes();
   }
 
-
   componentWillReceiveProps(props) {
-    if(props.notes && props.currentCategory) {
+    if(props.notes) {
       const notesInCategory = props.notes.filter(note => note.categoryID === props.currentCategory);
       this.setState({ filteredNotes: [] }, () => {
         this.setState({ filteredNotes: notesInCategory }); 

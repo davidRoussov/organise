@@ -15,7 +15,8 @@ class F2Note extends Component {
       initialNoteHeading: init('heading'),
       noteHeading: init('heading'),
       intitialNoteItems: init('items', []),
-      noteItems: init('items', [])
+      noteItems: init('items', []),
+      addTaskButtonHover: false
     };
   }
 
@@ -67,6 +68,8 @@ class F2Note extends Component {
     this.props.deleteNote(this.props.note.id);
   }
 
+  toggleHoverAddTaskButton = () => this.setState({ addTaskButtonHover: !this.state.addTaskButtonHover })
+
   render() {
     const style = {
       noteHeading: {
@@ -84,7 +87,9 @@ class F2Note extends Component {
         float: 'left',
         marginBottom: '10px',
         marginTop: '10px',
-        marginLeft: '10px'
+        marginLeft: '10px',
+        color: this.state.addTaskButtonHover ? '#0275d8' : 'black',
+        transform: this.state.addTaskButtonHover ? 'scale(1.1)' : ''
       },
       noteTask: {
         background: 'transparent',
@@ -172,6 +177,8 @@ class F2Note extends Component {
             style={style.addTaskButton} 
             className="fa fa-plus"
             onClick={this.handleClickAddTask.bind(this)}
+            onMouseEnter={this.toggleHoverAddTaskButton.bind(this)}
+            onMouseLeave={this.toggleHoverAddTaskButton.bind(this)}
           >
           </i>
 
