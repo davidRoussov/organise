@@ -146,7 +146,7 @@ class F2Note extends Component {
     );
 
     return (
-      <div className="card bg-light mb-3" style={{maxWidth: "20rem"}}>
+      <div className="card bg-light mb-3">
         <div className="card-header">
           <TextareaAutosize
             className="form-control"

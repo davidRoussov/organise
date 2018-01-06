@@ -26,7 +26,8 @@ class F2SideBar extends Component {
   }
 
   handleSelectCategory(categoryID) {
-    this.props.setCurrentCategory(categoryID);
+    if (this.props.currentCategory === categoryID) this.props.setCurrentCategory(null);
+    else this.props.setCurrentCategory(categoryID);
   }
 
   handleChangeAddCategory = e => this.setState({ newCategoryName: e.target.value });
