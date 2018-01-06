@@ -122,7 +122,7 @@ class F2Note extends Component {
     const list = this.state.noteItems.map((item, i) => 
       <div key={i} style={{ position: 'relative' }}>
         <TextareaAutosize
-          className="form-control"
+          className="form-control f2task"
           value={item}
           onChange={this.handleChangeNoteItem(i).bind(this)}
           style={style.noteTask}
@@ -171,8 +171,6 @@ class F2Note extends Component {
         </div>
         <div className="card-body">
           {list}
-
-
           <i 
             style={style.addTaskButton} 
             className="fa fa-plus"
@@ -181,7 +179,6 @@ class F2Note extends Component {
             onMouseLeave={this.toggleHoverAddTaskButton.bind(this)}
           >
           </i>
-
         </div>
       </div>
     );

@@ -31,3 +31,7 @@ table td, table th {
 .editableTimetableCell:focus {
   box-shadow: 0 0 1px 1px #000000 ;
 }
+
+.f2task:hover {
+   background: white !important;
+}
