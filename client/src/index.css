@@ -35,3 +35,7 @@ table td, table th {
 .f2task:hover {
    background: white !important;
 }
+
+.sidebar-button:hover {
+  background: transparent !important;
+}

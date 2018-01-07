@@ -20,7 +20,7 @@ class F2SideBar extends Component {
     this.props.getCategories();
   }
 
-  handleSubmitAddCategoy(e) {
+  handleSubmitAddCategory(e) {
     e.preventDefault();
     this.props.createNewCategory(this.state.newCategoryName);
   }
@@ -53,8 +53,16 @@ class F2SideBar extends Component {
         paddingRight: '10px',
         paddingLeft: '10px'
       },
-      category: {
-        width: '80%',
+      categoryButtonGroup: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row'
+      },
+      categoryButton: {
+        width: '100%',
+        borderRadius: '0px'
+      },
+      categoryButtonOptions: {
         borderRadius: '0px'
       },
       addNoteContainer: {
@@ -64,18 +72,18 @@ class F2SideBar extends Component {
 
     const categories = this.props.categories.map((category, i) => {
       return (
-        <div key={i} style={style.category} className="btn-group">
+        <div key={i} style={style.categoryButtonGroup} className="btn-group">
           <button 
-            style={style.category} 
+            style={style.categoryButton} 
             type="button" 
-            className={category.id === this.props.currentCategory ? "btn btn-success" : "btn btn-primary"}
+            className={category.id === this.props.currentCategory ? "btn btn-success" : "sidebar-button btn btn-transparent"}
             onClick={this.handleSelectCategory.bind(this, category.id)}
           >{category.categoryName}</button>
           <div className="btn-group" role="group">
             <button 
-              style={{borderRadius: '0px'}} 
+              style={style.categoryButtonOptions} 
               type="button" 
-              className={category.id === this.props.currentCategory ? "btn btn-success dropdown-toggle" : "btn btn-primary dropdown-toggle"}
+              className={category.id === this.props.currentCategory ? "btn btn-success dropdown-toggle" : "sidebar-button btn btn-transparent dropdown-toggle"}
               data-toggle="dropdown"></button>
             <div className="dropdown-menu">
               <a className="dropdown-item">Edit</a>
@@ -89,7 +97,7 @@ class F2SideBar extends Component {
     return (
       <div style={containerStyle}>
 
-        <div style={{marginTop: '20px'}}>
+        <div>
           {categories}
         </div>
 
@@ -102,7 +110,7 @@ class F2SideBar extends Component {
           { this.state.displayAddCategory ? 
             <div style={style.addCategoryDiv}>
               { this.props.addCategorySpinnerVisible ? <Spinner/> :
-                <form onSubmit={this.handleSubmitAddCategoy.bind(this)}>
+                <form onSubmit={this.handleSubmitAddCategory.bind(this)}>
                   <FormGroup>
                     <div style={{margin: '10px'}}>
                       <FormControl
