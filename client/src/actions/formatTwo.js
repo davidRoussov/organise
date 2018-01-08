@@ -53,7 +53,7 @@ export const deleteNote = noteID => dispatch => {
 }
 
 export const saveNote = note => dispatch => {
-  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
+  // dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
   fetch(`${SERVER_URL}/api/f2`, {
     method: 'PUT',
@@ -66,11 +66,10 @@ export const saveNote = note => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    dispatch({
-      type: 'SMALL_NETWORK_REQUEST_SUCCESS',
-      data: note.id
-    });
-    dispatch(getNotes());
+    // dispatch({
+    //   type: 'SMALL_NETWORK_REQUEST_SUCCESS',
+    //   data: note.id
+    // });
   })
   .catch(error => {
     dispatch({

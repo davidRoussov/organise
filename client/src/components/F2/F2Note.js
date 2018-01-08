@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
 import { connect } from 'react-redux';
-import Radium from 'radium';
 
 import { saveNote, deleteNote } from '../../actions/formatTwo';
 
@@ -20,17 +19,11 @@ class F2Note extends Component {
     };
   }
 
-  handleChangeNoteHeading = e => { 
-    this.setState({ noteHeading: e.target.value });
-  }
-
   handleBlurNoteHeading() {
-    if(this.state.initialNoteHeading !== this.state.noteHeading) {
-      this.props.saveNote({
-        ...this.props.note,
-        heading: this.state.noteHeading
-      });
-    }
+    // this.props.saveNote({
+    //   ...this.props.note,
+    //   heading: this.state.noteHeading
+    // });
   }
 
   handleBlurNoteTask() {
@@ -48,16 +41,6 @@ class F2Note extends Component {
     this.props.saveNote(newNote);
   }
 
-  handleChangeNoteItem = itemIndex => e => {
-    const newItems = this.state.noteItems.map((item, i) => {
-      if(i !== itemIndex) return item;
-      
-      return e.target.value;
-    });
-
-    this.setState({ noteItems: newItems });
-  }
-
   handleDeleteTask = itemIndex => () => {
     const newItems = this.state.noteItems.filter((item, i) => i !== itemIndex);
     const newNote = { ...this.props.note, items: newItems };
@@ -69,6 +52,25 @@ class F2Note extends Component {
   }
 
   toggleHoverAddTaskButton = () => this.setState({ addTaskButtonHover: !this.state.addTaskButtonHover })
+
+  checkDifference() {
+    this.props.note.items.forEach((item, i) => {
+      const textarea = this[`noteTask${i}`];
+      if(item !== textarea.currentValue) {
+        textarea.textarea.style.color = '#d9534f';
+      } else {
+        textarea.textarea.style.color = '#495057';
+      }
+    });
+
+    console.log(this.props.note.heading);
+    console.log(this.noteHeading.currentValue);
+    if(this.props.note.heading !== this.noteHeading.currentValue) {
+      this.noteHeading.textarea.style.color = '#d9534f';
+    } else {
+      this.noteHeading.textarea.style.color = '#495057';
+    }
+  }
 
   render() {
     const style = {
@@ -119,14 +121,15 @@ class F2Note extends Component {
       }
     };
 
-    const list = this.state.noteItems.map((item, i) => 
+    const list = this.props.note && this.props.note.items.map((item, i) => 
       <div key={i} style={{ position: 'relative' }}>
         <TextareaAutosize
           className="form-control f2task"
-          value={item}
-          onChange={this.handleChangeNoteItem(i).bind(this)}
+          defaultValue={item}
+          ref={(textarea) => { this[`noteTask${i}`] = textarea; } }
           style={style.noteTask}
           placeholder='Enter task'
+          onChange={this.checkDifference.bind(this)}
           onBlur={this.handleBlurNoteTask.bind(this)}
         ></TextareaAutosize>
 
@@ -150,10 +153,11 @@ class F2Note extends Component {
         <div className="card-header">
           <TextareaAutosize
             className="form-control"
-            value={this.state.noteHeading}
-            onChange={this.handleChangeNoteHeading.bind(this)}
+            defaultValue={this.props.note.heading}
+            ref={(textarea) => { this.noteHeading = textarea } }
             style={style.noteHeading}
             placeholder='Enter heading'
+            onChange={this.checkDifference.bind(this)}
             onBlur={this.handleBlurNoteHeading.bind(this)}
           ></TextareaAutosize>   
           <div style={style.noteOptionsHeading} className="btn-group" role="group">
@@ -190,4 +194,4 @@ const mapDispatchToProps = {
   deleteNote
 };
 
-export default connect(null, mapDispatchToProps)(Radium(F2Note));
+export default connect(null, mapDispatchToProps)(F2Note);
