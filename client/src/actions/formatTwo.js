@@ -52,8 +52,8 @@ export const deleteNote = noteID => dispatch => {
   });
 }
 
-export const saveNote = note => dispatch => {
-  // dispatch({ type: 'SMALL_NETWORK_REQUEST' });
+export const saveNote = (note, cb) => dispatch => {
+  if(!cb) dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
   fetch(`${SERVER_URL}/api/f2`, {
     method: 'PUT',
@@ -66,16 +66,22 @@ export const saveNote = note => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    // dispatch({
-    //   type: 'SMALL_NETWORK_REQUEST_SUCCESS',
-    //   data: note.id
-    // });
+    if(!cb) {
+      dispatch({
+        type: 'SMALL_NETWORK_REQUEST_SUCCESS',
+        data: note.id
+      });
+      setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
+    } else {
+      cb(true);
+    }
   })
   .catch(error => {
     dispatch({
       type: 'ERROR_SAVING_F2_NOTE',
       data: error.message
     });
+    cb(false);
   });
 }
 

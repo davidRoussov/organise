@@ -11,27 +11,57 @@ class F2Note extends Component {
     const init = (key, alt='') => ((props.note && props.note[key]) ? props.note[key] : alt);
 
     this.state = {
-      initialNoteHeading: init('heading'),
       noteHeading: init('heading'),
-      intitialNoteItems: init('items', []),
       noteItems: init('items', []),
       addTaskButtonHover: false
     };
   }
 
+  componentDidMount() {
+    this.props.note.items.forEach((item, i) => {
+      this[`noteTask${i}`].currentValue = item;
+    });
+  }
+
   handleBlurNoteHeading() {
-    // this.props.saveNote({
-    //   ...this.props.note,
-    //   heading: this.state.noteHeading
-    // });
+    const newNoteHeading = this.noteHeading.currentValue;
+
+    this.props.saveNote({
+      ...this.props.note,
+      heading: newNoteHeading,
+      items: this.state.noteItems
+    }, success => {
+      if(success) {
+        this.noteHeading.textarea.style.color = '#495057';
+        this.setState({ noteHeading: newNoteHeading });
+      }
+    });
   }
 
   handleBlurNoteTask() {
+    let changeIndex = null;
+    const newItems = this.state.noteItems.map((item, i) => {
+      const currentValue = this[`noteTask${i}`].currentValue;
+      const originalValue = this.state.noteItems[i];
+
+      if (currentValue !== originalValue) {
+        changeIndex = i;
+      }
+
+      return(currentValue);
+    });
+
     const newNote = {
       ...this.props.note,
-      items: this.state.noteItems
+      heading: this.state.noteHeading,
+      items: newItems
     };
-    this.props.saveNote(newNote);
+    this.props.saveNote(newNote, success => {
+      if(success) {
+        this[`noteTask${changeIndex}`].textarea.style.color = '#495057';
+        this.setState({ noteItems: newItems });
+      }
+    });
   }
 
   handleClickAddTask() {
@@ -54,23 +84,23 @@ class F2Note extends Component {
   toggleHoverAddTaskButton = () => this.setState({ addTaskButtonHover: !this.state.addTaskButtonHover })
 
   checkDifference() {
-    this.props.note.items.forEach((item, i) => {
+    this.state.noteItems.forEach((item, i) => {
       const textarea = this[`noteTask${i}`];
-      if(item !== textarea.currentValue) {
+      if(item !== textarea.currentValue && textarea.currentValue) {
         textarea.textarea.style.color = '#d9534f';
       } else {
         textarea.textarea.style.color = '#495057';
       }
     });
 
-    console.log(this.props.note.heading);
-    console.log(this.noteHeading.currentValue);
-    if(this.props.note.heading !== this.noteHeading.currentValue) {
+    if(this.noteHeading.currentValue !== undefined && this.state.noteHeading !== this.noteHeading.currentValue) {
       this.noteHeading.textarea.style.color = '#d9534f';
     } else {
       this.noteHeading.textarea.style.color = '#495057';
     }
   }
+
+
 
   render() {
     const style = {
@@ -121,7 +151,7 @@ class F2Note extends Component {
       }
     };
 
-    const list = this.props.note && this.props.note.items.map((item, i) => 
+    const list = this.state.noteItems.map((item, i) => 
       <div key={i} style={{ position: 'relative' }}>
         <TextareaAutosize
           className="form-control f2task"
@@ -153,7 +183,7 @@ class F2Note extends Component {
         <div className="card-header">
           <TextareaAutosize
             className="form-control"
-            defaultValue={this.props.note.heading}
+            defaultValue={this.state.noteHeading}
             ref={(textarea) => { this.noteHeading = textarea } }
             style={style.noteHeading}
             placeholder='Enter heading'
