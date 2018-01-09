@@ -8,6 +8,7 @@ import FormatOne from './FormatOne';
 import FormatTwo from './F2/FormatTwo';
 import FormatThree from './F3/FormatThree';
 import Timetable from './Timetable/Timetable';
+import Time from './Time/Time';
 import LoadingApp from './LoadingApp';
 import MiniLoadingIndicator from './MiniLoadingIndicator';
 
@@ -63,6 +64,7 @@ class App extends Component {
                       <Route exact path='/f2' component={FormatTwo}/>
                       <Route exact path='/f3' component={FormatThree}/>
                       <Route exact path='/t' component={Timetable}/>
+                      <Route exact path='/time' component={Time}/>
                     </Switch>
                   </div>
               </div>

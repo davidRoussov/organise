@@ -52,6 +52,9 @@ class NavBar extends Component {
                 <TimetableNavbarOptions/>
                 : null
               }
+              <li className={ path === '/time' ? "nav-item active" : "nav-item"}>
+                <a className="nav-link" href="/time">Time</a>
+              </li>
             </ul>
           </div>
 
