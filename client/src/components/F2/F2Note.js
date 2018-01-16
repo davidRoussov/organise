@@ -12,9 +12,7 @@ class F2Note extends Component {
     };
   }
 
-  handleBlurNoteHeading() {  }
-
-  handleBlurNoteTask() {  }
+  handleBlur = () => this.props.saveNote(this.props.note)
 
   handleChangeHeading = e => {
     const newHeading = e.target.value;
@@ -117,7 +115,7 @@ class F2Note extends Component {
           placeholder='Enter task'
           value={item}
           onChange={this.handleChangeItem(i).bind(this)}
-          onBlur={this.handleBlurNoteTask.bind(this)}
+          onBlur={this.handleBlur.bind(this)}
         ></TextareaAutosize>
 
         <div style={style.noteOptions} key={i}>
@@ -144,7 +142,7 @@ class F2Note extends Component {
             placeholder='Enter heading'
             value={this.props.note.heading}
             onChange={this.handleChangeHeading.bind(this)}
-            onBlur={this.handleBlurNoteHeading.bind(this)}
+            onBlur={this.handleBlur.bind(this)}
           ></TextareaAutosize>   
           <div style={style.noteOptionsHeading} className="btn-group" role="group">
             <button 
