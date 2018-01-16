@@ -77,14 +77,14 @@ class F3SideBar extends Component {
           <button 
             style={style.categoryButton} 
             type="button" 
-            className={category.id === (this.props.currentCategory && this.props.currentCategory.id) ? "btn btn-success" : "sidebar-button btn btn-transparent"}
+            className={category.id === (this.props.currentCategory && this.props.currentCategory.id) ? "btn btn-success" : "sidebar-button btn"}
             onClick={this.handleSelectCategory.bind(this, category)}
           >{category.categoryName}</button>
           <div className="btn-group" role="group">
             <button 
               style={style.categoryButtonOptions} 
               type="button" 
-              className={category.id === (this.props.currentCategory && this.props.currentCategory.id) ? "btn btn-success dropdown-toggle" : "sidebar-button btn btn-transparent dropdown-toggle"}
+              className={category.id === (this.props.currentCategory && this.props.currentCategory.id) ? "btn btn-success dropdown-toggle" : "sidebar-button btn dropdown-toggle"}
               data-toggle="dropdown"></button>
             <div className="dropdown-menu">
               <a className="dropdown-item" onClick={this.showEditCategoryModal(category).bind(this)}>Edit</a>

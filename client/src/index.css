@@ -36,6 +36,9 @@ table td, table th {
    background: white !important;
 }
 
-.sidebar-button:hover {
+.sidebar-button {
   background: transparent !important;
+}
+.sidebar-button:hover {
+  background: white !important;
 }
