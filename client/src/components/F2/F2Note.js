@@ -2,66 +2,40 @@ import React, { Component } from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
 import { connect } from 'react-redux';
 
-import { saveNote, deleteNote } from '../../actions/formatTwo';
+import { saveNote, deleteNote, setNote } from '../../actions/formatTwo';
 
 class F2Note extends Component {
-  constructor(props) {
-    super(props);
-
-    const init = (key, alt='') => ((props.note && props.note[key]) ? props.note[key] : alt);
-
+  constructor() {
+    super();
     this.state = {
-      noteHeading: init('heading'),
-      noteItems: init('items', []),
       addTaskButtonHover: false
     };
   }
 
-  componentDidMount() {
-    this.props.note.items.forEach((item, i) => {
-      this[`noteTask${i}`].currentValue = item;
-    });
+  handleBlurNoteHeading() {  }
+
+  handleBlurNoteTask() {  }
+
+  handleChangeHeading = e => {
+    const newHeading = e.target.value;
+    const newNote = { ...this.props.note, heading: newHeading };
+    
+    this.props.setNote(newNote);
   }
 
-  handleBlurNoteHeading() {
-    const newNoteHeading = this.noteHeading.currentValue;
+  handleChangeItem = itemIndex => e => {
+    const newItem = e.target.value;
 
-    this.props.saveNote({
-      ...this.props.note,
-      heading: newNoteHeading,
-      items: this.state.noteItems
-    }, success => {
-      if(success) {
-        this.noteHeading.textarea.style.color = '#495057';
-        this.setState({ noteHeading: newNoteHeading });
+    const newItems = this.props.note.items.map((item, i) => {
+      if (i === itemIndex) {
+        return newItem;
+      } else {
+        return item;
       }
     });
-  }
-
-  handleBlurNoteTask() {
-    let changeIndex = null;
-    const newItems = this.state.noteItems.map((item, i) => {
-      const currentValue = this[`noteTask${i}`].currentValue;
-      const originalValue = this.state.noteItems[i];
-
-      if (currentValue !== originalValue) {
-        changeIndex = i;
-      }
-
-      return(currentValue);
-    });
-
-    const newNote = {
-      ...this.props.note,
-      heading: this.state.noteHeading,
-      items: newItems
-    };
-    this.props.saveNote(newNote, success => {
-      if(success) {
-        this[`noteTask${changeIndex}`].textarea.style.color = '#495057';
-        this.setState({ noteItems: newItems });
-      }
-    });
+    const newNote = { ...this.props.note, items: newItems };
+    
+    this.props.setNote(newNote);
   }
 
   handleClickAddTask() {
@@ -72,7 +46,7 @@ class F2Note extends Component {
   }
 
   handleDeleteTask = itemIndex => () => {
-    const newItems = this.state.noteItems.filter((item, i) => i !== itemIndex);
+    const newItems = this.props.note.items.filter((item, i) => i !== itemIndex);
     const newNote = { ...this.props.note, items: newItems };
     this.props.saveNote(newNote);
   }
@@ -83,26 +57,10 @@ class F2Note extends Component {
 
   toggleHoverAddTaskButton = () => this.setState({ addTaskButtonHover: !this.state.addTaskButtonHover })
 
-  checkDifference() {
-    this.state.noteItems.forEach((item, i) => {
-      const textarea = this[`noteTask${i}`];
-      if(item !== textarea.currentValue && textarea.currentValue) {
-        textarea.textarea.style.color = '#d9534f';
-      } else {
-        textarea.textarea.style.color = '#495057';
-      }
-    });
-
-    if(this.noteHeading.currentValue !== undefined && this.state.noteHeading !== this.noteHeading.currentValue) {
-      this.noteHeading.textarea.style.color = '#d9534f';
-    } else {
-      this.noteHeading.textarea.style.color = '#495057';
-    }
-  }
-
-
-
   render() {
+
+    console.log(JSON.stringify(this.props, null, 2));
+
     const style = {
       noteHeading: {
         background: 'transparent',
@@ -151,15 +109,14 @@ class F2Note extends Component {
       }
     };
 
-    const list = this.state.noteItems.map((item, i) => 
+    const list = this.props.note.items.map((item, i) => 
       <div key={i} style={{ position: 'relative' }}>
         <TextareaAutosize
           className="form-control f2task"
-          defaultValue={item}
-          ref={(textarea) => { this[`noteTask${i}`] = textarea; } }
           style={style.noteTask}
           placeholder='Enter task'
-          onChange={this.checkDifference.bind(this)}
+          value={item}
+          onChange={this.handleChangeItem(i).bind(this)}
           onBlur={this.handleBlurNoteTask.bind(this)}
         ></TextareaAutosize>
 
@@ -183,11 +140,10 @@ class F2Note extends Component {
         <div className="card-header">
           <TextareaAutosize
             className="form-control"
-            defaultValue={this.state.noteHeading}
-            ref={(textarea) => { this.noteHeading = textarea } }
             style={style.noteHeading}
             placeholder='Enter heading'
-            onChange={this.checkDifference.bind(this)}
+            value={this.props.note.heading}
+            onChange={this.handleChangeHeading.bind(this)}
             onBlur={this.handleBlurNoteHeading.bind(this)}
           ></TextareaAutosize>   
           <div style={style.noteOptionsHeading} className="btn-group" role="group">
@@ -221,7 +177,8 @@ class F2Note extends Component {
 
 const mapDispatchToProps = {
   saveNote,
-  deleteNote
+  deleteNote,
+  setNote
 };
 
 export default connect(null, mapDispatchToProps)(F2Note);

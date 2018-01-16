@@ -25,6 +25,8 @@ export const deleteCategory = categoryID => dispatch => {
   })
 };
 
+export const setNote = newNote => dispatch => dispatch({ type: 'SETTING_F2_NOTE', data: newNote });
+
 export const deleteNote = noteID => dispatch => {
   dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
@@ -52,8 +54,8 @@ export const deleteNote = noteID => dispatch => {
   });
 }
 
-export const saveNote = (note, cb) => dispatch => {
-  if(!cb) dispatch({ type: 'SMALL_NETWORK_REQUEST' });
+export const saveNote = note => dispatch => {
+  dispatch({ type: 'SMALL_NETWORK_REQUEST' });
 
   fetch(`${SERVER_URL}/api/f2`, {
     method: 'PUT',
@@ -66,22 +68,17 @@ export const saveNote = (note, cb) => dispatch => {
   .then(handleErrors)
   .then(response => response.json())
   .then(response => {
-    if(!cb) {
-      dispatch({
-        type: 'SMALL_NETWORK_REQUEST_SUCCESS',
-        data: note.id
-      });
-      setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
-    } else {
-      cb(true);
-    }
+    dispatch({
+      type: 'SMALL_NETWORK_REQUEST_SUCCESS',
+      data: note.id
+    });
+    setTimeout(() => dispatch({ type: 'HIDE_MINI_INDICATOR' }), 3000);
   })
   .catch(error => {
     dispatch({
       type: 'ERROR_SAVING_F2_NOTE',
       data: error.message
     });
-    cb(false);
   });
 }
 

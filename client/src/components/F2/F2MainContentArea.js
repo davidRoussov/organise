@@ -9,12 +9,9 @@ class F2MainContentArea extends Component {
   constructor() {
     super();
     this.state = {
-      filteredNotes: [],
-      shouldComponentUpdate: true
+      filteredNotes: []
     };
   }
-
-  shouldComponentUpdate = () => this.state.shouldComponentUpdate
 
   componentDidMount() {
     this.props.getNotes();
@@ -23,11 +20,7 @@ class F2MainContentArea extends Component {
   componentWillReceiveProps(props) {
     if(props.notes) {
       const notesInCategory = props.notes.filter(note => note.categoryID === props.currentCategory);
-      this.setState({ filteredNotes: [] }, () => {
-        this.setState({ filteredNotes: notesInCategory }, () => {
-          this.setState({ shouldComponentUpdate: false }); 
-        }); 
-      });
+      this.setState({ filteredNotes: notesInCategory });
     }
   }
 

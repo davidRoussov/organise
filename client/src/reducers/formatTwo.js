@@ -19,6 +19,18 @@ const formatTwo = (state=defaultState, action) => {
       return { ...state, mainContentSpinnerVisible: false };
     case 'GET_F2_NOTES':
       return { ...state, notes: action.data };
+    case 'SETTING_F2_NOTE':
+      const newNote = action.data;
+
+      const newNotes = state.notes.map(note => {
+        if (note.id === newNote.id) {
+          return newNote;
+        } else {
+          return note
+        }
+      });
+
+      return { ...state, notes: newNotes };
     default:
       return state;
   }
