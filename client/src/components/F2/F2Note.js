@@ -56,9 +56,6 @@ class F2Note extends Component {
   toggleHoverAddTaskButton = () => this.setState({ addTaskButtonHover: !this.state.addTaskButtonHover })
 
   render() {
-
-    console.log(JSON.stringify(this.props, null, 2));
-
     const style = {
       noteHeading: {
         background: 'transparent',

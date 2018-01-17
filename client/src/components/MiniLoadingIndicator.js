@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
 
 class MiniLoadingIndicator extends Component {
   constructor() {
@@ -86,4 +85,4 @@ class MiniLoadingIndicator extends Component {
   }
 };
 
-export default Radium(MiniLoadingIndicator);
+export default MiniLoadingIndicator;

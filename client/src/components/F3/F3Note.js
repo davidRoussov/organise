@@ -229,4 +229,4 @@ const mapDispatchToProps = {
   saveCategory
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(F3Note));
+export default connect(mapStateToProps, mapDispatchToProps)(F3Note);
