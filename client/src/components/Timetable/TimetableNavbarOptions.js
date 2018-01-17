@@ -11,10 +11,10 @@ class TimetableNavbarOptions extends Component {
       colorButton: {
         fontSize: '16px',
         padding: '3px',
-        position: 'absolute',
-        top: '50%',
-        left: '20px',
-        margin: '-11px 0 0 -11px',
+        // position: 'absolute',
+        // top: '50%',
+        // left: '20px',
+        // margin: '-11px 0 0 -11px',
         cursor: 'pointer',
         WebkitTransition: "0.5s",
         MozTransition: '0.5s',
@@ -24,7 +24,9 @@ class TimetableNavbarOptions extends Component {
         transform: 'scale(0.5)',
 
         opacity: '0',
-        visible: 'hidden'
+        visible: 'hidden',
+
+        colorButtonContainingDivPosition: 'relative'
       }
     }
   }
@@ -58,7 +60,9 @@ class TimetableNavbarOptions extends Component {
           opacity: '0',
           visibility: 'hidden',
           transform: 'scale(0.5)'
-        }
+        },
+      }, () => {
+        setTimeout(() => this.setState({ colorButtonContainingDivPosition: 'absolute' }));
       });
     } else if (props.colorButtonsVisible) {
       this.setState({
@@ -67,8 +71,8 @@ class TimetableNavbarOptions extends Component {
           opacity: '1',
           visibility: 'visible',
           transform: 'scale(1)'
-        }
-      })
+        },
+      }, () => this.setState({ colorButtonContainingDivPosition: 'relative' }));
     }
   }
 
@@ -132,6 +136,12 @@ class TimetableNavbarOptions extends Component {
       left: '200px'
     };
 
+    const containingDivStyle = {
+      position: this.state.colorButtonContainingDivPosition,
+      marginTop: '7.5px',
+      marginLeft: '3px'
+    }
+
     return [
         <li className="nav-item" key={1}>
           <button 
@@ -142,75 +152,78 @@ class TimetableNavbarOptions extends Component {
         </li>,
         <li className="nav-item" style={{position: 'relative'}} key={2}>
 
-          <i 
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorOne}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+          <div style={containingDivStyle}>
+            <i 
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorOne}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i 
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorTwo}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i 
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorTwo}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i 
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorThree}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i 
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorThree}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i 
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorFour}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i 
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorFour}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i 
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorFive}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i 
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorFive}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i
-            className="fa fa-circle-thin timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorSix}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i
+              className="fa fa-circle-thin timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorSix}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorTen}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorTen}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorNine}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorNine}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorEight}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorEight}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
 
-          <i
-            className="fa fa-circle timetableColorIcon" 
-            aria-hidden="true" 
-            style={colorSeven}
-            onClick={this.handleClickColorButton.bind(this)}
-          ></i>
+            <i
+              className="fa fa-circle timetableColorIcon" 
+              aria-hidden="true" 
+              style={colorSeven}
+              onClick={this.handleClickColorButton.bind(this)}
+            ></i>
+
+            </div>
 
         </li>
     ]
