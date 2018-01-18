@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextareaAutosize from 'react-autosize-textarea';
-import Radium from 'radium';
 
 import { saveCategory } from '../../actions/formatThree';
 

@@ -110,7 +110,7 @@ class F2Note extends Component {
           className="form-control f2task"
           style={style.noteTask}
           placeholder='Enter task'
-          value={item}
+          value={item || ''}
           onChange={this.handleChangeItem(i).bind(this)}
           onBlur={this.handleBlur.bind(this)}
         ></TextareaAutosize>
