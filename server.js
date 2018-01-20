@@ -2,8 +2,11 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import cors from 'cors';
+import sslRedirect from 'heroku-ssl-redirect';
 
 const PORT = process.env.PORT || 3001;
+
+console.log(`running in environment: ${process.env.NODE_ENV}`);
 
 const SESSION_SECRET = process.env.NODE_ENV === 'production' ? process.env.SESSION_SECRET : 'monkey banana';
 const MONGO_URI = process.env.NODE_ENV === 'production' ? process.env.MONGO_URI : 'mongodb://localhost/organise';
@@ -17,6 +20,10 @@ db.once('open', () => console.log('connected to mongo!'));
 
 const express = require('express');
 const app = express();
+
+if(process.env.NODE_ENV === 'production') {
+  app.use(sslRedirect());
+}
 
 if(process.env.NODE_ENV !== 'production') {
   app.use(cors({
